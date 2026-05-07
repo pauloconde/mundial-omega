@@ -21,10 +21,10 @@
   /* Modificar estas variables para aplicar la identidad visual del sponsor */
 
   /* Fondo de la aplicación */
-  --brand-app-bg:          #053332;
+  --brand-app-bg:          #080210;
 
   /* Splash screen */
-  --brand-splash-bg:       linear-gradient(135deg, #053332 0%, #0d5b59 50%, #053332 100%);
+  --brand-splash-bg:       linear-gradient(135deg, #080210 0%, #3d1079 50%, #080210 100%);
 
   /* Header */
   --brand-header-bg:       rgba(255, 255, 255 );
@@ -32,9 +32,9 @@
 
   /* Navbar inferior */
   --brand-nav-bg:          #ffffff;
-  --brand-nav-text:        #053332;
-  --brand-nav-icon:        #053332;
-  --brand-nav-icon-active: #ffb6c0;
+  --brand-nav-text:        #080210;
+  --brand-nav-icon:        #080210;
+  --brand-nav-icon-active: #5314ff;
 }
 
 * {
