@@ -6,6 +6,7 @@ import sponsorInfo from './src/data/sponsor.json';
 
 // https://astro.build/config
 export default defineConfig({
+  site: sponsorInfo.deployUrl,
   vite: {
     plugins: [tailwindcss()]
   },
