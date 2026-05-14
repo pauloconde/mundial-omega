@@ -6,11 +6,14 @@
   "drawerLogoPath": "/paulocondedev.png",
   "instagram": "https://www.instagram.com/empaque.art",
   "whatsapp": "http://wa.me/+584147494763",
-  "facebook": "https://www.instagram.com/empaque.art",
-  "linkedin": "https://www.instagram.com/empaque.art",
-  "tiktok": "https://www.instagram.com/empaque.art",
-  "address": "Tu Dirección Aquí",
-  "googleMaps": "https://maps.google.com",
+  "facebook": "",
+  "linkedin": "",
+  "tiktok": "",
+  "youtube": "",
+  "x": "",
+  "email": "mundialclick2026@gmail.com",
+  "address": "",
+  "googleMaps": "",
   "colors": {
     "appBg": "#080210",
     "splashBg": "linear-gradient(135deg, #080210 0%, #3d1079 50%, #080210 100%)",
@@ -24,7 +27,7 @@
   },
   "seo": {
     "defaultTitle": "Mundial 2026 | pauloconde.dev",
-    "titleTemplate": "Mundial 2026 | %s",
+    "titleTemplate": "Mundial 2026 | pauloconde.dev",
     "description": "Calendario oficial, grupos y resultados del Mundial FIFA 2026",
     "keywords": "mundial 2026, fifa, calendario, resultados, futbol",
     "ogImage": "/ogimage.png"
