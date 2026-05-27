@@ -1,0 +1,202 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {
+  fetchWorldCupData,
+  parseMatchDate,
+  hasScore,
+  getScoreString,
+  getFlagUrl,
+  getMatchUTC,
+  translateTeam,
+  translateGround,
+} from '../lib/worldcup';
+
+const data = await fetchWorldCupData();
+const sortedMatches = [...data.matches].sort((a, b) => {
+  return parseMatchDate(a.date, a.time).getTime() - parseMatchDate(b.date, b.time).getTime();
+});
+
+// Determina la fase de un partido
+function getPhase(match: any): string {
+  if (match.group)                     return 'group';
+  const r = match.round;
+  if (r === 'Dieciséisavos de Final') return 'r32';
+  if (r === 'Octavos de Final')       return 'r16';
+  if (r === 'Cuartos de Final')       return 'qf';
+  if (r === 'Semifinales')            return 'sf';
+  if (r === 'Tercer Puesto')          return '3rd';
+  if (r === 'Final')                  return 'final';
+  return 'other';
+}
+
+const PHASE_INFO: Record<string, { label: string; emoji: string; color: string }> = {
+  group: { label: 'Fase de Grupos',   emoji: '🏟️', color: '#ffffff' },
+  r32:   { label: 'Dieciséisavos de Final',    emoji: '⚔️',  color: '#fcd34d' },
+  r16:   { label: 'Octavos de Final', emoji: '🔥',  color: '#f59e0b' },
+  qf:    { label: 'Cuartos de Final', emoji: '💥',  color: '#f87171' },
+  sf:    { label: 'Semifinales',      emoji: '⚡',  color: '#ef4444' },
+  '3rd': { label: 'Tercer Lugar',     emoji: '🥉',  color: '#9ca3af' },
+  final: { label: 'Gran Final',       emoji: '🏆',  color: '#f59e0b' },
+};
+
+// Se rastrea a nivel de partido para detectar cambios de fase mid-día
+let globalLastPhase = '';
+const anchorsShown  = new Set<string>();
+---
+
+<Layout title="Calendario" page="calendario">
+
+  <div class="px-4 pt-6 pb-4 max-w-lg mx-auto">
+
+    <h1 class="font-['Outfit'] font-black text-2xl text-[var(--text-primary)] mb-6">Calendario</h1>
+
+    <!-- Acceso rápido a fases -->
+    <div class="flex gap-2 overflow-x-auto pb-3 mb-6"
+         style="scrollbar-width: none; -webkit-overflow-scrolling: touch;">
+      {[
+        { label: 'Grupos',   anchor: 'fase-group' },
+        { label: '16vos',    anchor: 'fase-r32'   },
+        { label: '8vos',  anchor: 'fase-r16'   },
+        { label: '4tos',  anchor: 'fase-qf'    },
+        { label: 'Semifinales',    anchor: 'fase-sf'     },
+        { label: 'Final',    anchor: 'fase-final'  },
+      ].map(item => (
+        <a href={`#${item.anchor}`}
+           class="shrink-0 text-xs font-semibold px-3 py-1.5 rounded-full glass border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-amber-400 hover:border-amber-400/40 transition-colors">
+          {item.label}
+        </a>
+      ))}
+    </div>
+
+    <!-- ── Lista plana de partidos ── -->
+    {sortedMatches.map(match => {
+      const phase     = getPhase(match);
+      const phaseInfo = PHASE_INFO[phase];
+      const color     = phaseInfo?.color ?? '#ffffff';
+      const scored    = hasScore(match);
+      const ft        = match.score?.ft;
+      const utc       = getMatchUTC(match);
+
+      const showPhaseHeader = phase !== globalLastPhase;
+      const anchorId = `fase-${phase}`;
+      const needsAnchor = showPhaseHeader && !anchorsShown.has(phase);
+      if (showPhaseHeader) {
+        globalLastPhase = phase;
+        anchorsShown.add(phase);
+      }
+
+      return (
+        <div class="match-container">
+          {showPhaseHeader && phaseInfo && (
+            <div
+              id={needsAnchor ? anchorId : undefined}
+              class="flex items-center gap-3 mt-8 mb-4"
+            >
+              <span class="text-2xl">{phaseInfo.emoji}</span>
+              <h2 class="font-['Outfit'] font-black text-xl phase-title"
+                  style={`color: ${phaseInfo.color};`}>
+                {phaseInfo.label}
+              </h2>
+              <div class="flex-1 h-px phase-divider"
+                   style={`background: ${phaseInfo.color}40;`}></div>
+            </div>
+          )}
+
+          {/* Encabezado del día — coloreado por la fase del partido */}
+          <div class="date-header-container flex items-center gap-3 mb-2.5 mt-5">
+            <div
+              class="shrink-0 text-sm font-bold px-3 py-1 rounded-full bg-black/20 backdrop-blur-sm"
+              style={`border: 1px solid ${phaseInfo?.color ?? '#ffffff'}40;
+                      color: ${phaseInfo?.color ?? '#ffffff'};`}
+            >
+              <time data-utc={utc} data-fmt="date-full">
+                {(() => {
+                  const d = parseMatchDate(match.date, match.time);
+                  const str = d.toLocaleDateString('es', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' });
+                  return str.charAt(0).toUpperCase() + str.slice(1);
+                })()}
+              </time>
+            </div>
+            <div class="flex-1 h-px" style="background: var(--border-subtle);"></div>
+            <span class="match-count text-[10px] text-gray-600 shrink-0">
+              1 partido
+            </span>
+          </div>
+
+          <div class="space-y-2 mb-1">
+            <div class="match-card px-4 py-3">
+              <div class="flex items-center gap-3">
+
+                {/* Hora */}
+                <div class="shrink-0 w-[52px] text-center">
+                  {!scored ? (
+                    <p class="font-['Outfit'] font-bold text-sm" style={`color: ${color};`}>
+                      <time data-utc={utc} data-fmt="time">--</time>
+                    </p>
+                  ) : (
+                    <span class="text-[8px] font-bold px-1.5 py-0.5 rounded-full inline-block"
+                          style="background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3);">
+                      TC
+                    </span>
+                  )}
+                  {match.group && (
+                    <p class="text-[10px] text-[var(--text-secondary)] mt-0.5 font-medium leading-tight">
+                      {match.group}
+                    </p>
+                  )}
+                  {match.num && (
+                    <p class="text-[9px] text-[var(--text-secondary)] mt-0.5 font-medium leading-tight">
+                      #{match.num}
+                    </p>
+                  )}
+                </div>
+
+                {/* Equipos */}
+                <div class="flex-1 flex items-center min-w-0">
+                  <div class="flex items-center gap-2 flex-1 min-w-0">
+                    <img src={getFlagUrl(match.team1)} alt={translateTeam(match.team1)}
+                         class="w-6 h-4 object-cover rounded shrink-0"
+                         onerror="this.style.display='none'" />
+                    <span class={`text-sm font-semibold truncate ${scored && ft && ft[0] > ft[1] ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}>
+                      {translateTeam(match.team1)}
+                    </span>
+                  </div>
+
+                  <div class="shrink-0 px-3 text-center min-w-[56px]">
+                    {scored ? (
+                      <span class="font-['Outfit'] font-black text-xl gradient-text">
+                        {getScoreString(match)}
+                      </span>
+                    ) : (
+                      <span class="text-xs text-gray-600 font-bold">vs</span>
+                    )}
+                  </div>
+
+                  <div class="flex items-center gap-2 flex-1 min-w-0 justify-end">
+                    <span class={`text-sm font-semibold truncate text-right ${scored && ft && ft[1] > ft[0] ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}>
+                      {translateTeam(match.team2)}
+                    </span>
+                    <img src={getFlagUrl(match.team2)} alt={translateTeam(match.team2)}
+                         class="w-6 h-4 object-cover rounded shrink-0"
+                         onerror="this.style.display='none'" />
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Sede */}
+              <div class="mt-1.5 ml-[68px] flex items-center gap-1 text-[var(--text-secondary)]">
+                <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <circle cx="12" cy="11" r="3"/>
+                </svg>
+                <span class="text-[10px] font-medium truncate">{translateGround(match.ground)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    })}
+
+  </div>
+</Layout>

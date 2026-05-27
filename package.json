@@ -1,0 +1,29 @@
+{
+  "name": "mundial-2026",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "generate-manifest": "node scripts/generate-icons.js"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@supabase/supabase-js": "^2.106.0",
+    "@tailwindcss/vite": "^4.2.4",
+    "@vite-pwa/astro": "^1.2.0",
+    "astro": "^6.2.2",
+    "tailwindcss": "^4.2.4",
+    "typescript": "^6.0.3",
+    "workbox-window": "^7.4.1"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}

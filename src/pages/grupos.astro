@@ -1,0 +1,173 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {
+  fetchWorldCupData,
+  calculateGroupStandings,
+  getMatchesByGroup,
+  hasScore,
+  getScoreString,
+  getFlagUrl,
+  getMatchUTC,
+  translateTeam,
+  translateGround,
+  translateGroup,
+} from '../lib/worldcup';
+
+const data           = await fetchWorldCupData();
+const standings      = calculateGroupStandings(data);
+const matchesByGroup = getMatchesByGroup(data);
+const hayResultados  = standings.some(s => s.teams.some(t => t.played > 0));
+---
+
+<Layout title="Grupos" page="grupos">
+
+  <div class="px-4 pt-6 pb-4 max-w-lg mx-auto">
+
+    <div class="flex items-center gap-3 mb-3">
+      <h1 class="font-['Outfit'] font-black text-2xl text-[var(--text-primary)]">Fase de Grupos</h1>
+      {hayResultados && (
+        <span class="text-[10px] font-bold px-2 py-1 rounded-full"
+              style="background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3);">
+          EN VIVO
+        </span>
+      )}
+    </div>
+
+    <!-- Leyenda -->
+    <div class="flex flex-wrap items-center gap-3 mb-6 text-xs text-[var(--text-secondary)]">
+      <div class="flex items-center gap-1.5">
+        <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+        <span>Clasifica</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <div class="w-2 h-2 rounded-full bg-amber-400"></div>
+        <span>Mejor 3.º</span>
+      </div>
+    </div>
+
+    <!-- Grupos A–L -->
+    {standings.map(groupData => {
+      const groupMatches = matchesByGroup.get(groupData.group) ?? [];
+      const letter       = groupData.group.replace(/Group\s+|Grupo\s+/i, '');
+      return (
+        <div class="mb-10" id={`grupo-${letter.toLowerCase()}`}>
+
+          <!-- Encabezado del grupo -->
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center font-['Outfit'] font-black text-sm text-amber-400"
+                 style="background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.2);">
+              {letter}
+            </div>
+            <h2 class="font-['Outfit'] font-bold text-lg text-[var(--text-primary)]">{groupData.groupEs}</h2>
+            <div class="flex-1 h-px" style="background: var(--border-subtle);"></div>
+          </div>
+
+          <!-- Tabla de posiciones -->
+          <div class="glass rounded-2xl overflow-hidden mb-3">
+            <div class="grid px-3 py-2 text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider"
+                 style="grid-template-columns: 1fr 26px 26px 26px 26px 28px 30px;
+                        border-bottom: 1px solid var(--border-subtle);">
+              <span>Selección</span>
+              <span class="text-center">J</span>
+              <span class="text-center">G</span>
+              <span class="text-center">E</span>
+              <span class="text-center">P</span>
+              <span class="text-center">DG</span>
+              <span class="text-center text-amber-400 font-black">Pts</span>
+            </div>
+
+            {groupData.teams.map((team, idx) => {
+              const leftColor = idx < 2 ? '#10b981' : idx === 2 ? '#f59e0b' : 'transparent';
+              return (
+                <div
+                  class="standings-row grid items-center px-3 py-2.5"
+                  style={`grid-template-columns: 1fr 26px 26px 26px 26px 28px 30px;
+                          border-left: 3px solid ${leftColor};`}
+                >
+                  <div class="flex items-center gap-2 min-w-0">
+                    <span class="text-xs text-[var(--text-secondary)] w-4 shrink-0">{idx + 1}</span>
+                    <img src={getFlagUrl(team.team)} alt={team.teamEs}
+                         class="flag-img shrink-0" onerror="this.style.display='none'" />
+                    <span class="text-sm font-semibold truncate">{team.teamEs}</span>
+                  </div>
+                  <span class="text-xs text-center text-[var(--text-secondary)]">{team.played}</span>
+                  <span class="text-xs text-center text-[var(--text-secondary)]">{team.won}</span>
+                  <span class="text-xs text-center text-[var(--text-secondary)]">{team.drawn}</span>
+                  <span class="text-xs text-center text-[var(--text-secondary)]">{team.lost}</span>
+                  <span class={`text-xs text-center font-semibold ${team.gd > 0 ? 'text-emerald-400' : team.gd < 0 ? 'text-red-400' : 'text-[var(--text-secondary)]'}`}>
+                    {team.gd > 0 ? '+' : ''}{team.gd}
+                  </span>
+                  <span class="text-sm font-black text-center text-amber-400">{team.points}</span>
+                </div>
+              );
+            })}
+          </div>
+
+          <!-- Partidos del grupo -->
+          <div class="space-y-2">
+            {groupMatches.map(match => {
+              const utc = getMatchUTC(match);
+              return (
+                <div class="match-card px-4 py-3">
+                  <div class="flex items-center gap-3">
+
+                    <!-- Fecha / hora local -->
+                    <div class="shrink-0 text-center w-16">
+                      <p class="text-[9px] text-[var(--text-secondary)] font-semibold leading-tight">
+                        <time data-utc={utc} data-fmt="date-short">…</time>
+                      </p>
+                      <p class="text-[9px] text-amber-400 font-bold mt-0.5">
+                        {hasScore(match)
+                          ? <span class="text-[8px] font-bold px-1.5 py-0.5 rounded-full" style="background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3);">TC</span>
+                          : <time data-utc={utc} data-fmt="time">--:--</time>
+                        }
+                      </p>
+                    </div>
+
+                    <div class="flex-1 flex items-center justify-between gap-2 min-w-0">
+                      <!-- Equipo 1 -->
+                      <div class="flex items-center gap-2 flex-1 min-w-0">
+                        <img src={getFlagUrl(match.team1)} alt={translateTeam(match.team1)}
+                             class="w-6 h-4 object-cover rounded shrink-0"
+                             onerror="this.style.display='none'" />
+                        <span class="text-sm font-semibold truncate">{translateTeam(match.team1)}</span>
+                      </div>
+
+                      <!-- Marcador o VS -->
+                      <div class="shrink-0 px-3">
+                        {hasScore(match) ? (
+                          <span class="font-['Outfit'] font-black text-lg gradient-text">{getScoreString(match)}</span>
+                        ) : (
+                          <span class="text-xs text-[var(--text-secondary)] font-bold">vs</span>
+                        )}
+                      </div>
+
+                      <!-- Equipo 2 -->
+                      <div class="flex items-center gap-2 flex-1 min-w-0 justify-end">
+                        <span class="text-sm font-semibold truncate text-right">{translateTeam(match.team2)}</span>
+                        <img src={getFlagUrl(match.team2)} alt={translateTeam(match.team2)}
+                             class="w-6 h-4 object-cover rounded shrink-0"
+                             onerror="this.style.display='none'" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Sede -->
+                  <div class="mt-1.5 ml-[72px] flex items-center gap-1 text-gray-600">
+                    <svg class="w-2.5 h-2.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                      <circle cx="12" cy="11" r="3"/>
+                    </svg>
+                    <span class="text-[9px] truncate">{translateGround(match.ground)}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      );
+    })}
+
+  </div>
+</Layout>

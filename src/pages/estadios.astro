@@ -1,0 +1,346 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { VENUES, fetchWorldCupData, translateTeam, translateRound, getFlagUrl, getMatchUTC } from '../lib/worldcup';
+
+const data = await fetchWorldCupData();
+
+const venuesWithMatches = VENUES.map(v => {
+  const matches = data.matches.filter(m => m.ground === v.cityEn);
+  matches.sort((a, b) => new Date(getMatchUTC(a)).getTime() - new Date(getMatchUTC(b)).getTime());
+  return { ...v, matches };
+});
+
+const mexico = venuesWithMatches.filter(v => v.countryEn === 'Mexico');
+const usa    = venuesWithMatches.filter(v => v.countryEn === 'USA');
+const canada = venuesWithMatches.filter(v => v.countryEn === 'Canada');
+---
+
+<Layout title="Estadios" page="estadios">
+
+  <!-- ── Modal de estadio ── -->
+  <div id="venue-modal"
+       class="fixed inset-0 z-[9000] flex items-end justify-center"
+       style="display:none; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);"
+       role="dialog" aria-modal="true">
+
+    <div id="venue-modal-panel"
+         class="w-full max-w-lg rounded-t-3xl overflow-hidden"
+         style="background: var(--bg-card, #1a2035); transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);">
+
+      <!-- Foto -->
+      <div class="relative h-56">
+        <img id="modal-img" src="" alt="" class="w-full h-full object-cover" />
+        <div class="absolute inset-0"
+             style="background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);"></div>
+
+        <!-- Botón cerrar -->
+        <button id="modal-close"
+                class="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center transition-opacity hover:opacity-80"
+                style="background: rgba(0,0,0,0.5);"
+                aria-label="Cerrar">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+
+        <!-- Nombre sobre la foto -->
+        <div class="absolute bottom-4 left-5 right-16">
+          <h2 id="modal-name" class="font-['Outfit'] font-black text-xl text-white leading-tight"></h2>
+          <p id="modal-city" class="text-sm text-gray-300 mt-0.5"></p>
+        </div>
+      </div>
+
+      <!-- Detalles -->
+      <div class="p-5 grid grid-cols-2 gap-4 pb-2">
+        <div class="glass rounded-2xl p-4 text-center">
+          <p class="text-[10px] text-[var(--text-secondary)] font-semibold uppercase tracking-wider mb-1">Aforo</p>
+          <p id="modal-capacity" class="font-['Outfit'] font-black text-xl gradient-text"></p>
+        </div>
+        <div class="glass rounded-2xl p-4 text-center">
+          <p class="text-[10px] text-[var(--text-secondary)] font-semibold uppercase tracking-wider mb-1">País</p>
+          <p id="modal-country" class="font-['Outfit'] font-bold text-base text-[var(--text-primary)]"></p>
+        </div>
+      </div>
+
+      <!-- Calendario de Partidos -->
+      <div class="px-5 pb-6">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="font-bold text-[var(--text-primary)] text-sm">Calendario</h3>
+          <span class="text-[10px] text-amber-500 font-bold bg-amber-500/10 px-2 py-0.5 rounded-md"><span id="modal-matches-count">0</span> Partidos</span>
+        </div>
+        <div id="modal-matches-list" class="max-h-[14rem] overflow-y-auto pr-1 custom-scrollbar">
+          <!-- JS inyectará los partidos aquí -->
+        </div>
+      </div>
+
+      <!-- Safe area bottom -->
+      <div class="h-safe-bottom" style="height: env(safe-area-inset-bottom, 16px);"></div>
+    </div>
+  </div>
+
+  <div class="pt-6 pb-4 max-w-lg mx-auto">
+
+    <div class="px-4 mb-6">
+      <h1 class="font-['Outfit'] font-black text-2xl text-[var(--text-primary)]">Sedes Mundiales</h1>
+      <p class="text-sm text-[var(--text-secondary)] mt-1">16 estadios en 3 países anfitriones</p>
+    </div>
+
+    <!-- Barra de estadísticas -->
+    <div class="px-4 mb-8">
+      <div class="glass rounded-2xl p-4">
+        <div class="grid grid-cols-3 gap-4 text-center">
+          <div>
+            <p class="font-['Outfit'] font-black text-2xl gradient-text">3</p>
+            <p class="text-[10px] text-[var(--text-secondary)] font-semibold mt-0.5">PAÍSES</p>
+          </div>
+          <div class="border-x border-[var(--border-subtle)]">
+            <p class="font-['Outfit'] font-black text-2xl gradient-text">16</p>
+            <p class="text-[10px] text-[var(--text-secondary)] font-semibold mt-0.5">ESTADIOS</p>
+          </div>
+          <div>
+            <p class="font-['Outfit'] font-black text-2xl gradient-text">104</p>
+            <p class="text-[10px] text-[var(--text-secondary)] font-semibold mt-0.5">PARTIDOS</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secciones por país -->
+    {[
+      { countryEn: 'Mexico',  countryEs: 'México',         venues: mexico, flag: '🇲🇽', games: 13, accent: '#10b981' },
+      { countryEn: 'USA',     countryEs: 'Estados Unidos', venues: usa,    flag: '🇺🇸', games: 78, accent: '#3b82f6' },
+      { countryEn: 'Canada',  countryEs: 'Canadá',         venues: canada, flag: '🇨🇦', games: 13, accent: '#ef4444' },
+    ].map(({ countryEs, venues, flag, games, accent }) => (
+      <div class="mb-8">
+        <!-- Encabezado de país -->
+        <div class="flex items-center gap-3 px-4 mb-4">
+          <span class="text-3xl">{flag}</span>
+          <div>
+            <h2 class="font-['Outfit'] font-bold text-lg text-[var(--text-primary)]">{countryEs}</h2>
+            <p class="text-xs text-[var(--text-secondary)]">
+              {venues.length} sede{venues.length !== 1 ? 's' : ''} · {games} partidos
+            </p>
+          </div>
+          <div class="flex-1 h-px ml-2" style={`background: linear-gradient(90deg, ${accent}40, transparent);`}></div>
+        </div>
+
+        <!-- Tarjetas de estadios (carrusel) -->
+        <div class="carousel-track">
+          {venues.map(venue => (
+            <div class="carousel-item w-72">
+              <!-- data-* para el modal -->
+              <button
+                class="venue-card w-full text-left"
+                style="background: var(--bg-card); border: 1px solid var(--border-subtle); cursor: pointer;"
+                data-img={`/stadiums/${venue.imageKey}.png`}
+                data-name={venue.name}
+                data-city={`${venue.cityEs}, ${venue.countryEs}`}
+                data-capacity={venue.capacity}
+                data-country={venue.countryEs}
+                data-matches={JSON.stringify(venue.matches.map(m => ({
+                  r: translateRound(m.round).replace('Fase de Grupos', 'Grupos').replace('Dieciséisavos de Final', '16vos').replace('Octavos de Final', '8vos').replace('Cuartos de Final', 'Cuartos').replace('Tercer Puesto', '3er Lugar'),
+                  t1: translateTeam(m.team1),
+                  t2: translateTeam(m.team2),
+                  f1: getFlagUrl(m.team1),
+                  f2: getFlagUrl(m.team2),
+                  utc: getMatchUTC(m)
+                })))}
+                onclick="openVenueModal(this)"
+              >
+                <!-- Imagen del estadio -->
+                <div class="relative h-40 overflow-hidden">
+                  <img
+                    src={`/stadiums/${venue.imageKey}.png`}
+                    alt={venue.name}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    onerror="this.parentElement.style.background='linear-gradient(135deg,rgba(0,0,0,0.5),rgba(0,0,0,0.8))'"
+                  />
+                  <div class="absolute inset-0"
+                       style="background: linear-gradient(to top, rgba(10,14,26,0.95) 0%, rgba(10,14,26,0.3) 60%, transparent 100%);"></div>
+
+                  <!-- Aforo badge -->
+                  <div class="absolute top-3 right-3 flex flex-col items-end gap-1.5">
+                    <span class="text-[10px] font-bold px-2 py-1 rounded-full bg-[var(--bg-card)] text-[var(--text-primary)] backdrop-blur-md border border-[var(--border-subtle)] shadow-sm leading-none">
+                      {venue.matches.length} Partidos
+                    </span>
+                    <span class="text-[10px] font-bold px-2 py-1 rounded-full leading-none"
+                          style={`background: ${accent}25; border: 1px solid ${accent}50; color: ${accent}; backdrop-filter: blur(4px);`}>
+                      {venue.capacity}
+                    </span>
+                  </div>
+
+                  <!-- Icono de expandir -->
+                  <div class="absolute bottom-3 right-3 opacity-70">
+                    <svg class="w-4 h-4 text-[var(--text-primary)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Información -->
+                <div class="p-4">
+                  <h3 class="font-['Outfit'] font-bold text-base text-[var(--text-primary)] leading-tight">{venue.name}</h3>
+                  <div class="flex items-center gap-1.5 mt-2 text-[var(--text-secondary)]">
+                    <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                      <circle cx="12" cy="11" r="3"/>
+                    </svg>
+                    <span class="text-xs">{venue.cityEs}, {venue.countryEs}</span>
+                  </div>
+                </div>
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    <!-- Listado completo — también abre modal al tocar -->
+    <div class="px-4 mt-8">
+      <h2 class="font-['Outfit'] font-bold text-lg text-[var(--text-primary)] mb-4">Todas las Sedes</h2>
+      <div class="space-y-2">
+        {venuesWithMatches.map((venue, i) => (
+          <button
+            class="match-card w-full px-4 py-3 flex items-center gap-4 text-left"
+            style="cursor: pointer;"
+            data-img={`/stadiums/${venue.imageKey}.png`}
+            data-name={venue.name}
+            data-city={`${venue.cityEs}, ${venue.countryEs}`}
+            data-capacity={venue.capacity}
+            data-country={venue.countryEs}
+            data-matches={JSON.stringify(venue.matches.map(m => ({
+              r: translateRound(m.round).replace('Fase de Grupos', 'Grupos').replace('Dieciséisavos de Final', '16vos').replace('Octavos de Final', '8vos').replace('Cuartos de Final', 'Cuartos').replace('Tercer Puesto', '3er Lugar'),
+              t1: translateTeam(m.team1),
+              t2: translateTeam(m.team2),
+              f1: getFlagUrl(m.team1),
+              f2: getFlagUrl(m.team2),
+              utc: getMatchUTC(m)
+            })))}
+            onclick="openVenueModal(this)"
+          >
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center text-sm font-black shrink-0"
+                 style="background: rgba(245,158,11,0.1); color: #f59e0b; border: 1px solid rgba(245,158,11,0.2);">
+              {i + 1}
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-semibold text-sm text-[var(--text-primary)] truncate">{venue.name}</p>
+              <p class="text-xs text-[var(--text-secondary)] truncate mt-0.5">
+                {venue.countryEn === 'Mexico' ? '🇲🇽' : venue.countryEn === 'USA' ? '🇺🇸' : '🇨🇦'}
+                {' '}{venue.cityEs}, {venue.countryEs}
+              </p>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="text-right">
+                <p class="text-[11px] font-bold text-[var(--text-primary)] leading-tight">{venue.matches.length} <span class="text-[9px] text-[var(--text-secondary)] font-normal">Partidos</span></p>
+                <p class="text-[10px] font-bold text-amber-400 leading-tight mt-0.5">{venue.capacity} <span class="text-[9px] text-[var(--text-secondary)] font-normal">aforo</span></p>
+              </div>
+              <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Script del modal -->
+  <style>
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+  </style>
+  <script is:inline>
+    function formatLocal(isoStr) {
+      try {
+        var d = new Date(isoStr);
+        var date = d.toLocaleDateString('es', { day: 'numeric', month: 'short' });
+        var time = d.toLocaleTimeString('es', { hour: 'numeric', minute: '2-digit', hour12: true });
+        return { date: date, time: time };
+      } catch(e) { return { date: '', time: '' }; }
+    }
+
+    function openVenueModal(el) {
+      var modal  = document.getElementById('venue-modal');
+      var panel  = document.getElementById('venue-modal-panel');
+
+      document.getElementById('modal-img').src      = el.dataset.img;
+      document.getElementById('modal-img').alt      = el.dataset.name;
+      document.getElementById('modal-name').textContent     = el.dataset.name;
+      document.getElementById('modal-city').textContent     = el.dataset.city;
+      document.getElementById('modal-capacity').textContent = el.dataset.capacity;
+      document.getElementById('modal-country').textContent  = el.dataset.country;
+
+      var matchesList = document.getElementById('modal-matches-list');
+      var matches = JSON.parse(el.dataset.matches || '[]');
+      document.getElementById('modal-matches-count').textContent = matches.length;
+      
+      matchesList.innerHTML = '';
+      if (matches.length === 0) {
+        matchesList.innerHTML = '<p class="text-xs text-[var(--text-secondary)] text-center py-4">Aún no hay partidos programados aquí.</p>';
+      } else {
+        matches.forEach(function(m) {
+          var dt = formatLocal(m.utc);
+          matchesList.innerHTML += `
+            <div class="glass rounded-xl p-3 flex items-center justify-between gap-2 mb-2">
+              <div class="text-[10px] text-amber-500 font-bold w-12 shrink-0 leading-tight">${m.r}</div>
+              
+              <div class="flex-1 flex items-center justify-center gap-1.5">
+                <div class="flex items-center gap-1.5 flex-1 justify-end">
+                  <span class="font-bold text-[11px] text-[var(--text-primary)] truncate text-right">${m.t1}</span>
+                  <img src="${m.f1}" class="w-4 h-3 shrink-0 rounded-[2px] shadow-sm" alt=""/>
+                </div>
+                <span class="text-[9px] text-[var(--text-secondary)] font-black">VS</span>
+                <div class="flex items-center gap-1.5 flex-1 justify-start">
+                  <img src="${m.f2}" class="w-4 h-3 shrink-0 rounded-[2px] shadow-sm" alt=""/>
+                  <span class="font-bold text-[11px] text-[var(--text-primary)] truncate">${m.t2}</span>
+                </div>
+              </div>
+              
+              <div class="w-[60px] text-right shrink-0 border-l border-[var(--border-subtle)] pl-2">
+                <p class="text-[11px] text-[var(--text-primary)] font-bold">${dt.time}</p>
+                <p class="text-[9px] text-[var(--text-secondary)] capitalize">${dt.date}</p>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+
+      // Animar entrada desde abajo
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          panel.style.transform = 'translateY(0)';
+        });
+      });
+    }
+
+    function closeVenueModal() {
+      var modal = document.getElementById('venue-modal');
+      var panel = document.getElementById('venue-modal-panel');
+      panel.style.transform = 'translateY(100%)';
+      setTimeout(function () {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 350);
+    }
+
+    // Botón X
+    document.getElementById('modal-close').addEventListener('click', closeVenueModal);
+
+    // Click en backdrop (fuera del panel)
+    document.getElementById('venue-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeVenueModal();
+    });
+
+    // Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeVenueModal();
+    });
+  </script>
+
+</Layout>

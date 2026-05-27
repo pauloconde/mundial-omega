@@ -1,0 +1,844 @@
+---
+import '../styles/global.css';
+import { fetchWorldCupData, getMatchUTC } from '../lib/worldcup';
+import sponsorInfo from '../data/sponsor.json';
+import InstallIOSGuide from '../components/InstallIOSGuide.astro';
+// @ts-ignore
+import { pwaInfo } from 'virtual:pwa-info';
+
+interface Props {
+  title?: string;
+  description?: string;
+  page?: 'home' | 'grupos' | 'estadios' | 'calendario' | 'quiniela';
+}
+
+const {
+  title = sponsorInfo.seo.defaultTitle,
+  description = sponsorInfo.seo.description,
+  page = 'home'
+} = Astro.props;
+
+// Resolvemos el título final
+const pageTitle = title === sponsorInfo.seo.defaultTitle
+  ? sponsorInfo.seo.defaultTitle
+  : sponsorInfo.seo.titleTemplate.replace('%s', title);
+
+// Recoger todos los kickoffs para detección de partidos en vivo en el cliente
+const data = await fetchWorldCupData();
+const kickoffISOs = data.matches.map(m => getMatchUTC(m));
+---
+
+<!doctype html>
+<html lang="es" data-theme={sponsorInfo.theme || 'dark'}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={sponsorInfo.seo.keywords} />
+    <meta name="theme-color" content={sponsorInfo.colors.appBg} />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    { pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
+    <title>{pageTitle}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={new URL(sponsorInfo.seo.ogImage, Astro.site || Astro.url).toString()} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(sponsorInfo.seo.ogImage, Astro.site || Astro.url).toString()} />
+
+    <style is:global set:html={`
+      :root {
+        --brand-app-bg: ${sponsorInfo.colors.appBg};
+        --brand-splash-bg: ${sponsorInfo.colors.splashBg};
+        --brand-header-bg: ${sponsorInfo.colors.headerBg};
+        --brand-header-text: ${sponsorInfo.colors.headerText};
+        --brand-nav-bg: ${sponsorInfo.colors.navBg};
+        --brand-nav-text: ${sponsorInfo.colors.navText};
+        --brand-nav-icon: ${sponsorInfo.colors.navIcon};
+        --brand-nav-icon-active: ${sponsorInfo.colors.navIconActive};
+        --brand-drawer-bg: ${sponsorInfo.colors.drawerBg || sponsorInfo.colors.navBg};
+      }
+    `} />
+
+    <!-- Capturar PWA Prompt tempranamente -->
+    <script is:inline>
+      window.deferredPrompt = null;
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        window.deferredPrompt = e;
+        // Si el drawer ya está listo, mostrar el botón
+        var section = document.getElementById('install-android');
+        if (section) section.style.display = 'block';
+        var headerBtn = document.getElementById('header-install-btn');
+        if (headerBtn) headerBtn.style.display = 'flex';
+      });
+    </script>
+  </head>
+
+  <body class="bg-[var(--bg-primary)] text-[var(--text-primary)] font-['Inter'] pb-24">
+
+    <!-- ── Splash Screen ── -->
+    <div
+      id="splash"
+      class="fixed inset-0 z-[9999] flex flex-col animate-[splash-fade_2.2s_ease-in-out_forwards]"
+      style="background: var(--brand-splash-bg);"
+    >
+      <!-- Logo FIFA — centrado en el espacio disponible -->
+      <div class="flex-1 flex items-center justify-center slide-up">
+        <img src="/logo-fifa.webp" alt="FIFA World Cup 2026"
+             class="w-72 max-w-[80vw] h-auto object-contain" />
+      </div>
+
+      <!-- Logo del sponsor — anclado al fondo con padding seguro -->
+      <div class="flex justify-center pb-10" style="padding-bottom: max(2.5rem, env(safe-area-inset-bottom, 2.5rem));">
+        <img src="/logo-splash.svg" alt="Sponsor"
+             class="h-64 w-auto max-w-[60vw] object-contain" />
+      </div>
+    </div>
+
+    <!-- ── Full-Screen Rotating Banners ── -->
+    {sponsorInfo.showBanner && (
+      <div
+        id="page-banner"
+        class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-300 opacity-0"
+      >
+        <!-- Banner Container Wrapper (Constrained to App's max-w-lg width) -->
+        <div class="relative w-full max-w-lg h-full flex flex-col items-center justify-center bg-black">
+          <!-- Banner Image -->
+          <img
+            id="page-banner-img"
+            src=""
+            alt="Publicidad"
+            class="w-full h-full object-cover"
+          />
+
+          <!-- Manual Close Button (X) -->
+          <button
+            id="page-banner-close"
+            class="absolute top-4 right-4 z-[10000] flex items-center justify-center w-10 h-10 rounded-full bg-black/60 text-white backdrop-blur-md border border-white/20 transition-all hover:bg-black/80 active:scale-95 cursor-pointer"
+            aria-label="Cerrar publicidad"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    )}
+
+    <!-- ── Script: Control de Splash & Banners en Navegación ── -->
+    <script is:inline define:vars={{
+      showBanner: sponsorInfo.showBanner,
+      bannerUrls: [
+        sponsorInfo.banner1url,
+        sponsorInfo.banner2url,
+        sponsorInfo.banner3url,
+        sponsorInfo.banner4url,
+        sponsorInfo.banner5url
+      ].filter(Boolean),
+      bannerDuration: sponsorInfo.bannerDuration !== undefined ? sponsorInfo.bannerDuration : 0
+    }}>
+      (function () {
+        const isColdStart = !sessionStorage.getItem('app_initialized');
+        sessionStorage.setItem('app_initialized', 'true');
+
+        const splash = document.getElementById('splash');
+        const bannerContainer = document.getElementById('page-banner');
+        const bannerImg = document.getElementById('page-banner-img');
+        const closeBtn = document.getElementById('page-banner-close');
+
+        if (isColdStart) {
+          // Cold start: show original splash, hide banner container
+          if (bannerContainer) bannerContainer.style.display = 'none';
+          if (splash) {
+            splash.style.display = 'flex';
+          }
+        } else {
+          // Subsequent page navigation
+          if (showBanner && bannerUrls && bannerUrls.length > 0) {
+            // Hide splash immediately to prevent flashing
+            if (splash) splash.style.display = 'none';
+
+            // Show banner
+            if (bannerContainer && bannerImg) {
+              // Rotate banners using sessionStorage index
+              let currentIndex = parseInt(sessionStorage.getItem('banner_index') || '0');
+              if (isNaN(currentIndex) || currentIndex >= bannerUrls.length) {
+                currentIndex = 0;
+              }
+              const currentBannerUrl = bannerUrls[currentIndex];
+              
+              bannerImg.src = currentBannerUrl;
+              
+              const nextIndex = (currentIndex + 1) % bannerUrls.length;
+              sessionStorage.setItem('banner_index', nextIndex.toString());
+
+              bannerContainer.style.display = 'flex';
+              requestAnimationFrame(function () {
+                bannerContainer.style.opacity = '1';
+              });
+
+              let autoCloseTimer = null;
+              
+              function closeBanner() {
+                if (autoCloseTimer) clearTimeout(autoCloseTimer);
+                bannerContainer.style.opacity = '0';
+                setTimeout(function () {
+                  bannerContainer.style.display = 'none';
+                }, 300);
+              }
+
+              // Set up automatic close timer if duration > 0
+              if (bannerDuration > 0) {
+                autoCloseTimer = setTimeout(closeBanner, bannerDuration * 1000);
+              }
+
+              if (closeBtn) {
+                closeBtn.addEventListener('click', closeBanner);
+              }
+            }
+          } else {
+            // If banners are disabled or empty, let the normal splash screen execute
+            if (bannerContainer) bannerContainer.style.display = 'none';
+            if (splash) {
+              splash.style.display = 'flex';
+            }
+          }
+        }
+      })();
+    </script>
+
+    <!-- ── Header ── -->
+    <header class="app-header fixed top-0 left-0 right-0 z-50"
+            style="padding-top: env(safe-area-inset-top, 0px);">
+      <div class="flex items-center justify-between px-4 h-14 max-w-lg mx-auto">
+        <!-- Logo del sponsor -->
+        <a href="/" class="flex items-center" id="header-logo">
+          <img src="/logo.webp" alt="Logo" class="h-8 w-auto max-w-[140px] object-contain" />
+        </a>
+
+        <div class="flex items-center gap-2">
+          <!-- Badge LIVE -->
+          <div id="live-badge"
+               class="hidden flex items-center gap-1.5 px-2 py-1 rounded-full"
+               style="background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3);">
+            <span class="live-dot"></span>
+            <span class="text-[10px] font-bold text-red-400 tracking-wider">LIVE</span>
+          </div>
+
+          <!-- Botón instalar PWA en header -->
+          <button id="header-install-btn"
+                  class="w-9 h-9 rounded-full transition-all hover:opacity-80 active:scale-95"
+                  style="display: none; align-items: center; justify-content: center; color: var(--brand-header-text, #f59e0b);"
+                  aria-label="Instalar App">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          </button>
+
+          <!-- Botón abrir drawer -->
+          <button id="drawer-open"
+                  class="w-9 h-9 flex items-center justify-center rounded-full transition-colors"
+                  style="color: var(--brand-header-text, #6b7280);"
+                  aria-label="Menú">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Drawer backdrop ── -->
+    <div id="drawer-backdrop"
+         class="fixed inset-0 z-[8000] bg-black/60 backdrop-blur-sm"
+         style="display:none; opacity:0; transition: opacity 0.3s;"
+         aria-hidden="true"></div>
+
+    <!-- ── Drawer panel ── -->
+    <aside id="drawer-panel"
+           class="fixed top-0 right-0 bottom-0 z-[8001] w-80 max-w-[90vw] flex flex-col"
+           style={`background: ${sponsorInfo.colors.drawerBg || sponsorInfo.colors.navBg || '#0a0e1a'}; border-left: 1px solid var(--border-subtle); transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); padding-top: env(safe-area-inset-top, 0px);`}>
+
+      <!-- Header del drawer -->
+      <div class="flex items-center justify-between px-5 h-14 border-b"
+           style="border-color: var(--border-subtle);">
+        <span class="font-['Outfit'] font-bold text-sm" style="color: var(--brand-nav-text, #fff);">FIFA World Cup 2026</span>
+        <button id="drawer-close" class="w-8 h-8 flex items-center justify-center rounded-full"
+                style="color: var(--brand-nav-icon, #6b7280);" aria-label="Cerrar">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Contenido -->
+      <div class="flex-1 overflow-y-auto px-5 py-6 flex flex-col gap-8">
+        
+        <!-- Logo Sponsor Grande -->
+        <div class="flex flex-col items-center gap-5 mt-4">
+          <img src={sponsorInfo.drawerLogoPath || sponsorInfo.logoPath} alt={sponsorInfo.name} class="w-56 max-w-full h-auto object-contain" />
+          
+          <!-- Redes Sociales -->
+          <div class="flex flex-wrap justify-center gap-4 mt-2">
+            {sponsorInfo.facebook && (
+              <a href={sponsorInfo.facebook} target="_blank" rel="noopener" aria-label="Facebook" 
+                 class="w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+                 style="background: rgba(128,128,128,0.1); color: var(--brand-nav-icon-active, #f59e0b);">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/>
+                </svg>
+              </a>
+            )}
+            {sponsorInfo.instagram && (
+              <a href={sponsorInfo.instagram} target="_blank" rel="noopener" aria-label="Instagram" 
+                 class="w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+                 style="background: rgba(128,128,128,0.1); color: var(--brand-nav-icon-active, #f59e0b);">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 0 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+                </svg>
+              </a>
+            )}
+            {sponsorInfo.tiktok && (
+              <a href={sponsorInfo.tiktok} target="_blank" rel="noopener" aria-label="TikTok" 
+                 class="w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+                 style="background: rgba(128,128,128,0.1); color: var(--brand-nav-icon-active, #f59e0b);">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                </svg>
+              </a>
+            )}
+            {sponsorInfo.linkedin && (
+              <a href={sponsorInfo.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" 
+                 class="w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+                 style="background: rgba(128,128,128,0.1); color: var(--brand-nav-icon-active, #f59e0b);">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/>
+                </svg>
+              </a>
+            )}
+            {sponsorInfo.whatsapp && (
+              <a href={sponsorInfo.whatsapp} target="_blank" rel="noopener" aria-label="WhatsApp" 
+                 class="w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+                 style="background: rgba(128,128,128,0.1); color: var(--brand-nav-icon-active, #f59e0b);">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+              </a>
+            )}
+            {sponsorInfo.youtube && (
+              <a href={sponsorInfo.youtube} target="_blank" rel="noopener" aria-label="YouTube" 
+                 class="w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+                 style="background: rgba(128,128,128,0.1); color: var(--brand-nav-icon-active, #f59e0b);">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+            )}
+            {sponsorInfo.x && (
+              <a href={sponsorInfo.x} target="_blank" rel="noopener" aria-label="X" 
+                 class="w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+                 style="background: rgba(128,128,128,0.1); color: var(--brand-nav-icon-active, #f59e0b);">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+            )}
+            {sponsorInfo.email && (
+              <a href={`mailto:${sponsorInfo.email}`} target="_blank" rel="noopener" aria-label="Email" 
+                 class="w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+                 style="background: rgba(128,128,128,0.1); color: var(--brand-nav-icon-active, #f59e0b);">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+              </a>
+            )}
+          </div>
+          
+          <!-- Dirección, Teléfono y Cómo llegar -->
+          {(sponsorInfo.address || sponsorInfo.googleMaps || sponsorInfo.phone) && (
+            <div class="flex flex-col items-center gap-3 mt-4 text-center px-4">
+              {sponsorInfo.address && (
+                <p class="text-xs opacity-80 leading-tight" style="color: var(--brand-nav-text, #fff);">{sponsorInfo.address}</p>
+              )}
+              
+              <div class="flex flex-col w-full gap-2 mt-1">
+                {sponsorInfo.phone && (
+                  <a href={`tel:${sponsorInfo.phone.replace(/[^0-9+]/g, '')}`} class="w-full flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition-transform active:scale-95 hover:opacity-90" style="background: var(--brand-nav-icon-active, #f59e0b); color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,0.15);">
+                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                    <span>Llamar</span>
+                  </a>
+                )}
+                
+                {sponsorInfo.googleMaps && (
+                  <a href={sponsorInfo.googleMaps} target="_blank" rel="noopener" class="w-full flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition-transform active:scale-95 hover:opacity-90" style="background: var(--brand-nav-icon-active, #f59e0b); color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,0.15);">
+                    <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <span>Cómo llegar</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+        
+        <div class="space-y-6 mt-4">
+          <!-- Botón instalar Android -->
+          <div id="install-android" style="display:none;" class="px-2">
+            <p class="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-secondary)] mb-3 text-center">Instalar app</p>
+            <button id="install-btn"
+                    class="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-sm transition-transform active:scale-95 hover:opacity-90"
+                    style="background: var(--brand-nav-icon-active, #f59e0b); color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,0.15);">
+              <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Instalar en Android
+            </button>
+          </div>
+
+          <!-- Guía instalar iOS -->
+          <div id="install-ios" style="display:none;" class="px-2">
+            <p class="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-secondary)] mb-2">Instalar en iPhone</p>
+            <InstallIOSGuide />
+          </div>
+        </div>
+
+        <hr class="border-t border-[var(--border-subtle)] my-2 opacity-50" />
+
+        <nav class="flex flex-col gap-2 px-2" style="color: var(--brand-app-bg, #053332);">
+          <a href="/" class={`flex items-center gap-4 px-4 py-3 rounded-2xl transition-colors ${page === 'home' ? 'bg-black/5 text-[var(--brand-nav-icon-active,#f59e0b)]' : 'hover:bg-black/5'}`}>
+            <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <span class="font-semibold text-sm">Inicio</span>
+          </a>
+          
+          <a href="/grupos" class={`flex items-center gap-4 px-4 py-3 rounded-2xl transition-colors ${page === 'grupos' ? 'bg-black/5 text-[var(--brand-nav-icon-active,#f59e0b)]' : 'hover:bg-black/5'}`}>
+            <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18M10 3v18M14 3v18" />
+            </svg>
+            <span class="font-semibold text-sm">Grupos</span>
+          </a>
+          
+          <a href="/estadios" class={`flex items-center gap-4 px-4 py-3 rounded-2xl transition-colors ${page === 'estadios' ? 'bg-black/5 text-[var(--brand-nav-icon-active,#f59e0b)]' : 'hover:bg-black/5'}`}>
+            <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span class="font-semibold text-sm">Estadios</span>
+          </a>
+          
+          <a href="/calendario" class={`flex items-center gap-4 px-4 py-3 rounded-2xl transition-colors ${page === 'calendario' ? 'bg-black/5 text-[var(--brand-nav-icon-active,#f59e0b)]' : 'hover:bg-black/5'}`}>
+            <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round"/>
+              <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round"/>
+              <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round"/>
+            </svg>
+            <span class="font-semibold text-sm">Calendario</span>
+          </a>
+          
+          {sponsorInfo.hasQuiniela && (
+            <a href="/quiniela" class={`flex items-center gap-4 px-4 py-3 rounded-2xl transition-colors ${page === 'quiniela' ? 'bg-black/5 text-[var(--brand-nav-icon-active,#f59e0b)]' : 'hover:bg-black/5'}`}>
+              <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <span class="font-semibold text-sm">Quiniela</span>
+            </a>
+          )}
+        </nav>
+
+      </div>
+
+      <!-- Footer del drawer -->
+      <div class="px-5 py-1 pb-4">
+        <p class="text-[11px] text-center text-[var(--text-secondary)] relative z-10">
+          Desarrollado para <a href={sponsorInfo.website} target="_blank" rel="noopener" class="text-[var(--text-primary)] font-semibold hover:underline" style="color: var(--brand-nav-icon-active, #f59e0b);">{sponsorInfo.name}</a> por
+        </p>
+        <div class="flex justify-center items-center -mt-8 -mb-10 relative z-0">
+          <a href="https://pauloconde.dev" target="_blank" rel="noopener" class="hover:opacity-80 transition-opacity">
+            <img src="/paulocondedev.png" alt="pauloconde.dev" class="h-32 w-auto object-contain" />
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── iOS Install Modal ── -->
+    <div id="ios-modal-backdrop" class="fixed inset-0 z-[9000] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" style="display:none; opacity:0; transition: opacity 0.3s;" aria-hidden="true">
+      <div id="ios-modal-panel" class="w-full max-w-sm rounded-3xl p-6 relative transform scale-95 transition-transform duration-300" style="background: var(--brand-drawer-bg, #0a0e1a); border: 1px solid var(--border-subtle);">
+        <button id="ios-modal-close" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full transition-colors hover:bg-white/10" style="color: var(--brand-nav-icon, #6b7280);" aria-label="Cerrar">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        
+        <div class="text-center mb-6 mt-2">
+          <h3 class="text-lg font-bold font-['Outfit']" style="color: var(--brand-nav-text, #fff);">Instalar en iPhone</h3>
+          <p class="text-xs opacity-70 mt-1" style="color: var(--brand-nav-text, #fff);">Ten tu app siempre a la mano</p>
+        </div>
+        
+        <InstallIOSGuide />
+      </div>
+    </div>
+
+    <!-- ── Main Content ── -->
+    <main class="pt-14 min-h-screen">
+      <slot />
+    </main>
+
+    <!-- ── Script: Detección de partido en vivo ── -->
+    <script define:vars={{ kickoffISOs }}>
+      (function () {
+        var MATCH_DURATION_MS = 110 * 60 * 1000; // 110 minutos
+
+        function checkLive() {
+          var now = Date.now();
+          var isLive = kickoffISOs.some(function (iso) {
+            var kick = new Date(iso).getTime();
+            return now >= kick && now <= kick + MATCH_DURATION_MS;
+          });
+          var badge = document.getElementById('live-badge');
+          if (!badge) return;
+          if (isLive) {
+            badge.classList.remove('hidden');
+          } else {
+            badge.classList.add('hidden');
+          }
+        }
+
+        checkLive();
+        setInterval(checkLive, 60000); // re-evalúa cada minuto
+      })();
+    </script>
+
+    <!-- ── Script: Hora local del usuario ── -->
+    <!--
+      Todos los elementos con data-utc="<ISO>" se convierten al timezone del navegador.
+      data-fmt puede ser: "time" | "date" | "datetime" (default: "time")
+    -->
+    <script is:inline>
+      (function () {
+        function formatLocal(isoStr, fmt) {
+          try {
+            const d = new Date(isoStr);
+            if (isNaN(d)) return null;
+            if (fmt === 'date-full') {
+              const str = d.toLocaleDateString('es', {
+                weekday: 'long', day: 'numeric', month: 'long'
+              });
+              return str.charAt(0).toUpperCase() + str.slice(1);
+            }
+            if (fmt === 'date') {
+              return d.toLocaleDateString('es', {
+                weekday: 'short', day: 'numeric', month: 'short'
+              });
+            }
+            if (fmt === 'date-short') {
+              return d.toLocaleDateString('es', {
+                day: 'numeric', month: 'short'
+              });
+            }
+            if (fmt === 'datetime') {
+              return d.toLocaleDateString('es', {
+                weekday: 'short', day: 'numeric', month: 'short'
+              }) + ' · ' + d.toLocaleTimeString('es', {
+                hour: 'numeric', minute: '2-digit', hour12: true
+              });
+            }
+            // default: "time"
+            return d.toLocaleTimeString('es', {
+              hour: 'numeric', minute: '2-digit', hour12: true
+            });
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function applyLocalTimes() {
+          var counts = {};
+          var elements = Array.from(document.querySelectorAll('[data-utc]'));
+          
+          // First pass: Calculate local strings and counts for date-full elements
+          elements.forEach(function (el) {
+            var iso = el.getAttribute('data-utc');
+            var fmt = el.getAttribute('data-fmt') || 'time';
+            var text = formatLocal(iso, fmt);
+            el.__localText = text; // Cache it
+            if (fmt === 'date-full' && text) {
+              counts[text] = (counts[text] || 0) + 1;
+            }
+          });
+
+          var lastDateText = null;
+
+          // Second pass: Apply logic
+          elements.forEach(function (el) {
+            var fmt = el.getAttribute('data-fmt') || 'time';
+            var text = el.__localText;
+            if (text) {
+              el.textContent = text;
+              if (fmt === 'date-full') {
+                var headerDiv = el.closest('.date-header-container');
+                if (text === lastDateText) {
+                  if (headerDiv) headerDiv.style.display = 'none';
+                } else {
+                  if (headerDiv) {
+                    headerDiv.style.display = 'flex';
+                    var countSpan = headerDiv.querySelector('.match-count');
+                    if (countSpan) {
+                      countSpan.textContent = counts[text] + (counts[text] === 1 ? ' partido' : ' partidos');
+                    }
+                  }
+                  lastDateText = text;
+                }
+              }
+            }
+          });
+        }
+
+        // Ejecutar inmediatamente si el DOM ya cargó, si no esperar
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', applyLocalTimes);
+        } else {
+          applyLocalTimes();
+        }
+      })();
+    </script>
+
+    <!-- ── Script: Drag-to-scroll en carruseles (desktop) ── -->
+    <script is:inline>
+      (function () {
+        function initCarousel(el) {
+          var isDown  = false;
+          var startX  = 0;
+          var scrollL = 0;
+          var moved   = false;
+
+          el.style.cursor = 'grab';
+
+          el.addEventListener('mousedown', function (e) {
+            isDown  = true;
+            moved   = false;
+            startX  = e.pageX - el.offsetLeft;
+            scrollL = el.scrollLeft;
+            el.style.cursor = 'grabbing';
+            el.style.userSelect = 'none';
+          });
+
+          el.addEventListener('mouseleave', function () {
+            isDown = false;
+            el.style.cursor = 'grab';
+          });
+
+          el.addEventListener('mouseup', function () {
+            isDown = false;
+            el.style.cursor = 'grab';
+            el.style.userSelect = '';
+          });
+
+          el.addEventListener('mousemove', function (e) {
+            if (!isDown) return;
+            e.preventDefault();
+            var x    = e.pageX - el.offsetLeft;
+            var walk = (x - startX) * 1.2;
+            if (Math.abs(walk) > 4) moved = true;
+            el.scrollLeft = scrollL - walk;
+          });
+
+          // Evitar que un drag dispare clicks en los hijos
+          el.addEventListener('click', function (e) {
+            if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+          }, true);
+        }
+
+        function setup() {
+          document.querySelectorAll('.carousel-track').forEach(initCarousel);
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', setup);
+        } else {
+          setup();
+        }
+      })();
+    </script>
+
+    <!-- ── Bottom Navigation ── -->
+    <nav class="app-nav fixed bottom-0 left-0 right-0 z-50 bottom-nav" id="bottom-nav">
+      <div class="flex items-center justify-around h-16 max-w-lg mx-auto px-2">
+
+        <a href="/" id="nav-home"
+           class={`app-nav-item flex flex-col items-center gap-0.5 px-4 py-2 rounded-xl transition-all duration-200 ${page === 'home' ? 'nav-active' : ''}`}>
+          <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          <span class="nav-label text-[10px] font-semibold">Inicio</span>
+        </a>
+
+        <a href="/grupos" id="nav-grupos"
+           class={`app-nav-item flex flex-col items-center gap-0.5 px-4 py-2 rounded-xl transition-all duration-200 ${page === 'grupos' ? 'nav-active' : ''}`}>
+          <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18M10 3v18M14 3v18" />
+          </svg>
+          <span class="nav-label text-[10px] font-semibold">Grupos</span>
+        </a>
+
+        <a href="/estadios" id="nav-estadios"
+           class={`app-nav-item flex flex-col items-center gap-0.5 px-4 py-2 rounded-xl transition-all duration-200 ${page === 'estadios' ? 'nav-active' : ''}`}>
+          <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span class="nav-label text-[10px] font-semibold">Estadios</span>
+        </a>
+
+        <a href="/calendario" id="nav-calendario"
+           class={`app-nav-item flex flex-col items-center gap-0.5 px-4 py-2 rounded-xl transition-all duration-200 ${page === 'calendario' ? 'nav-active' : ''}`}>
+          <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round"/>
+            <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round"/>
+            <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round"/>
+          </svg>
+          <span class="nav-label text-[10px] font-semibold">Calendario</span>
+        </a>
+
+        {sponsorInfo.hasQuiniela && (
+          <a href="/quiniela" id="nav-quiniela"
+             class={`app-nav-item flex flex-col items-center gap-0.5 px-4 py-2 rounded-xl transition-all duration-200 ${page === 'quiniela' ? 'nav-active' : ''}`}>
+            <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <span class="nav-label text-[10px] font-semibold">Quiniela</span>
+          </a>
+        )}
+
+      </div>
+    </nav>
+
+    <!-- ── Script: Drawer + PWA Install ── -->
+    <script is:inline>
+      (function () {
+        var panel    = document.getElementById('drawer-panel');
+        var backdrop = document.getElementById('drawer-backdrop');
+        var btnOpen  = document.getElementById('drawer-open');
+        var btnClose = document.getElementById('drawer-close');
+        var deferredPrompt = null;
+
+        function openDrawer() {
+          backdrop.style.display = 'block';
+          requestAnimationFrame(function () {
+            backdrop.style.opacity = '1';
+            panel.style.transform  = 'translateX(0)';
+          });
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+          backdrop.style.opacity = '0';
+          panel.style.transform  = 'translateX(100%)';
+          setTimeout(function () {
+            backdrop.style.display = 'none';
+            document.body.style.overflow = '';
+          }, 350);
+        }
+
+        btnOpen.addEventListener('click', openDrawer);
+        btnClose.addEventListener('click', closeDrawer);
+        backdrop.addEventListener('click', closeDrawer);
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') closeDrawer();
+        });
+
+        // ── PWA Install: Android ──
+        var section = document.getElementById('install-android');
+        var headerBtn = document.getElementById('header-install-btn');
+        
+        // Mostrar SOLO si el navegador permite la instalación automática
+        if (window.deferredPrompt) {
+          if (section) section.style.display = 'block';
+          if (headerBtn) headerBtn.style.display = 'flex';
+        }
+
+        function handleInstallClick() {
+          if (!window.deferredPrompt) return;
+          window.deferredPrompt.prompt();
+          window.deferredPrompt.userChoice.then(function () {
+            window.deferredPrompt = null;
+            if (section) section.style.display = 'none';
+            if (headerBtn) headerBtn.style.display = 'none';
+          });
+        }
+
+        var installBtn = document.getElementById('install-btn');
+        if (installBtn) installBtn.addEventListener('click', handleInstallClick);
+        if (headerBtn) headerBtn.addEventListener('click', handleInstallClick);
+
+        // ── PWA Install: iOS (Safari) ──
+        var isIOS    = /iphone|ipad|ipod/i.test(navigator.userAgent);
+        var isSafari = /safari/i.test(navigator.userAgent) && !/chrome/i.test(navigator.userAgent);
+        var isStandalone = ('standalone' in window.navigator) && window.navigator.standalone;
+        
+        var iosModalBackdrop = document.getElementById('ios-modal-backdrop');
+        var iosModalPanel = document.getElementById('ios-modal-panel');
+        var iosModalClose = document.getElementById('ios-modal-close');
+
+        function openIosModal() {
+          if (!iosModalBackdrop) return;
+          iosModalBackdrop.style.display = 'flex';
+          requestAnimationFrame(function () {
+            iosModalBackdrop.style.opacity = '1';
+            iosModalPanel.style.transform = 'scale(1)';
+          });
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeIosModal() {
+          if (!iosModalBackdrop) return;
+          iosModalBackdrop.style.opacity = '0';
+          iosModalPanel.style.transform = 'scale(0.95)';
+          setTimeout(function () {
+            iosModalBackdrop.style.display = 'none';
+            document.body.style.overflow = '';
+          }, 300);
+        }
+
+        if (iosModalClose) iosModalClose.addEventListener('click', closeIosModal);
+        if (iosModalBackdrop) {
+          iosModalBackdrop.addEventListener('click', function(e) {
+            if (e.target === iosModalBackdrop) closeIosModal();
+          });
+        }
+
+        if (isIOS && isSafari && !isStandalone) {
+          var iosSection = document.getElementById('install-ios');
+          if (iosSection) iosSection.style.display = 'block';
+          
+          if (headerBtn) {
+            headerBtn.style.display = 'flex';
+            headerBtn.removeEventListener('click', handleInstallClick);
+            headerBtn.addEventListener('click', openIosModal);
+          }
+        }
+      })();
+    </script>
+
+  </body>
+</html>
+
+<style>
+  /* Solo lo que no puede ir en global.css */
+  #splash { pointer-events: none; }
+</style>

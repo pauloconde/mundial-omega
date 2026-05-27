@@ -1,0 +1,259 @@
+---
+import Layout from '../layouts/Layout.astro';
+import sponsorInfo from '../data/sponsor.json';
+import { TEAM_ES, getFlagUrl } from '../lib/worldcup';
+
+if (!sponsorInfo.hasQuiniela) {
+  return Astro.redirect('/');
+}
+
+const now = new Date();
+const endDate = new Date(sponsorInfo.quinielaEndDate || '2026-06-11T23:59:00Z');
+const isClosed = now > endDate;
+
+// Use TEAM_ES which contains exactly the 48 participating countries
+const teams = Object.entries(TEAM_ES)
+  .map(([id, name]) => ({ id, name, flag: getFlagUrl(id) }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<Layout title="Quiniela" page="quiniela">
+  <section class="px-4 pt-8 pb-10 text-center relative overflow-hidden min-h-screen">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full opacity-10"
+           style="background: radial-gradient(circle, var(--brand-nav-icon-active, #f59e0b), transparent 70%);"></div>
+      <div class="absolute -bottom-10 -left-10 w-48 h-48 rounded-full opacity-10"
+           style="background: radial-gradient(circle, var(--brand-nav-icon, #6366f1), transparent 70%);"></div>
+    </div>
+
+    <div class="relative z-10 max-w-lg mx-auto pb-24">
+      <div class="flex items-center justify-center mb-2">
+        <h1 class="font-['Outfit'] font-black text-3xl text-[var(--text-primary)]">{sponsorInfo.quinielaTitle || '⚽ Gran Quiniela 🏆'}</h1>
+      </div>
+      <p class="text-[var(--text-secondary)] text-sm mb-6 px-4">{sponsorInfo.quinielaDescription || 'Acierta el 1er y 2do lugar del Mundial y gana increíbles premios con nosotros.'}</p>
+
+      {sponsorInfo.quinielaPrizeImage && (
+        <div class="mb-8 rounded-3xl overflow-hidden glass p-2 inline-block slide-up shadow-xl">
+          <img src={sponsorInfo.quinielaPrizeImage} alt="Premio de la Quiniela" class="w-full max-w-[300px] h-auto rounded-2xl object-cover" onerror="this.style.display='none'" />
+        </div>
+      )}
+
+      {isClosed ? (
+        <div class="glass rounded-3xl p-8 mb-8 text-center">
+          <p class="text-5xl mb-4">🔒</p>
+          <h2 class="font-['Outfit'] font-bold text-xl text-[var(--text-primary)] mb-2">Quiniela Cerrada</h2>
+          <p class="text-[var(--text-secondary)] text-sm">La recepción de participaciones ha finalizado. ¡Mucha suerte a todos los participantes!</p>
+        </div>
+      ) : (
+        <div id="quiniela-container" class="glass rounded-3xl p-6 text-left relative shadow-2xl">
+          
+          <div id="success-message" class="hidden text-center py-8">
+            <p class="text-5xl mb-4">🎉</p>
+            <h2 class="font-['Outfit'] font-bold text-xl text-[var(--text-primary)] mb-2">¡Participación exitosa!</h2>
+            <p class="text-[var(--text-secondary)] text-sm">Tu pronóstico ha sido guardado correctamente. ¡Te deseamos mucha suerte!</p>
+          </div>
+
+          <form id="quiniela-form" class="space-y-5" data-sponsor={sponsorInfo.quinielaId}>
+            
+            <div class="space-y-1.5">
+              <label class="text-[10px] font-bold text-[var(--text-primary)] uppercase tracking-wider ml-1">Cédula de Identidad</label>
+              <div class="flex gap-2">
+                <select id="cedula-tipo" class="bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl px-3 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-[var(--brand-nav-icon-active,#f59e0b)] transition-colors w-20 appearance-none text-center font-semibold" required>
+                  <option value="V-">V</option>
+                  <option value="E-">E</option>
+                </select>
+                <input type="number" id="cedula-num" max="99999999" placeholder="12345678" class="flex-1 bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-[var(--brand-nav-icon-active,#f59e0b)] transition-colors" required />
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-[10px] font-bold text-[var(--text-primary)] uppercase tracking-wider ml-1">Nombre Completo</label>
+              <input type="text" id="nombre" placeholder="Ej. Juan Pérez" class="w-full bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-[var(--brand-nav-icon-active,#f59e0b)] transition-colors" required />
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-[10px] font-bold text-[var(--text-primary)] uppercase tracking-wider ml-1">Email</label>
+              <input type="email" id="email" placeholder="correo@ejemplo.com" class="w-full bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-[var(--brand-nav-icon-active,#f59e0b)] transition-colors" required />
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-[10px] font-bold text-[var(--text-primary)] uppercase tracking-wider ml-1">Teléfono</label>
+              <input type="tel" id="telefono" placeholder="Ej. 04141234567" class="w-full bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-[var(--brand-nav-icon-active,#f59e0b)] transition-colors" required />
+            </div>
+
+            <div class="h-px w-full bg-[var(--border-subtle)] my-6 opacity-50"></div>
+
+            <div class="space-y-1.5">
+              <label class="text-[10px] font-bold text-[var(--text-primary)] uppercase tracking-wider ml-1">🏆 Campeón (1er Lugar)</label>
+              <div class="relative flex items-center bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl focus-within:border-[var(--brand-nav-icon-active,#f59e0b)] transition-colors pr-4">
+                <div class="w-12 flex shrink-0 items-center justify-center pl-3 pr-2 border-r border-[var(--border-subtle)]">
+                  <img id="flag-primer" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="w-6 h-4 object-cover rounded-sm" alt="" />
+                </div>
+                <select id="primer-lugar" class="flex-1 bg-transparent px-3 py-3 text-[var(--text-primary)] text-sm outline-none font-medium appearance-none" required>
+                  <option value="" disabled selected>Selecciona el equipo ganador</option>
+                  {teams.map(t => (
+                    <option value={t.id} data-flag={t.flag}>{t.name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-[10px] font-bold text-[var(--text-primary)] uppercase tracking-wider ml-1">🥈 Subcampeón (2do Lugar)</label>
+              <div class="relative flex items-center bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl focus-within:border-[var(--brand-nav-icon-active,#f59e0b)] transition-colors pr-4">
+                <div class="w-12 flex shrink-0 items-center justify-center pl-3 pr-2 border-r border-[var(--border-subtle)]">
+                  <img id="flag-segundo" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="w-6 h-4 object-cover rounded-sm" alt="" />
+                </div>
+                <select id="segundo-lugar" class="flex-1 bg-transparent px-3 py-3 text-[var(--text-primary)] text-sm outline-none font-medium appearance-none" required>
+                  <option value="" disabled selected>Selecciona el segundo lugar</option>
+                  {teams.map(t => (
+                    <option value={t.id} data-flag={t.flag}>{t.name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div id="error-message" class="hidden bg-red-500/20 border border-red-500/50 rounded-xl p-3 text-red-200 text-xs text-center font-medium"></div>
+
+            <button type="submit" id="submit-btn" class="w-full mt-6 flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold text-sm transition-all active:scale-95 hover:opacity-90 shadow-lg" style="background: var(--brand-nav-icon-active, #f59e0b); color: #fff;">
+              <span>Participar Ahora</span>
+              <svg id="spinner" class="w-5 h-5 animate-spin hidden" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </button>
+          </form>
+
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { supabase } from '../lib/supabase';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('quiniela-form') as HTMLFormElement;
+    if (!form) return;
+
+    const errorDiv = document.getElementById('error-message');
+    const successDiv = document.getElementById('success-message');
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+    const spinner = document.getElementById('spinner');
+
+    const primerSelect = document.getElementById('primer-lugar') as HTMLSelectElement;
+    const segundoSelect = document.getElementById('segundo-lugar') as HTMLSelectElement;
+
+    // Prevenir seleccionar el mismo país en ambos lugares y actualizar banderas
+    const updateDropdowns = () => {
+      const pVal = primerSelect.value;
+      const sVal = segundoSelect.value;
+
+      // Actualizar banderas
+      const pFlag = primerSelect.options[primerSelect.selectedIndex]?.dataset.flag;
+      const sFlag = segundoSelect.options[segundoSelect.selectedIndex]?.dataset.flag;
+      
+      const pImg = document.getElementById('flag-primer') as HTMLImageElement;
+      const sImg = document.getElementById('flag-segundo') as HTMLImageElement;
+      
+      if (pImg && pFlag) pImg.src = pFlag;
+      if (sImg && sFlag) sImg.src = sFlag;
+
+      // Habilitar todas las opciones
+      Array.from(primerSelect.options).forEach(opt => opt.disabled = false);
+      Array.from(segundoSelect.options).forEach(opt => opt.disabled = false);
+
+      // Deshabilitar la primera opción (placeholder)
+      primerSelect.options[0].disabled = true;
+      segundoSelect.options[0].disabled = true;
+
+      // Deshabilitar el seleccionado en la otra lista
+      if (pVal) {
+        const opt = segundoSelect.querySelector(`option[value="${pVal}"]`) as HTMLOptionElement;
+        if (opt) opt.disabled = true;
+      }
+      if (sVal) {
+        const opt = primerSelect.querySelector(`option[value="${sVal}"]`) as HTMLOptionElement;
+        if (opt) opt.disabled = true;
+      }
+    };
+
+    primerSelect.addEventListener('change', () => { hideError(); updateDropdowns(); });
+    segundoSelect.addEventListener('change', () => { hideError(); updateDropdowns(); });
+
+    function showError(msg: string) {
+      if (errorDiv) {
+        errorDiv.textContent = msg;
+        errorDiv.classList.remove('hidden');
+      }
+    }
+
+    function hideError() {
+      if (errorDiv) {
+        errorDiv.classList.add('hidden');
+        errorDiv.textContent = '';
+      }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideError();
+
+      if (primerSelect.value === segundoSelect.value) {
+        showError("El primer y segundo lugar no pueden ser el mismo país.");
+        return;
+      }
+
+      const sponsorId = form.dataset.sponsor;
+      const cedulaTipo = (document.getElementById('cedula-tipo') as HTMLSelectElement).value;
+      const cedulaNum = (document.getElementById('cedula-num') as HTMLInputElement).value;
+      const cedula = cedulaTipo + cedulaNum;
+      
+      const nombre = (document.getElementById('nombre') as HTMLInputElement).value;
+      const email = (document.getElementById('email') as HTMLInputElement).value;
+      const telefono = (document.getElementById('telefono') as HTMLInputElement).value;
+      const primer_lugar = primerSelect.value;
+      const segundo_lugar = segundoSelect.value;
+
+      try {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+        spinner?.classList.remove('hidden');
+
+        const { error } = await supabase
+          .from('quiniela_participaciones')
+          .insert([
+            {
+              sponsor_id: sponsorId,
+              cedula,
+              nombre,
+              email,
+              telefono,
+              primer_lugar,
+              segundo_lugar
+            }
+          ]);
+
+        if (error) {
+          if (error.code === '23505') { // Postgres unique violation
+            showError("Ya existe una participación registrada con esta cédula.");
+          } else {
+            showError("Hubo un error al enviar tu participación. Inténtalo de nuevo.");
+            console.error(error);
+          }
+        } else {
+          // Success
+          form.style.display = 'none';
+          if (successDiv) successDiv.classList.remove('hidden');
+        }
+      } catch (err) {
+        showError("Error de conexión. Revisa tu internet.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        spinner?.classList.add('hidden');
+      }
+    });
+  });
+</script>
