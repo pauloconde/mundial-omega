@@ -2,6 +2,8 @@
 // Data layer for World Cup 2026 – consumes openfootball JSON
 // All display text is translated to Spanish via mapping tables.
 
+import { supabase } from './supabase';
+
 export const DATA_URL =
   'https://cqexjtuffyqgfxthvjhp.supabase.co/storage/v1/object/public/mundial/worldcup2026.json';
 
@@ -21,6 +23,7 @@ export interface Goal {
 }
 
 export interface Match {
+  id?: string;            // UUID de base de datos
   round: string;
   num?: number;
   date: string;          // "2026-06-11T19:00:00.000Z" (nuevo) o "2026-06-11" (antiguo)
@@ -31,6 +34,24 @@ export interface Match {
   ground: string;
   score?: Score;
   goals?: { team1?: Goal[]; team2?: Goal[] };
+  estado?: 'programado' | 'en_curso' | 'finalizado';
+  minuto_actual?: number;
+  hora_inicio_periodo?: string | null;
+  cronometro_corriendo?: boolean;
+  tiempo_adicional?: number;
+  penales_team1?: number | null;
+  penales_team2?: number | null;
+}
+
+export interface MatchEvent {
+  id: string;
+  partido_id: string;
+  tipo: 'gol' | 'tarjeta_amarilla' | 'tarjeta_roja' | 'falta' | 'cambio' | 'penal_anotado' | 'penal_fallado';
+  minuto: number;
+  jugador: string;
+  equipo_id: string;
+  detalle?: string;
+  created_at: string;
 }
 
 export interface WorldCupData {
@@ -57,6 +78,7 @@ export interface GroupStanding {
   groupEs: string;
   teams: TeamStanding[];
 }
+
 
 // ──────────────────────────────────────────────
 // TRADUCCIÓN: Países / Selecciones
@@ -238,15 +260,72 @@ let _cache: WorldCupData | null = null;
 export async function fetchWorldCupData(): Promise<WorldCupData> {
   if (_cache) return _cache;
   try {
-    const res = await fetch(DATA_URL);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    _cache = await res.json() as WorldCupData;
+    const { data: dbMatches, error } = await supabase
+      .from('partidos')
+      .select('*, sedes(*)');
+    
+    if (error) throw error;
+    
+    // Sort matches by numero_partido
+    dbMatches.sort((a, b) => a.numero_partido - b.numero_partido);
+
+    const matches: Match[] = dbMatches.map(m => {
+      let score: Score | undefined = undefined;
+      if (m.estado === 'finalizado' || m.estado === 'en_curso') {
+        score = {
+          ft: [m.goles_team1, m.goles_team2]
+        };
+        if (m.penales_team1 !== null && m.penales_team2 !== null) {
+          score.p = [m.penales_team1, m.penales_team2];
+        }
+      }
+
+      return {
+        id: m.id,
+        num: m.numero_partido,
+        round: m.ronda,
+        grupo: m.grupo || undefined,
+        date: m.fecha_inicio_utc, // ISO string in UTC
+        time: undefined,          // Omitted since date is full ISO datetime
+        team1: m.team1_id,
+        team2: m.team2_id,
+        ground: m.sedes ? m.sedes.ciudad_en : (m.sede_id || 'Sede no definida'),
+        score: score,
+        estado: m.estado,
+        minuto_actual: m.minuto_actual,
+        hora_inicio_periodo: m.hora_inicio_periodo,
+        cronometro_corriendo: m.cronometro_corriendo,
+        tiempo_adicional: m.tiempo_adicional,
+        penales_team1: m.penales_team1,
+        penales_team2: m.penales_team2
+      };
+    });
+
+    _cache = { name: 'World Cup 2026', matches };
     return _cache;
   } catch (e) {
-    console.error('[WorldCup] Error al obtener datos en vivo, usando fallback:', e);
+    console.error('[WorldCup] Error al obtener datos de Supabase:', e);
     return { name: 'World Cup 2026', matches: [] };
   }
 }
+
+export async function fetchMatchEvents(matchId: string): Promise<MatchEvent[]> {
+  try {
+    const { data, error } = await supabase
+      .from('eventos_partido')
+      .select('*')
+      .eq('partido_id', matchId)
+      .order('minuto', { ascending: true })
+      .order('created_at', { ascending: true });
+    
+    if (error) throw error;
+    return data as MatchEvent[];
+  } catch (e) {
+    console.error(`[WorldCup] Error al obtener eventos del partido ${matchId}:`, e);
+    return [];
+  }
+}
+
 
 // ──────────────────────────────────────────────
 // Derived helpers
@@ -260,12 +339,23 @@ export function getKnockoutMatches(data: WorldCupData): Match[] {
   return data.matches.filter(m => !m.group);
 }
 
-export function getNextMatch(data: WorldCupData, now = new Date()): Match | null {
-  const future = data.matches
+export function getNextMatch(data: WorldCupData, _now = new Date()): Match | null {
+  // 1. Si hay algún partido actualmente en curso, mostrarlo como prioridad en el Hero.
+  const liveMatch = data.matches.find(m => m.estado === 'en_curso');
+  if (liveMatch) return liveMatch;
+
+  // 2. Buscar el primer partido que no haya finalizado, ordenado cronológicamente.
+  const nonFinalized = data.matches
+    .filter(m => m.estado !== 'finalizado')
     .map(m => ({ m, d: parseMatchDate(m.date, m.time) }))
-    .filter(({ d }) => d > now)
     .sort((a, b) => a.d.getTime() - b.d.getTime());
-  return future[0]?.m ?? null;
+
+  if (nonFinalized.length > 0) {
+    return nonFinalized[0].m;
+  }
+
+  // 3. Si todos los partidos han terminado, devolver null.
+  return null;
 }
 
 export function getMatchesForDate(data: WorldCupData, dateStr: string): Match[] {
@@ -469,5 +559,9 @@ export function hasScore(match: Match): boolean {
 
 export function getScoreString(match: Match): string | null {
   if (!match.score?.ft) return null;
-  return `${match.score.ft[0]} - ${match.score.ft[1]}`;
+  let scoreStr = `${match.score.ft[0]} - ${match.score.ft[1]}`;
+  if (match.score.p) {
+    scoreStr += ` (${match.score.p[0]} - ${match.score.p[1]} pen.)`;
+  }
+  return scoreStr;
 }

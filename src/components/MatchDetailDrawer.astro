@@ -1,0 +1,685 @@
+---
+// src/components/MatchDetailDrawer.astro
+import sponsorInfo from '../data/sponsor.json';
+---
+
+<!-- ── Backdrop del Drawer ── -->
+<div id="match-drawer-backdrop"
+     class="fixed inset-0 z-[8500] bg-black/70 backdrop-blur-sm"
+     style="display:none; opacity:0; transition: opacity 0.3s;"
+     aria-hidden="true"></div>
+
+<!-- ── Panel del Drawer (Slide-Up) ── -->
+<div id="match-drawer-panel"
+     class="fixed bottom-0 left-0 right-0 z-[8501] max-w-lg mx-auto rounded-t-[2.5rem] flex flex-col transition-transform duration-350 ease-out"
+     style={`--bg-primary: #0a0e1a; --bg-secondary: #111827; --text-primary: #f9fafb; --text-secondary: #9ca3af; --border-subtle: rgba(255, 255, 255, 0.08); background: var(--bg-primary); color: var(--text-primary); border-top: 1px solid var(--border-subtle); transform: translateY(100%); max-height: 85vh; min-height: 50vh;`}>
+  
+  <!-- Tirador superior para indicar que se puede deslizar o cerrar -->
+  <div class="w-full flex justify-center py-3 shrink-0">
+    <div class="w-12 h-1.5 rounded-full bg-gray-600/40"></div>
+  </div>
+
+  <!-- Botón cerrar (esquina derecha) -->
+  <button id="match-drawer-close"
+          class="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center transition-colors bg-white/5 border border-white/10 hover:bg-white/10 text-[var(--text-secondary)]"
+          aria-label="Cerrar detalles">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+
+  <!-- ── Contenedor de Carga (Spinner) ── -->
+  <div id="drawer-loading" class="flex-1 flex flex-col items-center justify-center py-12 gap-3">
+    <svg class="w-10 h-10 animate-spin" style={`color: ${sponsorInfo.colors.navIconActive || '#f59e0b'};`} fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+    <p class="text-xs text-[var(--text-secondary)] font-medium">Cargando detalles del partido...</p>
+  </div>
+
+  <!-- ── Contenido Principal (Oculto al inicio) ── -->
+  <div id="drawer-content" class="flex-1 flex flex-col overflow-hidden hidden">
+    
+    <!-- ── CABECERA: Marcador y Estado ── -->
+    <div class="px-6 pt-2 pb-5 border-b border-[var(--border-subtle)] shrink-0">
+      
+      <!-- Indicador de Tiempo / Estado -->
+      <div class="flex items-center justify-center gap-2 mb-4">
+        <span id="live-dot-indicator" class="live-dot hidden"></span>
+        <span id="match-status-badge" class="text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider bg-white/5 border border-white/10 text-[var(--text-primary)]">
+          PROGRAMADO
+        </span>
+      </div>
+
+      <!-- Scoreboard -->
+      <div class="flex items-center justify-between gap-4">
+        
+        <!-- Local -->
+        <div class="flex-1 flex flex-col items-center gap-2 text-center min-w-0">
+          <img id="team1-flag" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="w-14 h-9 object-cover rounded shadow-lg border border-white/10" alt="" />
+          <span id="team1-name" class="font-black text-sm truncate w-full">Local</span>
+        </div>
+
+        <!-- Marcador Central -->
+        <div class="flex flex-col items-center justify-center min-w-[7rem]">
+          <span id="scoreboard-text" class="font-['Outfit'] font-black text-4xl gradient-text select-none">
+            0 - 0
+          </span>
+          <span id="penalties-score-text" class="text-xs font-black uppercase tracking-wider text-amber-500 mt-1 hidden">
+            (0 - 0 Pen)
+          </span>
+          <span id="match-minute-counter" class="text-xs font-bold text-amber-500 mt-1.5 hidden animate-pulse">
+            1'
+          </span>
+        </div>
+
+        <!-- Visitante -->
+        <div class="flex-1 flex flex-col items-center gap-2 text-center min-w-0">
+          <img id="team2-flag" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="w-14 h-9 object-cover rounded shadow-lg border border-white/10" alt="" />
+          <span id="team2-name" class="font-black text-sm truncate w-full">Visitante</span>
+        </div>
+
+      </div>
+
+      <!-- Sede del partido -->
+      <div class="flex flex-col items-center justify-center gap-1.5 text-[var(--text-secondary)] mt-4 text-xs font-medium">
+        <div class="flex items-center justify-center gap-1.5">
+          <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <circle cx="12" cy="11" r="3"/>
+          </svg>
+          <span id="match-venue-name">Estadio</span>
+        </div>
+        <div class="flex items-center justify-center gap-1.5 opacity-80">
+          <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round"/>
+            <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round"/>
+            <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round"/>
+          </svg>
+          <span id="match-date-time">Fecha del partido</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── LÍNEA DE TIEMPO (Timeline Scrollable) ── -->
+    <div class="flex-1 overflow-y-auto px-6 py-6 custom-scrollbar relative">
+      <h3 class="font-['Outfit'] font-bold text-sm text-[var(--text-primary)] mb-5 flex items-center justify-center gap-2">
+        <span>⏱️ Transcurrir del Partido</span>
+        <div id="reconnecting-badge" class="hidden text-[10px] bg-amber-500/15 text-amber-400 px-2 py-0.5 rounded border border-amber-500/30 animate-pulse font-normal">Reconectando...</div>
+      </h3>
+
+      <!-- Contenedor del Timeline -->
+      <div class="relative pl-7 border-l-2 border-white/5 space-y-6" id="timeline-container">
+        <!-- Eventos inyectados dinámicamente por JS -->
+      </div>
+
+      <!-- Empty state / Sin eventos -->
+      <div id="timeline-empty-state" class="flex flex-col items-center justify-center py-8 text-center hidden">
+        <span class="text-3xl mb-2">⚽</span>
+        <p class="text-xs text-[var(--text-secondary)] font-medium">Aún no se han registrado eventos en este partido.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Safe Area Bottom -->
+  <div class="h-safe-bottom shrink-0" style="height: max(1.5rem, env(safe-area-inset-bottom, 1.5rem));"></div>
+</div>
+
+<style>
+  /* Scrollbar estético para el timeline */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    animation: pulse-live 1.5s infinite;
+  }
+  @keyframes pulse-live {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+  }
+</style>
+
+<!-- ── Script cliente: Gestión de drawer y Supabase Realtime ── -->
+<script>
+  import { supabase } from '../lib/supabase';
+  import { translateTeam, getFlagUrl } from '../lib/worldcup';
+
+  function formatLocalMatchDateTime(isoStr: string) {
+    try {
+      const d = new Date(isoStr);
+      if (isNaN(d.getTime())) return '';
+      const datePart = d.toLocaleDateString('es', {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'short'
+      });
+      const timePart = d.toLocaleTimeString('es', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      });
+      const capitalizedDate = datePart.charAt(0).toUpperCase() + datePart.slice(1);
+      return `${capitalizedDate} · ${timePart}`;
+    } catch (e) {
+      return '';
+    }
+  }
+
+  let matchesChannel: any = null;
+  let eventsChannel: any = null;
+  let cronometroInterval: any = null;
+  let localEventos: any[] = [];
+
+  function updateStopwatchDisplay(minutoBase: number, horaInicioIso: string, tiempoAdicional: number) {
+    const startTime = new Date(horaInicioIso).getTime();
+    
+    function tick() {
+      const diffMs = Date.now() - startTime;
+      const elapsedMins = Math.floor(diffMs / 60000);
+      let currentMinute = minutoBase + elapsedMins;
+      
+      let limit = 45;
+      if (minutoBase >= 105) {
+        limit = 120;
+      } else if (minutoBase >= 90) {
+        limit = 105;
+      } else if (minutoBase >= 45) {
+        limit = 90;
+      }
+      
+      let displayText = "";
+      if (currentMinute >= limit) {
+        if (tiempoAdicional > 0) {
+          const extraMins = currentMinute - limit;
+          displayText = `${limit} + ${Math.min(extraMins, tiempoAdicional)}'`;
+        } else {
+          displayText = `${limit}'`;
+        }
+      } else {
+        displayText = `${currentMinute}'`;
+      }
+      
+      if (minuteCounter) {
+        minuteCounter.textContent = displayText;
+      }
+    }
+    
+    tick();
+    cronometroInterval = setInterval(tick, 1000);
+  }
+
+  const backdrop = document.getElementById('match-drawer-backdrop');
+  const panel = document.getElementById('match-drawer-panel');
+  const btnClose = document.getElementById('match-drawer-close');
+  const loading = document.getElementById('drawer-loading');
+  const content = document.getElementById('drawer-content');
+
+  // Elementos UI
+  const statusBadge = document.getElementById('match-status-badge');
+  const liveDot = document.getElementById('live-dot-indicator');
+  const team1Flag = document.getElementById('team1-flag') as HTMLImageElement;
+  const team2Flag = document.getElementById('team2-flag') as HTMLImageElement;
+  const team1Name = document.getElementById('team1-name');
+  const team2Name = document.getElementById('team2-name');
+  const scoreboard = document.getElementById('scoreboard-text');
+  const minuteCounter = document.getElementById('match-minute-counter');
+  const penaltiesScore = document.getElementById('penalties-score-text');
+  const venueName = document.getElementById('match-venue-name');
+  const matchDateTime = document.getElementById('match-date-time');
+  const timeline = document.getElementById('timeline-container');
+  const emptyState = document.getElementById('timeline-empty-state');
+  const reconnectingBadge = document.getElementById('reconnecting-badge');
+
+  function openDrawer() {
+    if (!backdrop || !panel) return;
+    backdrop.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    // Forzar reflow
+    void backdrop.offsetWidth;
+    
+    backdrop.style.opacity = '1';
+    panel.style.transform = 'translateY(0)';
+  }
+
+  function closeDrawer() {
+    if (!backdrop || !panel) return;
+    backdrop.style.opacity = '0';
+    panel.style.transform = 'translateY(100%)';
+    setTimeout(() => {
+      backdrop.style.display = 'none';
+      document.body.style.overflow = '';
+      resetDrawer();
+    }, 350);
+  }
+
+  function resetDrawer() {
+    // Desconectar canales de Supabase Realtime
+    if (matchesChannel) {
+      supabase.removeChannel(matchesChannel);
+      matchesChannel = null;
+    }
+    if (eventsChannel) {
+      supabase.removeChannel(eventsChannel);
+      eventsChannel = null;
+    }
+    if (cronometroInterval) {
+      clearInterval(cronometroInterval);
+      cronometroInterval = null;
+    }
+    localEventos = [];
+    if (loading) loading.classList.remove('hidden');
+    if (content) content.classList.add('hidden');
+    if (timeline) timeline.innerHTML = '';
+    if (emptyState) emptyState.classList.add('hidden');
+    if (reconnectingBadge) reconnectingBadge.classList.add('hidden');
+    if (penaltiesScore) penaltiesScore.classList.add('hidden');
+  }
+
+  // Cerrar eventos
+  if (btnClose) btnClose.addEventListener('click', closeDrawer);
+  if (backdrop) backdrop.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  // Función global para poder abrir el drawer desde cualquier componente
+  // @ts-ignore
+  window.openMatchDetailDrawer = async function (matchId: string) {
+    if (!matchId) return;
+    resetDrawer();
+    openDrawer();
+
+    try {
+      // 1. Obtener detalles del partido inicial de la base de datos
+      const { data: partido, error: pError } = await supabase
+        .from('partidos')
+        .select('*, sedes(*)')
+        .eq('id', matchId)
+        .single();
+
+      if (pError) throw pError;
+
+      // 2. Obtener eventos iniciales del partido
+      const { data: eventos, error: eError } = await supabase
+        .from('eventos_partido')
+        .select('*')
+        .eq('partido_id', matchId)
+        .order('minuto', { ascending: true })
+        .order('created_at', { ascending: true });
+
+      if (eError) throw eError;
+
+      // 3. Renderizar la cabecera
+      renderHeader(partido);
+
+      // 4. Renderizar el Timeline
+      localEventos = eventos || [];
+      renderTimeline(localEventos);
+
+      // 5. Ocultar cargando y mostrar contenido
+      if (loading) loading.classList.add('hidden');
+      if (content) content.classList.remove('hidden');
+
+      // 6. Configurar Realtime
+      setupRealtimeSubscriptions(matchId);
+
+    } catch (err) {
+      console.error("Error al cargar detalles del partido:", err);
+      // Cerrar y mostrar alerta
+      closeDrawer();
+      alert("No se pudieron cargar los detalles en vivo del partido en este momento.");
+    }
+  };
+
+  function renderHeader(partido: any) {
+    if (!partido) return;
+
+    // Actualizar nombres y banderas
+    if (team1Name) team1Name.textContent = translateTeam(partido.team1_id);
+    if (team2Name) team2Name.textContent = translateTeam(partido.team2_id);
+    if (team1Flag) team1Flag.src = getFlagUrl(partido.team1_id);
+    if (team2Flag) team2Flag.src = getFlagUrl(partido.team2_id);
+
+    // Sede
+    if (venueName) {
+      venueName.textContent = partido.sedes 
+        ? `${partido.sedes.nombre_estadio} (${partido.sedes.ciudad_es})`
+        : partido.sede_id;
+    }
+
+    // Fecha
+    if (matchDateTime) {
+      matchDateTime.textContent = formatLocalMatchDateTime(partido.fecha_inicio_utc);
+    }
+
+    // Marcador
+    if (scoreboard) {
+      if (partido.estado === 'programado') {
+        scoreboard.textContent = "vs";
+        if (minuteCounter) {
+          minuteCounter.textContent = formatLocalMatchDateTime(partido.fecha_inicio_utc);
+          minuteCounter.classList.remove('hidden', 'text-amber-500', 'animate-pulse');
+          minuteCounter.classList.add('text-[var(--text-secondary)]', 'font-semibold');
+        }
+        if (penaltiesScore) penaltiesScore.classList.add('hidden');
+      } else {
+        scoreboard.textContent = `${partido.goles_team1} - ${partido.goles_team2}`;
+        if (penaltiesScore) {
+          if (partido.penales_team1 !== null && partido.penales_team2 !== null) {
+            penaltiesScore.textContent = `(${partido.penales_team1} - ${partido.penales_team2} Pen)`;
+            penaltiesScore.classList.remove('hidden');
+          } else {
+            penaltiesScore.classList.add('hidden');
+          }
+        }
+      }
+    }
+
+    // Limpiar cronómetro previo
+    if (cronometroInterval) {
+      clearInterval(cronometroInterval);
+      cronometroInterval = null;
+    }
+
+    // Estado y Minuto
+    if (statusBadge) {
+      if (partido.estado === 'en_curso') {
+        statusBadge.textContent = "EN VIVO";
+        statusBadge.style.color = '#ef4444';
+        statusBadge.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+        statusBadge.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+        if (liveDot) liveDot.classList.remove('hidden');
+        
+        if (minuteCounter) {
+          minuteCounter.classList.remove('hidden', 'text-[var(--text-secondary)]', 'font-semibold');
+          minuteCounter.classList.add('text-amber-500', 'animate-pulse', 'font-bold');
+          
+          const min = partido.minuto_actual || 0;
+          if (min > 120) {
+            minuteCounter.textContent = "Tanda de Penaltis";
+            minuteCounter.classList.remove('animate-pulse');
+          } else if (partido.cronometro_corriendo && partido.hora_inicio_periodo) {
+            updateStopwatchDisplay(min, partido.hora_inicio_periodo, partido.tiempo_adicional || 0);
+          } else {
+            // Pausado (ej: entretiempo)
+            minuteCounter.textContent = `${min}' (Pausa)`;
+            minuteCounter.classList.remove('animate-pulse');
+          }
+        }
+      } else if (partido.estado === 'finalizado') {
+        statusBadge.textContent = "FINALIZADO";
+        statusBadge.style.color = '#10b981';
+        statusBadge.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+        statusBadge.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+        if (liveDot) liveDot.classList.add('hidden');
+        if (minuteCounter) {
+          minuteCounter.textContent = "TC (Tiempo Completo)";
+          minuteCounter.classList.remove('hidden', 'text-amber-500', 'animate-pulse');
+          minuteCounter.classList.add('text-[var(--text-secondary)]', 'font-semibold');
+        }
+      } else {
+        statusBadge.textContent = "PROGRAMADO";
+        statusBadge.style.color = 'var(--text-primary)';
+        statusBadge.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+        statusBadge.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+        if (liveDot) liveDot.classList.add('hidden');
+        if (timeline) {
+          timeline.innerHTML = '';
+        }
+        if (emptyState) {
+          emptyState.classList.remove('hidden');
+        }
+      }
+    }
+  }
+
+  function getEventIcon(tipo: string) {
+    switch (tipo) {
+      case 'gol': return '⚽';
+      case 'tarjeta_amarilla': return '🟨';
+      case 'tarjeta_roja': return '🟥';
+      case 'cambio': return '🔄';
+      case 'falta': return '⚠️';
+      case 'penal_anotado': return '✅';
+      case 'penal_fallado': return '❌';
+      default: return '⚽';
+    }
+  }
+
+  function getEventIconClass(tipo: string) {
+    switch (tipo) {
+      case 'gol': return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
+      case 'tarjeta_amarilla': return 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30';
+      case 'tarjeta_roja': return 'bg-red-500/10 text-red-400 border-red-500/30';
+      case 'cambio': return 'bg-blue-500/10 text-blue-400 border-blue-500/30';
+      case 'falta': return 'bg-amber-500/10 text-amber-400 border-amber-500/30';
+      case 'penal_anotado': return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
+      case 'penal_fallado': return 'bg-red-500/10 text-red-400 border-red-500/30';
+      default: return 'bg-gray-500/10 text-gray-400 border-gray-500/30';
+    }
+  }
+
+  const PERIOD_LABELS: Record<string, string> = {
+    'penaltis': 'Tanda de Penaltis',
+    'segundo_extra': 'Segundo Tiempo Extra',
+    'primer_extra': 'Primer Tiempo Extra',
+    'segundo_tiempo': 'Segundo Tiempo',
+    'primer_tiempo': 'Primer Tiempo'
+  };
+
+  function getPeriod(minuto: number) {
+    if (minuto > 120) return 'penaltis';
+    if (minuto > 105) return 'segundo_extra';
+    if (minuto > 90) return 'primer_extra';
+    if (minuto > 45) return 'segundo_tiempo';
+    return 'primer_tiempo';
+  }
+
+  function createPeriodDividerDOM(period: string) {
+    const div = document.createElement('div');
+    div.className = 'w-full py-2 flex items-center gap-2 select-none';
+    
+    const label = document.createElement('span');
+    label.className = 'text-[10px] font-black uppercase tracking-widest text-amber-500 bg-amber-500/10 px-2.5 py-0.5 rounded-md border border-amber-500/20';
+    label.textContent = PERIOD_LABELS[period] || period;
+    div.appendChild(label);
+    
+    const line = document.createElement('div');
+    line.className = 'flex-1 h-[1px] bg-white/5';
+    div.appendChild(line);
+    
+    return div;
+  }
+
+  function renderTimeline(eventos: any[]) {
+    if (!timeline) return;
+    timeline.innerHTML = '';
+
+    if (!eventos || eventos.length === 0) {
+      if (emptyState) emptyState.classList.remove('hidden');
+      return;
+    }
+
+    if (emptyState) emptyState.classList.add('hidden');
+
+    // Ordenar descendente (sucesos más recientes arriba)
+    const sorted = [...eventos].sort((a, b) => {
+      if (b.minuto !== a.minuto) {
+        return b.minuto - a.minuto;
+      }
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    });
+
+    let currentPeriod: string | null = null;
+
+    sorted.forEach(ev => {
+      const period = getPeriod(ev.minuto);
+      if (period !== currentPeriod) {
+        currentPeriod = period;
+        timeline.appendChild(createPeriodDividerDOM(period));
+      }
+      
+      const row = createEventDOM(ev);
+      timeline.appendChild(row);
+    });
+
+    // Scroll al inicio (arriba)
+    const scrollContainer = timeline.parentElement;
+    if (scrollContainer) {
+      scrollContainer.scrollTop = 0;
+    }
+  }
+
+  function createEventDOM(ev: any) {
+    const teamCode = ev.equipo_id || '';
+    const flagUrl = getFlagUrl(teamCode);
+    const teamName = translateTeam(teamCode);
+
+    const row = document.createElement('div');
+    row.className = 'relative flex items-start gap-4 transition-all duration-300 slide-up';
+    row.setAttribute('data-event-id', ev.id);
+
+    // Bolita del timeline (ícono)
+    const iconSpan = document.createElement('div');
+    iconSpan.className = `event-icon-circle absolute -left-[49px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center text-lg border-2 ${getEventIconClass(ev.tipo)} bg-[var(--bg-primary)] shadow-md`;
+    iconSpan.innerHTML = getEventIcon(ev.tipo);
+    row.appendChild(iconSpan);
+
+    // Detalles del Evento
+    const detailsContainer = document.createElement('div');
+    detailsContainer.className = 'flex-1 glass p-3.5 rounded-2xl border border-white/5 flex gap-3 items-center min-w-0';
+    
+    // Bandera del equipo
+    if (flagUrl && ev.equipo_id) {
+      const flagImg = document.createElement('img');
+      flagImg.src = flagUrl;
+      flagImg.alt = teamName;
+      flagImg.className = 'w-5 h-3.5 rounded shadow shrink-0 object-cover';
+      detailsContainer.appendChild(flagImg);
+    }
+
+    const textDiv = document.createElement('div');
+    textDiv.className = 'flex-1 min-w-0';
+
+    const playerPara = document.createElement('p');
+    playerPara.className = 'event-player-name text-sm font-bold text-[var(--text-primary)] truncate';
+    playerPara.textContent = ev.jugador || 'Evento del partido';
+    textDiv.appendChild(playerPara);
+
+    const descPara = document.createElement('p');
+    descPara.className = 'event-desc-text text-[11px] text-[var(--text-secondary)] font-medium mt-0.5 leading-tight';
+    
+    let desc = '';
+    if (ev.tipo === 'gol') desc = '¡GOOOOOL!';
+    else if (ev.tipo === 'tarjeta_amarilla') desc = 'Tarjeta Amarilla';
+    else if (ev.tipo === 'tarjeta_roja') desc = 'Tarjeta Roja (Expulsado)';
+    else if (ev.tipo === 'cambio') desc = 'Sustitución';
+    else if (ev.tipo === 'falta') desc = 'Infracción';
+    else if (ev.tipo === 'penal_anotado') desc = 'Penalti Anotado';
+    else if (ev.tipo === 'penal_fallado') desc = 'Penalti Fallado';
+
+    if (ev.detalle) {
+      desc += ` · ${ev.detalle}`;
+    }
+    descPara.textContent = desc;
+    textDiv.appendChild(descPara);
+
+    detailsContainer.appendChild(textDiv);
+
+    // Minuto al final
+    const minDiv = document.createElement('div');
+    minDiv.className = 'event-minute-text shrink-0 font-["Outfit"] font-black text-sm text-amber-500 w-10 text-right';
+    if (ev.minuto > 120) {
+      minDiv.textContent = 'PEN';
+    } else {
+      minDiv.textContent = `${ev.minuto}'`;
+    }
+    detailsContainer.appendChild(minDiv);
+
+    row.appendChild(detailsContainer);
+    return row;
+  }
+
+  function setupRealtimeSubscriptions(matchId: string) {
+    // 1. Suscripción al partido (marcador, minuto y estado)
+    matchesChannel = supabase
+      .channel(`db-match-${matchId}`)
+      .on('postgres_changes', {
+        event: 'UPDATE',
+        schema: 'public',
+        table: 'partidos',
+        filter: `id=eq.${matchId}`
+      }, (payload: any) => {
+        console.log("Realtime Match update received:", payload.new);
+        renderHeader(payload.new);
+      })
+      .subscribe((status: string) => {
+        console.log("Match subscription status:", status);
+        if (status === 'CHANNEL_ERROR' && reconnectingBadge) {
+          reconnectingBadge.classList.remove('hidden');
+        } else if (status === 'SUBSCRIBED' && reconnectingBadge) {
+          reconnectingBadge.classList.add('hidden');
+        }
+      });
+
+    // 2. Suscripción a eventos (INSERT, UPDATE, DELETE)
+    eventsChannel = supabase
+      .channel(`db-events-${matchId}`)
+      .on('postgres_changes', {
+        event: '*', // Escuchar todo (inserciones, actualizaciones, borrados)
+        schema: 'public',
+        table: 'eventos_partido',
+        filter: `partido_id=eq.${matchId}`
+      }, (payload: any) => {
+        console.log("Realtime Event change received:", payload.eventType, payload);
+
+        if (payload.eventType === 'INSERT') {
+          localEventos.push(payload.new);
+          renderTimeline(localEventos);
+        } 
+        else if (payload.eventType === 'DELETE') {
+          localEventos = localEventos.filter(ev => ev.id !== payload.old.id);
+          renderTimeline(localEventos);
+        } 
+        else if (payload.eventType === 'UPDATE') {
+          const idx = localEventos.findIndex(ev => ev.id === payload.new.id);
+          if (idx !== -1) {
+            localEventos[idx] = payload.new;
+          }
+          renderTimeline(localEventos);
+        }
+      })
+      .subscribe();
+  }
+</script>
+

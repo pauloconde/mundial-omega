@@ -124,28 +124,42 @@ const anchorsShown  = new Set<string>();
           </div>
 
           <div class="space-y-2 mb-1">
-            <div class="match-card px-4 py-3">
+            <div class="match-card px-4 py-3 transition-all hover:border-amber-400/30 border border-transparent"
+                 data-match-id={match.id}
+                     onclick={`window.openMatchDetailDrawer && window.openMatchDetailDrawer('${match.id}')`}>
               <div class="flex items-center gap-3">
 
-                {/* Hora */}
-                <div class="shrink-0 w-[52px] text-center">
-                  {!scored ? (
+                {/* Hora / Estado */}
+                <div class="shrink-0 w-[52px] text-center match-status-container">
+                  {match.estado === 'en_curso' ? (
+                    <span class="text-xs font-bold text-amber-500 animate-pulse">
+                      {match.minuto_actual}'
+                    </span>
+                  ) : match.estado === 'finalizado' ? (
+                    <div class="flex flex-col items-center gap-1">
+                      <span class="text-[8px] font-bold px-1.5 py-0.5 rounded-full inline-block"
+                            style="background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3);">
+                        TC
+                      </span>
+                      {match.penales_team1 !== null && match.penales_team2 !== null && (
+                        <span class="text-[8px] font-bold px-1.5 py-0.5 rounded-full inline-block animate-pulse"
+                              style="background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3);">
+                          PEN
+                        </span>
+                      )}
+                    </div>
+                  ) : (
                     <p class="font-['Outfit'] font-bold text-sm" style={`color: ${color};`}>
                       <time data-utc={utc} data-fmt="time">--</time>
                     </p>
-                  ) : (
-                    <span class="text-[8px] font-bold px-1.5 py-0.5 rounded-full inline-block"
-                          style="background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3);">
-                      TC
-                    </span>
                   )}
                   {match.group && (
-                    <p class="text-[10px] text-[var(--text-secondary)] mt-0.5 font-medium leading-tight">
+                    <p class="text-[10px] text-[var(--text-secondary)] mt-0.5 font-medium leading-tight match-group-text">
                       {match.group}
                     </p>
                   )}
                   {match.num && (
-                    <p class="text-[9px] text-[var(--text-secondary)] mt-0.5 font-medium leading-tight">
+                    <p class="text-[9px] text-[var(--text-secondary)] mt-0.5 font-medium leading-tight match-num-text">
                       #{match.num}
                     </p>
                   )}
@@ -157,23 +171,40 @@ const anchorsShown  = new Set<string>();
                     <img src={getFlagUrl(match.team1)} alt={translateTeam(match.team1)}
                          class="w-6 h-4 object-cover rounded shrink-0"
                          onerror="this.style.display='none'" />
-                    <span class={`text-sm font-semibold truncate ${scored && ft && ft[0] > ft[1] ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}>
+                    <span class={`team1-name-span text-sm font-semibold truncate ${
+                      scored && ft && (
+                        ft[0] > ft[1] || 
+                        (ft[0] === ft[1] && typeof match.penales_team1 === 'number' && typeof match.penales_team2 === 'number' && match.penales_team1 > match.penales_team2)
+                      ) ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'
+                    }`}>
                       {translateTeam(match.team1)}
                     </span>
                   </div>
 
-                  <div class="shrink-0 px-3 text-center min-w-[56px]">
-                    {scored ? (
-                      <span class="font-['Outfit'] font-black text-xl gradient-text">
-                        {getScoreString(match)}
-                      </span>
+                  <div class="shrink-0 px-3 text-center min-w-[56px] match-score-container">
+                    {match.estado === 'en_curso' || match.estado === 'finalizado' ? (
+                      <div class="flex flex-col items-center justify-center">
+                        <span class="font-['Outfit'] font-black text-xl gradient-text">
+                          {ft ? `${ft[0]} - ${ft[1]}` : ''}
+                        </span>
+                        {match.penales_team1 !== null && match.penales_team2 !== null && (
+                          <span class="text-[9px] font-black text-amber-500 uppercase tracking-widest mt-0.5 whitespace-nowrap">
+                            ({match.penales_team1} - {match.penales_team2} Pen)
+                          </span>
+                        )}
+                      </div>
                     ) : (
                       <span class="text-xs text-gray-600 font-bold">vs</span>
                     )}
                   </div>
 
                   <div class="flex items-center gap-2 flex-1 min-w-0 justify-end">
-                    <span class={`text-sm font-semibold truncate text-right ${scored && ft && ft[1] > ft[0] ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}>
+                    <span class={`team2-name-span text-sm font-semibold truncate text-right ${
+                      scored && ft && (
+                        ft[1] > ft[0] || 
+                        (ft[0] === ft[1] && typeof match.penales_team1 === 'number' && typeof match.penales_team2 === 'number' && match.penales_team2 > match.penales_team1)
+                      ) ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'
+                    }`}>
                       {translateTeam(match.team2)}
                     </span>
                     <img src={getFlagUrl(match.team2)} alt={translateTeam(match.team2)}

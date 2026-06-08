@@ -1,0 +1,2680 @@
+<!DOCTYPE html><html lang="es" data-theme="dark" data-astro-cid-sckkx6r4> <head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="generator" content="Astro v6.2.2"><meta name="description" content="Calendario oficial, grupos y resultados del Mundial FIFA 2026"><meta name="keywords" content="mundial 2026, fifa, calendario, resultados, futbol"><meta name="theme-color" content="#080210"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180"><link rel="manifest" href="/manifest.webmanifest"><title>Mundial 2026 | pauloconde.dev</title><!-- Open Graph --><meta property="og:title" content="Mundial 2026 | pauloconde.dev"><meta property="og:description" content="Calendario oficial, grupos y resultados del Mundial FIFA 2026"><meta property="og:type" content="website"><meta property="og:image" content="https://calendario.mundial.click/ogimage.png"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Mundial 2026 | pauloconde.dev"><meta name="twitter:description" content="Calendario oficial, grupos y resultados del Mundial FIFA 2026"><meta name="twitter:image" content="https://calendario.mundial.click/ogimage.png"><style is:global>
+      :root {
+        --brand-app-bg: #080210;
+        --brand-splash-bg: linear-gradient(135deg, #080210 0%, #3d1079 50%, #080210 100%);
+        --brand-header-bg: #fff;
+        --brand-header-text: #9ca3af;
+        --brand-nav-bg: #ffffff;
+        --brand-nav-text: #080210;
+        --brand-nav-icon: #080210;
+        --brand-nav-icon-active: #5314ff;
+        --brand-drawer-bg: #fff;
+      }
+    </style><!-- Capturar PWA Prompt tempranamente --><script>
+      window.deferredPrompt = null;
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        window.deferredPrompt = e;
+        // Si el drawer ya está listo, mostrar el botón
+        var section = document.getElementById('install-android');
+        if (section) section.style.display = 'block';
+        var headerBtn = document.getElementById('header-install-btn');
+        if (headerBtn) headerBtn.style.display = 'flex';
+      });
+    </script><style data-vite-dev-id="/Users/pauloconde/Development/mundial-template/src/styles/global.css">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap');
+@layer properties;
+@layer theme, base, components, utilities;
+/*! tailwindcss v4.2.4 | MIT License | https://tailwindcss.com */
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --color-red-200: oklch(88.5% 0.062 18.334);
+    --color-red-400: oklch(70.4% 0.191 22.216);
+    --color-red-500: oklch(63.7% 0.237 25.331);
+    --color-amber-400: oklch(82.8% 0.189 84.429);
+    --color-amber-500: oklch(76.9% 0.188 70.08);
+    --color-yellow-400: oklch(85.2% 0.199 91.936);
+    --color-yellow-500: oklch(79.5% 0.184 86.047);
+    --color-emerald-400: oklch(76.5% 0.177 163.223);
+    --color-emerald-500: oklch(69.6% 0.17 162.48);
+    --color-blue-400: oklch(70.7% 0.165 254.624);
+    --color-blue-500: oklch(62.3% 0.214 259.815);
+    --color-gray-300: oklch(87.2% 0.01 258.338);
+    --color-gray-400: oklch(70.7% 0.022 261.325);
+    --color-gray-500: oklch(55.1% 0.027 264.364);
+    --color-gray-600: oklch(44.6% 0.03 256.802);
+    --color-black: #000;
+    --color-white: #fff;
+    --spacing: 0.25rem;
+    --container-sm: 24rem;
+    --container-lg: 32rem;
+    --container-2xl: 42rem;
+    --text-xs: 0.75rem;
+    --text-xs--line-height: calc(1 / 0.75);
+    --text-sm: 0.875rem;
+    --text-sm--line-height: calc(1.25 / 0.875);
+    --text-base: 1rem;
+    --text-base--line-height: calc(1.5 / 1);
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
+    --text-xl: 1.25rem;
+    --text-xl--line-height: calc(1.75 / 1.25);
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: calc(2 / 1.5);
+    --text-3xl: 1.875rem;
+    --text-3xl--line-height: calc(2.25 / 1.875);
+    --text-4xl: 2.25rem;
+    --text-4xl--line-height: calc(2.5 / 2.25);
+    --text-5xl: 3rem;
+    --text-5xl--line-height: 1;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+    --tracking-wider: 0.05em;
+    --tracking-widest: 0.1em;
+    --leading-tight: 1.25;
+    --leading-relaxed: 1.625;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --animate-spin: spin 1s linear infinite;
+    --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    --blur-sm: 8px;
+    --blur-md: 12px;
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities {
+  .pointer-events-none {
+    pointer-events: none;
+  }
+  .visible {
+    visibility: visible;
+  }
+  .absolute {
+    position: absolute;
+  }
+  .fixed {
+    position: fixed;
+  }
+  .relative {
+    position: relative;
+  }
+  .static {
+    position: static;
+  }
+  .inset-0 {
+    inset: calc(var(--spacing) * 0);
+  }
+  .start {
+    inset-inline-start: var(--spacing);
+  }
+  .end {
+    inset-inline-end: var(--spacing);
+  }
+  .-top-20 {
+    top: calc(var(--spacing) * -20);
+  }
+  .top-0 {
+    top: calc(var(--spacing) * 0);
+  }
+  .top-1 {
+    top: calc(var(--spacing) * 1);
+  }
+  .top-1\/2 {
+    top: calc(1 / 2 * 100%);
+  }
+  .top-3 {
+    top: calc(var(--spacing) * 3);
+  }
+  .top-4 {
+    top: calc(var(--spacing) * 4);
+  }
+  .top-6 {
+    top: calc(var(--spacing) * 6);
+  }
+  .-right-20 {
+    right: calc(var(--spacing) * -20);
+  }
+  .right-0 {
+    right: calc(var(--spacing) * 0);
+  }
+  .right-3 {
+    right: calc(var(--spacing) * 3);
+  }
+  .right-4 {
+    right: calc(var(--spacing) * 4);
+  }
+  .right-6 {
+    right: calc(var(--spacing) * 6);
+  }
+  .right-16 {
+    right: calc(var(--spacing) * 16);
+  }
+  .-bottom-10 {
+    bottom: calc(var(--spacing) * -10);
+  }
+  .bottom-0 {
+    bottom: calc(var(--spacing) * 0);
+  }
+  .bottom-3 {
+    bottom: calc(var(--spacing) * 3);
+  }
+  .bottom-4 {
+    bottom: calc(var(--spacing) * 4);
+  }
+  .-left-10 {
+    left: calc(var(--spacing) * -10);
+  }
+  .-left-\[49px\] {
+    left: calc(49px * -1);
+  }
+  .left-0 {
+    left: calc(var(--spacing) * 0);
+  }
+  .left-5 {
+    left: calc(var(--spacing) * 5);
+  }
+  .z-0 {
+    z-index: 0;
+  }
+  .z-10 {
+    z-index: 10;
+  }
+  .z-50 {
+    z-index: 50;
+  }
+  .z-\[100\] {
+    z-index: 100;
+  }
+  .z-\[8000\] {
+    z-index: 8000;
+  }
+  .z-\[8001\] {
+    z-index: 8001;
+  }
+  .z-\[8500\] {
+    z-index: 8500;
+  }
+  .z-\[8501\] {
+    z-index: 8501;
+  }
+  .z-\[9000\] {
+    z-index: 9000;
+  }
+  .z-\[9999\] {
+    z-index: 9999;
+  }
+  .z-\[10000\] {
+    z-index: 10000;
+  }
+  .z-\[10001\] {
+    z-index: 10001;
+  }
+  .container {
+    width: 100%;
+    @media (width >= 40rem) {
+      max-width: 40rem;
+    }
+    @media (width >= 48rem) {
+      max-width: 48rem;
+    }
+    @media (width >= 64rem) {
+      max-width: 64rem;
+    }
+    @media (width >= 80rem) {
+      max-width: 80rem;
+    }
+    @media (width >= 96rem) {
+      max-width: 96rem;
+    }
+  }
+  .mx-4 {
+    margin-inline: calc(var(--spacing) * 4);
+  }
+  .mx-auto {
+    margin-inline: auto;
+  }
+  .my-2 {
+    margin-block: calc(var(--spacing) * 2);
+  }
+  .my-6 {
+    margin-block: calc(var(--spacing) * 6);
+  }
+  .-mt-0 {
+    margin-top: calc(var(--spacing) * -0);
+  }
+  .-mt-0\.5 {
+    margin-top: calc(var(--spacing) * -0.5);
+  }
+  .-mt-8 {
+    margin-top: calc(var(--spacing) * -8);
+  }
+  .mt-0 {
+    margin-top: calc(var(--spacing) * 0);
+  }
+  .mt-0\.5 {
+    margin-top: calc(var(--spacing) * 0.5);
+  }
+  .mt-1 {
+    margin-top: calc(var(--spacing) * 1);
+  }
+  .mt-1\.5 {
+    margin-top: calc(var(--spacing) * 1.5);
+  }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
+  }
+  .mt-3 {
+    margin-top: calc(var(--spacing) * 3);
+  }
+  .mt-4 {
+    margin-top: calc(var(--spacing) * 4);
+  }
+  .mt-5 {
+    margin-top: calc(var(--spacing) * 5);
+  }
+  .mt-6 {
+    margin-top: calc(var(--spacing) * 6);
+  }
+  .mt-8 {
+    margin-top: calc(var(--spacing) * 8);
+  }
+  .-mb-10 {
+    margin-bottom: calc(var(--spacing) * -10);
+  }
+  .mb-1 {
+    margin-bottom: calc(var(--spacing) * 1);
+  }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+  .mb-2\.5 {
+    margin-bottom: calc(var(--spacing) * 2.5);
+  }
+  .mb-3 {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
+  .mb-4 {
+    margin-bottom: calc(var(--spacing) * 4);
+  }
+  .mb-5 {
+    margin-bottom: calc(var(--spacing) * 5);
+  }
+  .mb-6 {
+    margin-bottom: calc(var(--spacing) * 6);
+  }
+  .mb-8 {
+    margin-bottom: calc(var(--spacing) * 8);
+  }
+  .mb-10 {
+    margin-bottom: calc(var(--spacing) * 10);
+  }
+  .ml-1 {
+    margin-left: calc(var(--spacing) * 1);
+  }
+  .ml-2 {
+    margin-left: calc(var(--spacing) * 2);
+  }
+  .ml-\[68px\] {
+    margin-left: 68px;
+  }
+  .ml-\[72px\] {
+    margin-left: 72px;
+  }
+  .block {
+    display: block;
+  }
+  .flex {
+    display: flex;
+  }
+  .grid {
+    display: grid;
+  }
+  .hidden {
+    display: none;
+  }
+  .inline-block {
+    display: inline-block;
+  }
+  .table {
+    display: table;
+  }
+  .h-1 {
+    height: calc(var(--spacing) * 1);
+  }
+  .h-1\.5 {
+    height: calc(var(--spacing) * 1.5);
+  }
+  .h-2 {
+    height: calc(var(--spacing) * 2);
+  }
+  .h-2\.5 {
+    height: calc(var(--spacing) * 2.5);
+  }
+  .h-3 {
+    height: calc(var(--spacing) * 3);
+  }
+  .h-3\.5 {
+    height: calc(var(--spacing) * 3.5);
+  }
+  .h-4 {
+    height: calc(var(--spacing) * 4);
+  }
+  .h-5 {
+    height: calc(var(--spacing) * 5);
+  }
+  .h-6 {
+    height: calc(var(--spacing) * 6);
+  }
+  .h-7 {
+    height: calc(var(--spacing) * 7);
+  }
+  .h-8 {
+    height: calc(var(--spacing) * 8);
+  }
+  .h-9 {
+    height: calc(var(--spacing) * 9);
+  }
+  .h-10 {
+    height: calc(var(--spacing) * 10);
+  }
+  .h-12 {
+    height: calc(var(--spacing) * 12);
+  }
+  .h-14 {
+    height: calc(var(--spacing) * 14);
+  }
+  .h-16 {
+    height: calc(var(--spacing) * 16);
+  }
+  .h-32 {
+    height: calc(var(--spacing) * 32);
+  }
+  .h-40 {
+    height: calc(var(--spacing) * 40);
+  }
+  .h-48 {
+    height: calc(var(--spacing) * 48);
+  }
+  .h-56 {
+    height: calc(var(--spacing) * 56);
+  }
+  .h-64 {
+    height: calc(var(--spacing) * 64);
+  }
+  .h-\[1px\] {
+    height: 1px;
+  }
+  .h-auto {
+    height: auto;
+  }
+  .h-full {
+    height: 100%;
+  }
+  .h-px {
+    height: 1px;
+  }
+  .max-h-\[14rem\] {
+    max-height: 14rem;
+  }
+  .max-h-\[80vh\] {
+    max-height: 80vh;
+  }
+  .max-h-\[85vh\] {
+    max-height: 85vh;
+  }
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  .w-2 {
+    width: calc(var(--spacing) * 2);
+  }
+  .w-2\.5 {
+    width: calc(var(--spacing) * 2.5);
+  }
+  .w-3 {
+    width: calc(var(--spacing) * 3);
+  }
+  .w-3\.5 {
+    width: calc(var(--spacing) * 3.5);
+  }
+  .w-4 {
+    width: calc(var(--spacing) * 4);
+  }
+  .w-5 {
+    width: calc(var(--spacing) * 5);
+  }
+  .w-6 {
+    width: calc(var(--spacing) * 6);
+  }
+  .w-8 {
+    width: calc(var(--spacing) * 8);
+  }
+  .w-9 {
+    width: calc(var(--spacing) * 9);
+  }
+  .w-10 {
+    width: calc(var(--spacing) * 10);
+  }
+  .w-12 {
+    width: calc(var(--spacing) * 12);
+  }
+  .w-14 {
+    width: calc(var(--spacing) * 14);
+  }
+  .w-16 {
+    width: calc(var(--spacing) * 16);
+  }
+  .w-20 {
+    width: calc(var(--spacing) * 20);
+  }
+  .w-48 {
+    width: calc(var(--spacing) * 48);
+  }
+  .w-56 {
+    width: calc(var(--spacing) * 56);
+  }
+  .w-64 {
+    width: calc(var(--spacing) * 64);
+  }
+  .w-72 {
+    width: calc(var(--spacing) * 72);
+  }
+  .w-80 {
+    width: calc(var(--spacing) * 80);
+  }
+  .w-\[52px\] {
+    width: 52px;
+  }
+  .w-\[60px\] {
+    width: 60px;
+  }
+  .w-auto {
+    width: auto;
+  }
+  .w-full {
+    width: 100%;
+  }
+  .max-w-2xl {
+    max-width: var(--container-2xl);
+  }
+  .max-w-\[60vw\] {
+    max-width: 60vw;
+  }
+  .max-w-\[80vw\] {
+    max-width: 80vw;
+  }
+  .max-w-\[90vw\] {
+    max-width: 90vw;
+  }
+  .max-w-\[140px\] {
+    max-width: 140px;
+  }
+  .max-w-full {
+    max-width: 100%;
+  }
+  .max-w-lg {
+    max-width: var(--container-lg);
+  }
+  .max-w-sm {
+    max-width: var(--container-sm);
+  }
+  .min-w-0 {
+    min-width: calc(var(--spacing) * 0);
+  }
+  .min-w-\[7rem\] {
+    min-width: 7rem;
+  }
+  .min-w-\[56px\] {
+    min-width: 56px;
+  }
+  .flex-1 {
+    flex: 1;
+  }
+  .flex-shrink {
+    flex-shrink: 1;
+  }
+  .shrink-0 {
+    flex-shrink: 0;
+  }
+  .border-collapse {
+    border-collapse: collapse;
+  }
+  .-translate-y-1 {
+    --tw-translate-y: calc(var(--spacing) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-y-1\/2 {
+    --tw-translate-y: calc(calc(1 / 2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .scale-95 {
+    --tw-scale-x: 95%;
+    --tw-scale-y: 95%;
+    --tw-scale-z: 95%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+  .transform {
+    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+  }
+  .animate-\[splash-fade_2\.2s_ease-in-out_forwards\] {
+    animation: splash-fade 2.2s ease-in-out forwards;
+  }
+  .animate-pulse {
+    animation: var(--animate-pulse);
+  }
+  .animate-spin {
+    animation: var(--animate-spin);
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .resize {
+    resize: both;
+  }
+  .appearance-none {
+    appearance: none;
+  }
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .flex-col {
+    flex-direction: column;
+  }
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .items-end {
+    align-items: flex-end;
+  }
+  .items-start {
+    align-items: flex-start;
+  }
+  .justify-around {
+    justify-content: space-around;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .justify-end {
+    justify-content: flex-end;
+  }
+  .justify-start {
+    justify-content: flex-start;
+  }
+  .gap-0 {
+    gap: calc(var(--spacing) * 0);
+  }
+  .gap-0\.5 {
+    gap: calc(var(--spacing) * 0.5);
+  }
+  .gap-1 {
+    gap: calc(var(--spacing) * 1);
+  }
+  .gap-1\.5 {
+    gap: calc(var(--spacing) * 1.5);
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
+  }
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
+  }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
+  }
+  .gap-5 {
+    gap: calc(var(--spacing) * 5);
+  }
+  .gap-8 {
+    gap: calc(var(--spacing) * 8);
+  }
+  .space-y-1 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 1) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 1) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-1\.5 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 1.5) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 1.5) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-2 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 2) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-4 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-5 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 5) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 5) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-6 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 6) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .overflow-hidden {
+    overflow: hidden;
+  }
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+  .overflow-y-auto {
+    overflow-y: auto;
+  }
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  .rounded-2xl {
+    border-radius: var(--radius-2xl);
+  }
+  .rounded-3xl {
+    border-radius: var(--radius-3xl);
+  }
+  .rounded-\[2px\] {
+    border-radius: 2px;
+  }
+  .rounded-full {
+    border-radius: calc(infinity * 1px);
+  }
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+  .rounded-sm {
+    border-radius: var(--radius-sm);
+  }
+  .rounded-xl {
+    border-radius: var(--radius-xl);
+  }
+  .rounded-t-3xl {
+    border-top-left-radius: var(--radius-3xl);
+    border-top-right-radius: var(--radius-3xl);
+  }
+  .rounded-t-\[2\.5rem\] {
+    border-top-left-radius: 2.5rem;
+    border-top-right-radius: 2.5rem;
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+  .border-2 {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+  }
+  .border-x {
+    border-inline-style: var(--tw-border-style);
+    border-inline-width: 1px;
+  }
+  .border-t {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+  .border-r {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 1px;
+  }
+  .border-b {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+  }
+  .border-l {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 1px;
+  }
+  .border-l-2 {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 2px;
+  }
+  .border-\[var\(--border-subtle\)\] {
+    border-color: var(--border-subtle);
+  }
+  .border-amber-500 {
+    border-color: var(--color-amber-500);
+  }
+  .border-amber-500\/20 {
+    border-color: color-mix(in srgb, oklch(76.9% 0.188 70.08) 20%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-amber-500) 20%, transparent);
+    }
+  }
+  .border-amber-500\/30 {
+    border-color: color-mix(in srgb, oklch(76.9% 0.188 70.08) 30%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-amber-500) 30%, transparent);
+    }
+  }
+  .border-blue-500 {
+    border-color: var(--color-blue-500);
+  }
+  .border-blue-500\/30 {
+    border-color: color-mix(in srgb, oklch(62.3% 0.214 259.815) 30%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-blue-500) 30%, transparent);
+    }
+  }
+  .border-emerald-500 {
+    border-color: var(--color-emerald-500);
+  }
+  .border-emerald-500\/30 {
+    border-color: color-mix(in srgb, oklch(69.6% 0.17 162.48) 30%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-emerald-500) 30%, transparent);
+    }
+  }
+  .border-gray-500 {
+    border-color: var(--color-gray-500);
+  }
+  .border-gray-500\/30 {
+    border-color: color-mix(in srgb, oklch(55.1% 0.027 264.364) 30%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-gray-500) 30%, transparent);
+    }
+  }
+  .border-red-500 {
+    border-color: var(--color-red-500);
+  }
+  .border-red-500\/30 {
+    border-color: color-mix(in srgb, oklch(63.7% 0.237 25.331) 30%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-red-500) 30%, transparent);
+    }
+  }
+  .border-red-500\/50 {
+    border-color: color-mix(in srgb, oklch(63.7% 0.237 25.331) 50%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-red-500) 50%, transparent);
+    }
+  }
+  .border-transparent {
+    border-color: transparent;
+  }
+  .border-white {
+    border-color: var(--color-white);
+  }
+  .border-white\/5 {
+    border-color: color-mix(in srgb, #fff 5%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-white) 5%, transparent);
+    }
+  }
+  .border-white\/10 {
+    border-color: color-mix(in srgb, #fff 10%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-white) 10%, transparent);
+    }
+  }
+  .border-white\/20 {
+    border-color: color-mix(in srgb, #fff 20%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-white) 20%, transparent);
+    }
+  }
+  .border-yellow-500 {
+    border-color: var(--color-yellow-500);
+  }
+  .border-yellow-500\/30 {
+    border-color: color-mix(in srgb, oklch(79.5% 0.184 86.047) 30%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-yellow-500) 30%, transparent);
+    }
+  }
+  .bg-\[var\(--bg-card\)\] {
+    background-color: var(--bg-card);
+  }
+  .bg-\[var\(--bg-primary\)\] {
+    background-color: var(--bg-primary);
+  }
+  .bg-\[var\(--border-subtle\)\] {
+    background-color: var(--border-subtle);
+  }
+  .bg-amber-400 {
+    background-color: var(--color-amber-400);
+  }
+  .bg-amber-500 {
+    background-color: var(--color-amber-500);
+  }
+  .bg-amber-500\/10 {
+    background-color: color-mix(in srgb, oklch(76.9% 0.188 70.08) 10%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-amber-500) 10%, transparent);
+    }
+  }
+  .bg-amber-500\/15 {
+    background-color: color-mix(in srgb, oklch(76.9% 0.188 70.08) 15%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-amber-500) 15%, transparent);
+    }
+  }
+  .bg-black {
+    background-color: var(--color-black);
+  }
+  .bg-black\/5 {
+    background-color: color-mix(in srgb, #000 5%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 5%, transparent);
+    }
+  }
+  .bg-black\/20 {
+    background-color: color-mix(in srgb, #000 20%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 20%, transparent);
+    }
+  }
+  .bg-black\/40 {
+    background-color: color-mix(in srgb, #000 40%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 40%, transparent);
+    }
+  }
+  .bg-black\/60 {
+    background-color: color-mix(in srgb, #000 60%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 60%, transparent);
+    }
+  }
+  .bg-black\/70 {
+    background-color: color-mix(in srgb, #000 70%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 70%, transparent);
+    }
+  }
+  .bg-black\/80 {
+    background-color: color-mix(in srgb, #000 80%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 80%, transparent);
+    }
+  }
+  .bg-black\/95 {
+    background-color: color-mix(in srgb, #000 95%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 95%, transparent);
+    }
+  }
+  .bg-blue-500 {
+    background-color: var(--color-blue-500);
+  }
+  .bg-blue-500\/10 {
+    background-color: color-mix(in srgb, oklch(62.3% 0.214 259.815) 10%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-blue-500) 10%, transparent);
+    }
+  }
+  .bg-emerald-500 {
+    background-color: var(--color-emerald-500);
+  }
+  .bg-emerald-500\/10 {
+    background-color: color-mix(in srgb, oklch(69.6% 0.17 162.48) 10%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-emerald-500) 10%, transparent);
+    }
+  }
+  .bg-gray-500 {
+    background-color: var(--color-gray-500);
+  }
+  .bg-gray-500\/10 {
+    background-color: color-mix(in srgb, oklch(55.1% 0.027 264.364) 10%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-gray-500) 10%, transparent);
+    }
+  }
+  .bg-gray-600 {
+    background-color: var(--color-gray-600);
+  }
+  .bg-gray-600\/40 {
+    background-color: color-mix(in srgb, oklch(44.6% 0.03 256.802) 40%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-gray-600) 40%, transparent);
+    }
+  }
+  .bg-red-500 {
+    background-color: var(--color-red-500);
+  }
+  .bg-red-500\/10 {
+    background-color: color-mix(in srgb, oklch(63.7% 0.237 25.331) 10%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-red-500) 10%, transparent);
+    }
+  }
+  .bg-red-500\/20 {
+    background-color: color-mix(in srgb, oklch(63.7% 0.237 25.331) 20%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-red-500) 20%, transparent);
+    }
+  }
+  .bg-transparent {
+    background-color: transparent;
+  }
+  .bg-white {
+    background-color: var(--color-white);
+  }
+  .bg-white\/5 {
+    background-color: color-mix(in srgb, #fff 5%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-white) 5%, transparent);
+    }
+  }
+  .bg-white\/10 {
+    background-color: color-mix(in srgb, #fff 10%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-white) 10%, transparent);
+    }
+  }
+  .bg-white\/90 {
+    background-color: color-mix(in srgb, #fff 90%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-white) 90%, transparent);
+    }
+  }
+  .bg-yellow-500 {
+    background-color: var(--color-yellow-500);
+  }
+  .bg-yellow-500\/10 {
+    background-color: color-mix(in srgb, oklch(79.5% 0.184 86.047) 10%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-yellow-500) 10%, transparent);
+    }
+  }
+  .object-contain {
+    object-fit: contain;
+  }
+  .object-cover {
+    object-fit: cover;
+  }
+  .p-3 {
+    padding: calc(var(--spacing) * 3);
+  }
+  .p-3\.5 {
+    padding: calc(var(--spacing) * 3.5);
+  }
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
+  .p-5 {
+    padding: calc(var(--spacing) * 5);
+  }
+  .p-6 {
+    padding: calc(var(--spacing) * 6);
+  }
+  .p-8 {
+    padding: calc(var(--spacing) * 8);
+  }
+  .px-1 {
+    padding-inline: calc(var(--spacing) * 1);
+  }
+  .px-1\.5 {
+    padding-inline: calc(var(--spacing) * 1.5);
+  }
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
+  }
+  .px-2\.5 {
+    padding-inline: calc(var(--spacing) * 2.5);
+  }
+  .px-3 {
+    padding-inline: calc(var(--spacing) * 3);
+  }
+  .px-4 {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+  .px-5 {
+    padding-inline: calc(var(--spacing) * 5);
+  }
+  .px-6 {
+    padding-inline: calc(var(--spacing) * 6);
+  }
+  .py-0 {
+    padding-block: calc(var(--spacing) * 0);
+  }
+  .py-0\.5 {
+    padding-block: calc(var(--spacing) * 0.5);
+  }
+  .py-1 {
+    padding-block: calc(var(--spacing) * 1);
+  }
+  .py-1\.5 {
+    padding-block: calc(var(--spacing) * 1.5);
+  }
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
+  }
+  .py-2\.5 {
+    padding-block: calc(var(--spacing) * 2.5);
+  }
+  .py-3 {
+    padding-block: calc(var(--spacing) * 3);
+  }
+  .py-3\.5 {
+    padding-block: calc(var(--spacing) * 3.5);
+  }
+  .py-4 {
+    padding-block: calc(var(--spacing) * 4);
+  }
+  .py-6 {
+    padding-block: calc(var(--spacing) * 6);
+  }
+  .py-8 {
+    padding-block: calc(var(--spacing) * 8);
+  }
+  .py-10 {
+    padding-block: calc(var(--spacing) * 10);
+  }
+  .py-12 {
+    padding-block: calc(var(--spacing) * 12);
+  }
+  .pt-2 {
+    padding-top: calc(var(--spacing) * 2);
+  }
+  .pt-6 {
+    padding-top: calc(var(--spacing) * 6);
+  }
+  .pt-8 {
+    padding-top: calc(var(--spacing) * 8);
+  }
+  .pt-14 {
+    padding-top: calc(var(--spacing) * 14);
+  }
+  .pr-1 {
+    padding-right: calc(var(--spacing) * 1);
+  }
+  .pr-2 {
+    padding-right: calc(var(--spacing) * 2);
+  }
+  .pr-4 {
+    padding-right: calc(var(--spacing) * 4);
+  }
+  .pb-2 {
+    padding-bottom: calc(var(--spacing) * 2);
+  }
+  .pb-3 {
+    padding-bottom: calc(var(--spacing) * 3);
+  }
+  .pb-4 {
+    padding-bottom: calc(var(--spacing) * 4);
+  }
+  .pb-5 {
+    padding-bottom: calc(var(--spacing) * 5);
+  }
+  .pb-6 {
+    padding-bottom: calc(var(--spacing) * 6);
+  }
+  .pb-8 {
+    padding-bottom: calc(var(--spacing) * 8);
+  }
+  .pb-10 {
+    padding-bottom: calc(var(--spacing) * 10);
+  }
+  .pb-24 {
+    padding-bottom: calc(var(--spacing) * 24);
+  }
+  .pl-2 {
+    padding-left: calc(var(--spacing) * 2);
+  }
+  .pl-3 {
+    padding-left: calc(var(--spacing) * 3);
+  }
+  .pl-7 {
+    padding-left: calc(var(--spacing) * 7);
+  }
+  .text-center {
+    text-align: center;
+  }
+  .text-left {
+    text-align: left;
+  }
+  .text-right {
+    text-align: right;
+  }
+  .font-\[\"Outfit\"\] {
+    font-family: "Outfit";
+  }
+  .font-\[\'Inter\'\] {
+    font-family: 'Inter';
+  }
+  .font-\[\'Outfit\'\] {
+    font-family: 'Outfit';
+  }
+  .text-2xl {
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  }
+  .text-3xl {
+    font-size: var(--text-3xl);
+    line-height: var(--tw-leading, var(--text-3xl--line-height));
+  }
+  .text-4xl {
+    font-size: var(--text-4xl);
+    line-height: var(--tw-leading, var(--text-4xl--line-height));
+  }
+  .text-5xl {
+    font-size: var(--text-5xl);
+    line-height: var(--tw-leading, var(--text-5xl--line-height));
+  }
+  .text-base {
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+  }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
+  }
+  .text-xs {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+  .text-\[8px\] {
+    font-size: 8px;
+  }
+  .text-\[9px\] {
+    font-size: 9px;
+  }
+  .text-\[10px\] {
+    font-size: 10px;
+  }
+  .text-\[11px\] {
+    font-size: 11px;
+  }
+  .leading-none {
+    --tw-leading: 1;
+    line-height: 1;
+  }
+  .leading-relaxed {
+    --tw-leading: var(--leading-relaxed);
+    line-height: var(--leading-relaxed);
+  }
+  .leading-tight {
+    --tw-leading: var(--leading-tight);
+    line-height: var(--leading-tight);
+  }
+  .font-black {
+    --tw-font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-black);
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+  .font-medium {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
+  .font-normal {
+    --tw-font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal);
+  }
+  .font-semibold {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
+  .tracking-wider {
+    --tw-tracking: var(--tracking-wider);
+    letter-spacing: var(--tracking-wider);
+  }
+  .tracking-widest {
+    --tw-tracking: var(--tracking-widest);
+    letter-spacing: var(--tracking-widest);
+  }
+  .whitespace-nowrap {
+    white-space: nowrap;
+  }
+  .text-\[var\(--brand-nav-icon-active\,\#f59e0b\)\] {
+    color: var(--brand-nav-icon-active,#f59e0b);
+  }
+  .text-\[var\(--text-primary\)\] {
+    color: var(--text-primary);
+  }
+  .text-\[var\(--text-secondary\)\] {
+    color: var(--text-secondary);
+  }
+  .text-amber-400 {
+    color: var(--color-amber-400);
+  }
+  .text-amber-500 {
+    color: var(--color-amber-500);
+  }
+  .text-blue-400 {
+    color: var(--color-blue-400);
+  }
+  .text-emerald-400 {
+    color: var(--color-emerald-400);
+  }
+  .text-gray-300 {
+    color: var(--color-gray-300);
+  }
+  .text-gray-400 {
+    color: var(--color-gray-400);
+  }
+  .text-gray-600 {
+    color: var(--color-gray-600);
+  }
+  .text-red-200 {
+    color: var(--color-red-200);
+  }
+  .text-red-400 {
+    color: var(--color-red-400);
+  }
+  .text-white {
+    color: var(--color-white);
+  }
+  .text-white\/70 {
+    color: color-mix(in srgb, #fff 70%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-white) 70%, transparent);
+    }
+  }
+  .text-yellow-400 {
+    color: var(--color-yellow-400);
+  }
+  .capitalize {
+    text-transform: capitalize;
+  }
+  .lowercase {
+    text-transform: lowercase;
+  }
+  .uppercase {
+    text-transform: uppercase;
+  }
+  .underline {
+    text-decoration-line: underline;
+  }
+  .opacity-0 {
+    opacity: 0%;
+  }
+  .opacity-10 {
+    opacity: 10%;
+  }
+  .opacity-25 {
+    opacity: 25%;
+  }
+  .opacity-50 {
+    opacity: 50%;
+  }
+  .opacity-70 {
+    opacity: 70%;
+  }
+  .opacity-75 {
+    opacity: 75%;
+  }
+  .opacity-80 {
+    opacity: 80%;
+  }
+  .shadow {
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-2xl {
+    --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-lg {
+    --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-md {
+    --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-sm {
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
+  .filter {
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  .backdrop-blur-md {
+    --tw-backdrop-blur: blur(var(--blur-md));
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+  .backdrop-blur-sm {
+    --tw-backdrop-blur: blur(var(--blur-sm));
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+  .backdrop-filter {
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+  .transition {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-all {
+    transition-property: all;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-colors {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-opacity {
+    transition-property: opacity;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-transform {
+    transition-property: transform, translate, scale, rotate;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .duration-200 {
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
+  }
+  .duration-300 {
+    --tw-duration: 300ms;
+    transition-duration: 300ms;
+  }
+  .duration-350 {
+    --tw-duration: 350ms;
+    transition-duration: 350ms;
+  }
+  .ease-in-out {
+    --tw-ease: var(--ease-in-out);
+    transition-timing-function: var(--ease-in-out);
+  }
+  .ease-out {
+    --tw-ease: var(--ease-out);
+    transition-timing-function: var(--ease-out);
+  }
+  .outline-none {
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+  .select-none {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .focus-within\:border-\[var\(--brand-nav-icon-active\,\#f59e0b\)\] {
+    &:focus-within {
+      border-color: var(--brand-nav-icon-active,#f59e0b);
+    }
+  }
+  .hover\:border-amber-400\/30 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: color-mix(in srgb, oklch(82.8% 0.189 84.429) 30%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          border-color: color-mix(in oklab, var(--color-amber-400) 30%, transparent);
+        }
+      }
+    }
+  }
+  .hover\:border-amber-400\/40 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: color-mix(in srgb, oklch(82.8% 0.189 84.429) 40%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          border-color: color-mix(in oklab, var(--color-amber-400) 40%, transparent);
+        }
+      }
+    }
+  }
+  .hover\:bg-black\/5 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in srgb, #000 5%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-black) 5%, transparent);
+        }
+      }
+    }
+  }
+  .hover\:bg-black\/80 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in srgb, #000 80%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-black) 80%, transparent);
+        }
+      }
+    }
+  }
+  .hover\:bg-white\/10 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in srgb, #fff 10%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-white) 10%, transparent);
+        }
+      }
+    }
+  }
+  .hover\:bg-white\/20 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in srgb, #fff 20%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-white) 20%, transparent);
+        }
+      }
+    }
+  }
+  .hover\:text-\[var\(--text-primary\)\] {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--text-primary);
+      }
+    }
+  }
+  .hover\:text-amber-400 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-amber-400);
+      }
+    }
+  }
+  .hover\:text-white {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-white);
+      }
+    }
+  }
+  .hover\:underline {
+    &:hover {
+      @media (hover: hover) {
+        text-decoration-line: underline;
+      }
+    }
+  }
+  .hover\:opacity-80 {
+    &:hover {
+      @media (hover: hover) {
+        opacity: 80%;
+      }
+    }
+  }
+  .hover\:opacity-90 {
+    &:hover {
+      @media (hover: hover) {
+        opacity: 90%;
+      }
+    }
+  }
+  .focus\:border-\[var\(--brand-nav-icon-active\,\#f59e0b\)\] {
+    &:focus {
+      border-color: var(--brand-nav-icon-active,#f59e0b);
+    }
+  }
+  .active\:scale-95 {
+    &:active {
+      --tw-scale-x: 95%;
+      --tw-scale-y: 95%;
+      --tw-scale-z: 95%;
+      scale: var(--tw-scale-x) var(--tw-scale-y);
+    }
+  }
+  .sm\:gap-4 {
+    @media (width >= 40rem) {
+      gap: calc(var(--spacing) * 4);
+    }
+  }
+  .sm\:p-4 {
+    @media (width >= 40rem) {
+      padding: calc(var(--spacing) * 4);
+    }
+  }
+}
+:root {
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #111827;
+  --bg-card: rgba(0, 0, 0, 0.30);
+  --bg-card-hover: rgba(0, 0, 0, 0.45);
+  --accent-gold: #f59e0b;
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
+  --accent-blue: #3b82f6;
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --border-subtle: rgba(255,255,255,0.07);
+  --gradient-hero: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.35) 100%);
+}
+[data-theme="light"] {
+  --bg-primary: #f3f4f6;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: rgba(255, 255, 255, 1);
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --border-subtle: rgba(0,0,0,0.1);
+  --gradient-hero: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.45) 60%, rgba(255,255,255,0.75) 100%);
+}
+[data-theme="light"] .glass {
+  background: rgba(0, 0, 0, 0.1);
+}
+[data-theme="light"] .phase-title {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+[data-theme="light"] .phase-divider {
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--brand-app-bg);
+  color: var(--text-primary);
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+}
+.app-header {
+  background: var(--brand-header-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.app-header-text {
+  color: var(--brand-header-text);
+}
+.app-nav {
+  background: var(--brand-nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-subtle);
+}
+.app-nav-item {
+  color: var(--brand-nav-text);
+}
+.app-nav-item .nav-icon {
+  stroke: var(--brand-nav-icon);
+}
+.app-nav-item:hover, .app-nav-item.nav-active {
+  color: var(--brand-nav-icon-active);
+  background: var(--brand-nav-icon-active);
+  @supports (color: color-mix(in lab, red, red)) {
+    background: color-mix(in srgb, var(--brand-nav-icon-active) 10%, transparent);
+  }
+}
+.app-nav-item.nav-active .nav-icon {
+  stroke: var(--brand-nav-icon-active);
+}
+.app-nav-item.nav-active .nav-label {
+  color: var(--brand-nav-icon-active);
+}
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+}
+.glass {
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+}
+.gradient-text {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.match-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.match-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(245,158,11,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+.live-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  background: #ef4444;
+  border-radius: 50%;
+  display: inline-block;
+}
+.live-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: pulse-ring 1.5s ease-out infinite;
+}
+.bottom-nav {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@keyframes splash-fade {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+#splash {
+  animation: splash-fade 2.2s ease-in-out forwards;
+}
+@keyframes slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.slide-up {
+  animation: slide-up 0.5s ease-out forwards;
+}
+.carousel-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px 16px 12px;
+}
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+.carousel-item {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+.standings-row {
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background 0.2s;
+}
+.standings-row:hover {
+  background: rgba(255,255,255,0.04);
+}
+.flag-img {
+  width: 28px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+.hero-bg {
+  background: var(--gradient-hero);
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.25) 0%, transparent 70%);
+}
+.venue-card {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
+}
+.venue-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-scale-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-space-y-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-tracking {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-inset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-ring-inset {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-offset-width {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --tw-ring-offset-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: #fff;
+}
+@property --tw-ring-offset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-drop-shadow-size {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-duration {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ease {
+  syntax: "*";
+  inherits: false;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      --tw-scale-z: 1;
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
+      --tw-space-y-reverse: 0;
+      --tw-border-style: solid;
+      --tw-leading: initial;
+      --tw-font-weight: initial;
+      --tw-tracking: initial;
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-color: initial;
+      --tw-shadow-alpha: 100%;
+      --tw-inset-shadow: 0 0 #0000;
+      --tw-inset-shadow-color: initial;
+      --tw-inset-shadow-alpha: 100%;
+      --tw-ring-color: initial;
+      --tw-ring-shadow: 0 0 #0000;
+      --tw-inset-ring-color: initial;
+      --tw-inset-ring-shadow: 0 0 #0000;
+      --tw-ring-inset: initial;
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-outline-style: solid;
+      --tw-blur: initial;
+      --tw-brightness: initial;
+      --tw-contrast: initial;
+      --tw-grayscale: initial;
+      --tw-hue-rotate: initial;
+      --tw-invert: initial;
+      --tw-opacity: initial;
+      --tw-saturate: initial;
+      --tw-sepia: initial;
+      --tw-drop-shadow: initial;
+      --tw-drop-shadow-color: initial;
+      --tw-drop-shadow-alpha: 100%;
+      --tw-drop-shadow-size: initial;
+      --tw-backdrop-blur: initial;
+      --tw-backdrop-brightness: initial;
+      --tw-backdrop-contrast: initial;
+      --tw-backdrop-grayscale: initial;
+      --tw-backdrop-hue-rotate: initial;
+      --tw-backdrop-invert: initial;
+      --tw-backdrop-opacity: initial;
+      --tw-backdrop-saturate: initial;
+      --tw-backdrop-sepia: initial;
+      --tw-duration: initial;
+      --tw-ease: initial;
+    }
+  }
+}
+</style>
+<style data-vite-dev-id="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro?astro&#38;type=style&#38;index=0&#38;lang.css">.custom-scrollbar[data-astro-cid-lj52qwkr]::-webkit-scrollbar{width:4px}.custom-scrollbar[data-astro-cid-lj52qwkr]::-webkit-scrollbar-track{background:transparent}.custom-scrollbar[data-astro-cid-lj52qwkr]::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:4px}.custom-scrollbar[data-astro-cid-lj52qwkr]::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2)}.live-dot[data-astro-cid-lj52qwkr]{width:8px;height:8px;background-color:#ef4444;border-radius:50%;display:inline-block;box-shadow:0 0 0 0 rgba(239,68,68,0.7);animation:pulse-live 1.5s infinite}@keyframes pulse-live{0%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(239,68,68,0.7)}70%{transform:scale(1);box-shadow:0 0 0 6px rgba(239,68,68,0)}100%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(239,68,68,0)}}</style>
+<style data-vite-dev-id="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro?astro&#38;type=style&#38;index=0&#38;lang.css">#splash[data-astro-cid-sckkx6r4]{pointer-events:none}</style><script type="module" src="/@vite/client"></script>
+<script type="module" src="/@id/astro/runtime/client/dev-toolbar/entrypoint.js"></script>
+<script>window.__astro_dev_toolbar__ = {"root":"/Users/pauloconde/Development/mundial-template/","version":"6.2.2","latestAstroVersion":"6.4.4","debugInfo":"Astro                    v6.2.2\nNode                     v22.22.1\nSystem                   macOS (arm64)\nPackage Manager          pnpm\nOutput                   static\nAdapter                  none\nIntegrations             @vite-pwa/astro-integration"}</script>
+<script type="module" src="/src/styles/global.css"></script>
+<script type="module" src="/src/components/MatchDetailDrawer.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/src/layouts/Layout.astro?astro&type=style&index=0&lang.css"></script></head> <body class="bg-[var(--bg-primary)] text-[var(--text-primary)] font-['Inter'] pb-24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="90:88"> <!-- ── Splash Screen ── --> <div id="splash" class="fixed inset-0 z-[9999] flex flex-col animate-[splash-fade_2.2s_ease-in-out_forwards]" style="background: var(--brand-splash-bg);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="97:6"> <!-- Logo FIFA — centrado en el espacio disponible --> <div class="flex-1 flex items-center justify-center slide-up" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="99:69"> <img src="/logo-fifa.webp" alt="FIFA World Cup 2026" class="w-72 max-w-[80vw] h-auto object-contain" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="100:10"> </div> <!-- Logo del sponsor — anclado al fondo con padding seguro --> <div class="flex justify-center pb-10" style="padding-bottom: max(2.5rem, env(safe-area-inset-bottom, 2.5rem));" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="105:120"> <img src="/logo-splash.svg" alt="Sponsor" class="h-64 w-auto max-w-[60vw] object-contain" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="106:10"> </div> </div> <!-- ── Full-Screen Rotating Banners ── --> <div id="page-banner" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-300 opacity-0" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="116:8"> <!-- Banner Container Wrapper (Constrained to App's max-w-lg width) --> <div class="relative w-full max-w-lg h-full flex flex-col items-center justify-center bg-black" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="118:105"> <!-- Indicador visual de tiempo --> <div id="banner-progress-container" class="absolute top-0 left-0 w-full h-1.5 bg-black/40 z-[10001] hidden" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="121:119"> <div id="banner-progress-bar" class="h-full bg-white/90" style="width: 0%;" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="122:14"></div> </div> <!-- Banner Image --> <img id="page-banner-img" src="" alt="Publicidad" class="w-full h-full object-cover" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="126:12"> <!-- Manual Close Button (X) --> <button id="page-banner-close" class="absolute top-4 right-4 z-[10000] flex items-center justify-center w-10 h-10 rounded-full bg-black/60 text-white backdrop-blur-md border border-white/20 transition-all hover:bg-black/80 active:scale-95 cursor-pointer" aria-label="Cerrar publicidad" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="138:12"> <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="139:107"> <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="140:16"></path> </svg> </button> </div> </div> <!-- ── Script: Control de Splash & Banners en Navegación ── --> <script>(function(){const showBanner = true;
+const bannerUrls = ["/banner1.webp","/banner2.webp","/banner3.webp","/banner4.webp","/banner5.webp"];
+const bannerDuration = 2;
+
+      (function () {
+        const isColdStart = !sessionStorage.getItem('app_initialized');
+        sessionStorage.setItem('app_initialized', 'true');
+
+        const splash = document.getElementById('splash');
+        const bannerContainer = document.getElementById('page-banner');
+        const bannerImg = document.getElementById('page-banner-img');
+        const closeBtn = document.getElementById('page-banner-close');
+
+        if (isColdStart) {
+          // Cold start: show original splash, hide banner container
+          if (bannerContainer) bannerContainer.style.display = 'none';
+          if (splash) {
+            splash.style.display = 'flex';
+          }
+        } else {
+          // Subsequent page navigation
+          if (showBanner && bannerUrls && bannerUrls.length > 0) {
+            // Hide splash immediately to prevent flashing
+            if (splash) splash.style.display = 'none';
+
+            // Show banner
+            if (bannerContainer && bannerImg) {
+              // Rotate banners using sessionStorage index
+              let currentIndex = parseInt(sessionStorage.getItem('banner_index') || '0');
+              if (isNaN(currentIndex) || currentIndex >= bannerUrls.length) {
+                currentIndex = 0;
+              }
+              const currentBannerUrl = bannerUrls[currentIndex];
+              
+              bannerImg.src = currentBannerUrl;
+              
+              const nextIndex = (currentIndex + 1) % bannerUrls.length;
+              sessionStorage.setItem('banner_index', nextIndex.toString());
+
+              bannerContainer.style.display = 'flex';
+              requestAnimationFrame(function () {
+                bannerContainer.style.opacity = '1';
+              });
+
+              let autoCloseTimer = null;
+              
+              function closeBanner() {
+                if (autoCloseTimer) clearTimeout(autoCloseTimer);
+                bannerContainer.style.opacity = '0';
+                setTimeout(function () {
+                  bannerContainer.style.display = 'none';
+                }, 300);
+              }
+
+              // Set up automatic close timer if duration > 0
+              if (bannerDuration > 0) {
+                const progressContainer = document.getElementById('banner-progress-container');
+                const progressBar = document.getElementById('banner-progress-bar');
+                
+                if (progressContainer && progressBar) {
+                  progressContainer.style.display = 'block';
+                  progressBar.style.transition = 'none';
+                  progressBar.style.width = '0%';
+                  
+                  // Trigger reflow to restart animation
+                  void progressBar.offsetWidth;
+                  
+                  requestAnimationFrame(function () {
+                    progressBar.style.transition = 'width ' + bannerDuration + 's linear';
+                    progressBar.style.width = '100%';
+                  });
+                }
+
+                autoCloseTimer = setTimeout(closeBanner, bannerDuration * 1000);
+              }
+
+              if (closeBtn) {
+                closeBtn.addEventListener('click', closeBanner);
+              }
+            }
+          } else {
+            // If banners are disabled or empty, let the normal splash screen execute
+            if (bannerContainer) bannerContainer.style.display = 'none';
+            if (splash) {
+              splash.style.display = 'flex';
+            }
+          }
+        }
+      })();
+    })();</script> <!-- ── Header ── --> <header class="app-header fixed top-0 left-0 right-0 z-50" style="padding-top: env(safe-area-inset-top, 0px);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="248:65"> <div class="flex items-center justify-between px-4 h-14 max-w-lg mx-auto" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="249:81"> <!-- Logo del sponsor --> <a href="/" class="flex items-center" id="header-logo" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="251:64"> <img src="/logo.webp" alt="Logo" class="h-8 w-auto max-w-[140px] object-contain" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="252:12"> </a> <div class="flex items-center gap-2" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="255:46"> <!-- Badge LIVE --> <div id="live-badge" class="hidden flex items-center gap-1.5 px-2 py-1 rounded-full" style="background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="259:97"> <span class="live-dot" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="260:14"></span> <span class="text-[10px] font-bold text-red-400 tracking-wider" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="261:77">LIVE</span> </div> <!-- Botón instalar PWA en header --> <button id="header-install-btn" class="w-9 h-9 rounded-full transition-all hover:opacity-80 active:scale-95" style="display: none; align-items: center; justify-content: center; color: var(--brand-header-text, #f59e0b);" aria-label="Instalar App" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="268:45"> <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="269:105"> <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="270:16"></path> </svg> </button> <!-- Botón abrir drawer --> <button id="drawer-open" class="w-9 h-9 flex items-center justify-center rounded-full transition-colors" style="color: var(--brand-header-text, #6b7280);" aria-label="Menú" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="278:37"> <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="279:105"> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="280:16"></path> </svg> </button> </div> </div> </header> <!-- ── Drawer backdrop ── --> <div id="drawer-backdrop" class="fixed inset-0 z-[8000] bg-black/60 backdrop-blur-sm" style="display:none; opacity:0; transition: opacity 0.3s;" aria-hidden="true" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="288:6"></div> <!-- ── Drawer panel ── --> <aside id="drawer-panel" class="fixed top-0 right-0 bottom-0 z-[8001] w-80 max-w-[90vw] flex flex-col" style="background: #fff; border-left: 1px solid var(--border-subtle); transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); padding-top: env(safe-area-inset-top, 0px);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="296:280"> <!-- Header del drawer --> <div class="flex items-center justify-between px-5 h-14 border-b" style="border-color: var(--border-subtle);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="300:56"> <span class="font-['Outfit'] font-bold text-sm" style="color: var(--brand-nav-text, #fff);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="301:101">FIFA World Cup 2026</span> <button id="drawer-close" class="w-8 h-8 flex items-center justify-center rounded-full" style="color: var(--brand-nav-icon, #6b7280);" aria-label="Cerrar" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="303:84"> <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="304:103"> <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="305:14"></path> </svg> </button> </div> <!-- Contenido --> <div class="flex-1 overflow-y-auto px-5 py-6 flex flex-col gap-8" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="311:73"> <!-- Logo Sponsor Grande --> <div class="flex flex-col items-center gap-5 mt-4" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="314:60"> <img src="/paulocondedev.png" alt="pauloconde.dev" class="w-56 max-w-full h-auto object-contain" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="315:12"> <!-- Redes Sociales --> <div class="flex flex-wrap justify-center gap-4 mt-2" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="318:65"> <a href="https://pauloconde.dev" target="_blank" rel="noopener" aria-label="Website" class="w-12 h-12 rounded-full flex items-center justify-center transition-colors" style="background: rgba(128,128,128,0.1); color: var(--brand-nav-icon-active, #f59e0b);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="322:107"> <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="323:109"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="324:20"></path> </svg> </a>  <a href="https://www.instagram.com/empaque.art" target="_blank" rel="noopener" aria-label="Instagram" class="w-12 h-12 rounded-full flex items-center justify-center transition-colors" style="background: rgba(128,128,128,0.1); color: var(--brand-nav-icon-active, #f59e0b);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="340:107"> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="341:78"> <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 0 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="342:20"></path> </svg> </a>   <a href="http://wa.me/+584147494763" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-12 h-12 rounded-full flex items-center justify-center transition-colors" style="background: rgba(128,128,128,0.1); color: var(--brand-nav-icon-active, #f59e0b);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="367:107"> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="368:78"> <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="369:20"></path> </svg> </a>   <a href="mailto:mundialclick2026@gmail.com" target="_blank" rel="noopener" aria-label="Email" class="w-12 h-12 rounded-full flex items-center justify-center transition-colors" style="background: rgba(128,128,128,0.1); color: var(--brand-nav-icon-active, #f59e0b);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="394:107"> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="395:78"> <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="396:20"></path> </svg> </a> </div> <!-- Dirección, Teléfono y Cómo llegar --> <div class="flex flex-col items-center gap-3 mt-4 text-center px-4" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="404:81">  <div class="flex flex-col w-full gap-2 mt-1" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="409:60"> <a href="tel:+584147494763" class="w-full flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition-transform active:scale-95 hover:opacity-90" style="background: var(--brand-nav-icon-active, #f59e0b); color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,0.15);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="411:346"> <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="412:122"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="413:24"></path> </svg> <span data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="415:27">Llamar</span> </a>  </div> </div> </div> <div class="space-y-6 mt-4" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="432:37"> <!-- Botón instalar Android --> <div id="install-android" style="display:none;" class="px-2" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="434:72"> <p class="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-secondary)] mb-3 text-center" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="435:121">Instalar app</p> <button id="install-btn" class="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-sm transition-transform active:scale-95 hover:opacity-90" style="background: var(--brand-nav-icon-active, #f59e0b); color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,0.15);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="438:134"> <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="439:116"> <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="440:18"></path> </svg>
+Instalar en Android
+</button> </div> <!-- Guía instalar iOS --> <div id="install-ios" style="display:none;" class="px-2" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="447:68"> <p class="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-secondary)] mb-2" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="448:109">Instalar en iPhone</p> <div class="space-y-4 text-sm font-medium" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="4:44"> <div class="flex items-start gap-3 p-3 sm:gap-4 sm:p-4 rounded-2xl" style="background: rgba(128,128,128,0.1);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="5:114"> <div class="w-6 h-6 shrink-0 rounded-full flex items-center justify-center text-sm font-bold text-[var(--text-primary)] shadow-sm mt-0.5" style="background: var(--brand-nav-icon-active, #f59e0b);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="6:202">1</div> <p style="color: var(--brand-nav-text, #d1d5db); display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem;" class="leading-relaxed" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="7:146">
+Toca el botón <svg class="inline-block w-5 h-5 -mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="8:182"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="8:182"></path><polyline points="16 6 12 2 8 6" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="8:241"></polyline><line x1="12" y1="2" x2="12" y2="15" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="8:285"></line></svg> <strong data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="8:343">Compartir</strong> en la barra de Safari
+</p> </div> <div class="flex items-start gap-3 p-3 sm:gap-4 sm:p-4 rounded-2xl" style="background: rgba(128,128,128,0.1);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="11:114"> <div class="w-6 h-6 shrink-0 rounded-full flex items-center justify-center text-sm font-bold text-[var(--text-primary)] shadow-sm mt-0.5" style="background: var(--brand-nav-icon-active, #f59e0b);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="12:202">2</div> <p style="color: var(--brand-nav-text, #d1d5db); display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem;" class="leading-relaxed" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="13:146">
+Desliza y selecciona <svg class="inline-block w-5 h-5 -mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="14:189"><rect x="3" y="3" width="18" height="18" rx="4" ry="4" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="14:189"></rect><line x1="12" y1="8" x2="12" y2="16" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="14:251"></line><line x1="8" y1="12" x2="16" y2="12" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="14:295"></line></svg> <strong data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="14:353">Añadir a pantalla de inicio,</strong> quizás debas tocar en <strong data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="14:421">Ver más</strong> </p> </div> <div class="flex items-start gap-3 p-3 sm:gap-4 sm:p-4 rounded-2xl" style="background: rgba(128,128,128,0.1);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="17:114"> <div class="w-6 h-6 shrink-0 rounded-full flex items-center justify-center text-sm font-bold text-[var(--text-primary)] shadow-sm" style="background: var(--brand-nav-icon-active, #f59e0b);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="18:195">3</div> <p style="color: var(--brand-nav-text, #d1d5db);" class="leading-relaxed mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="19:86">Toca <strong data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="19:99">Añadir</strong> en la esquina superior derecha</p> </div> </div> </div> </div> <hr class="border-t border-[var(--border-subtle)] my-2 opacity-50" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="453:10"> <nav class="flex flex-col gap-2 px-2" style="color: var(--brand-app-bg, #053332);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="455:92"> <a href="/" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-colors bg-black/5 text-[var(--brand-nav-icon-active,#f59e0b)]" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="456:196"> <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="457:114"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="458:16"></path> </svg> <span class="font-semibold text-sm" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="460:49">Inicio</span> </a> <a href="/grupos" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-colors hover:bg-black/5" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="463:204"> <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="464:114"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18M10 3v18M14 3v18" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="465:16"></path> </svg> <span class="font-semibold text-sm" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="467:49">Grupos</span> </a> <a href="/estadios" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-colors hover:bg-black/5" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="470:208"> <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="471:114"> <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="472:16"></path> <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="473:16"></path> </svg> <span class="font-semibold text-sm" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="475:49">Estadios</span> </a> <a href="/calendario" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-colors hover:bg-black/5" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="478:212"> <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="479:114"> <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="480:16"></rect> <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="481:16"></line> <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="482:16"></line> <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="483:16"></line> </svg> <span class="font-semibold text-sm" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="485:49">Calendario</span> </a> <a href="/quiniela" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-colors hover:bg-black/5" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="489:210"> <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="490:116"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="491:18"></path> </svg> <span class="font-semibold text-sm" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="493:51">Quiniela</span> </a> </nav> </div> <!-- Footer del drawer --> <div class="px-5 py-1 pb-4" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="501:35"> <p class="text-[11px] text-center text-[var(--text-secondary)] relative z-10" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="502:87">
+Desarrollado para <a href="https://pauloconde.dev" target="_blank" rel="noopener" class="text-[var(--text-primary)] font-semibold hover:underline" style="color: var(--brand-nav-icon-active, #f59e0b);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="503:209">pauloconde.dev</a> por
+</p> <div class="flex justify-center items-center -mt-8 -mb-10 relative z-0" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="505:81"> <a href="https://pauloconde.dev" target="_blank" rel="noopener" class="hover:opacity-80 transition-opacity" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="506:119"> <img src="/paulocondedev.png" alt="pauloconde.dev" class="h-32 w-auto object-contain" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="507:14"> </a> </div> </div> </aside> <!-- ── iOS Install Modal ── --> <div id="ios-modal-backdrop" class="fixed inset-0 z-[9000] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" style="display:none; opacity:0; transition: opacity 0.3s;" aria-hidden="true" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="514:209"> <div id="ios-modal-panel" class="w-full max-w-sm rounded-3xl p-6 relative transform scale-95 transition-transform duration-300" style="background: var(--brand-drawer-bg, #0a0e1a); border: 1px solid var(--border-subtle);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="515:228"> <button id="ios-modal-close" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full transition-colors hover:bg-white/10" style="color: var(--brand-nav-icon, #6b7280);" aria-label="Cerrar" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="516:226"> <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="517:104"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="517:104"></path></svg> </button> <div class="text-center mb-6 mt-2" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="520:44"> <h3 class="text-lg font-bold font-['Outfit']" style="color: var(--brand-nav-text, #fff);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="521:101">Instalar en iPhone</h3> <p class="text-xs opacity-70 mt-1" style="color: var(--brand-nav-text, #fff);" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="522:90">Ten tu app siempre a la mano</p> </div> <div class="space-y-4 text-sm font-medium" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="4:44"> <div class="flex items-start gap-3 p-3 sm:gap-4 sm:p-4 rounded-2xl" style="background: rgba(128,128,128,0.1);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="5:114"> <div class="w-6 h-6 shrink-0 rounded-full flex items-center justify-center text-sm font-bold text-[var(--text-primary)] shadow-sm mt-0.5" style="background: var(--brand-nav-icon-active, #f59e0b);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="6:202">1</div> <p style="color: var(--brand-nav-text, #d1d5db); display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem;" class="leading-relaxed" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="7:146">
+Toca el botón <svg class="inline-block w-5 h-5 -mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="8:182"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="8:182"></path><polyline points="16 6 12 2 8 6" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="8:241"></polyline><line x1="12" y1="2" x2="12" y2="15" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="8:285"></line></svg> <strong data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="8:343">Compartir</strong> en la barra de Safari
+</p> </div> <div class="flex items-start gap-3 p-3 sm:gap-4 sm:p-4 rounded-2xl" style="background: rgba(128,128,128,0.1);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="11:114"> <div class="w-6 h-6 shrink-0 rounded-full flex items-center justify-center text-sm font-bold text-[var(--text-primary)] shadow-sm mt-0.5" style="background: var(--brand-nav-icon-active, #f59e0b);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="12:202">2</div> <p style="color: var(--brand-nav-text, #d1d5db); display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem;" class="leading-relaxed" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="13:146">
+Desliza y selecciona <svg class="inline-block w-5 h-5 -mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="14:189"><rect x="3" y="3" width="18" height="18" rx="4" ry="4" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="14:189"></rect><line x1="12" y1="8" x2="12" y2="16" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="14:251"></line><line x1="8" y1="12" x2="16" y2="12" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="14:295"></line></svg> <strong data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="14:353">Añadir a pantalla de inicio,</strong> quizás debas tocar en <strong data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="14:421">Ver más</strong> </p> </div> <div class="flex items-start gap-3 p-3 sm:gap-4 sm:p-4 rounded-2xl" style="background: rgba(128,128,128,0.1);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="17:114"> <div class="w-6 h-6 shrink-0 rounded-full flex items-center justify-center text-sm font-bold text-[var(--text-primary)] shadow-sm" style="background: var(--brand-nav-icon-active, #f59e0b);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="18:195">3</div> <p style="color: var(--brand-nav-text, #d1d5db);" class="leading-relaxed mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="19:86">Toca <strong data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/InstallIOSGuide.astro" data-astro-source-loc="19:99">Añadir</strong> en la esquina superior derecha</p> </div> </div> </div> </div> <!-- ── Main Content ── --> <main class="pt-14 min-h-screen" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="530:38">   <section class="hero-bg relative px-4 pt-8 pb-10 overflow-hidden" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="47:71"> <div class="absolute inset-0 overflow-hidden pointer-events-none" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="48:73"> <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full opacity-10" style="background: radial-gradient(circle, #f59e0b, transparent 70%);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="49:10"></div> <div class="absolute -bottom-10 -left-10 w-48 h-48 rounded-full opacity-10" style="background: radial-gradient(circle, #6366f1, transparent 70%);" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="51:10"></div> </div> <div class="relative z-10 max-w-lg mx-auto" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="55:51"> <!-- Etiqueta --> <div class="flex items-center gap-2 mb-6" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="57:51"> <div class="flex gap-1 items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider" style="background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); color: #f59e0b;" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="59:115">
+⚡ PRÓXIMO PARTIDO
+</div>  </div> <!-- Tarjeta del partido --> <div class="match-card hero-card glass rounded-3xl p-6 slide-up transition-all hover:border-amber-400/30 border border-transparent shadow-lg" data-match-id="6f215b6d-b9b1-4035-b027-8f1161c43512" style="cursor: pointer;" onclick="window.openMatchDetailDrawer &#38;&#38; window.openMatchDetailDrawer('6f215b6d-b9b1-4035-b027-8f1161c43512')" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="71:106"> <div class="flex items-center justify-between gap-4" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="72:64"> <!-- Equipo 1 --> <div class="flex-1 flex flex-col items-center gap-2 text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="75:78"> <img src="https://flagcdn.com/mx.svg" alt="México" class="w-14 h-10 object-cover rounded-lg shadow-lg" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="76:16"> <span class="font-bold text-sm leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="82:61">México</span> </div> <!-- Centro: marcador o hora --> <div class="flex flex-col items-center gap-1 px-4 match-score-container" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="86:86"> <div class="text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="104:42"> <!-- Hora local: el script del layout la convierte --> <p class="font-['Outfit'] font-black text-2xl text-[var(--text-primary)]" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="106:93"> <time data-utc="2026-06-11T19:00:00.000Z" data-fmt="time" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="107:67">--:--</time> </p> <p class="text-xs text-[var(--text-secondary)] mt-1" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="109:72"> <time data-utc="2026-06-11T19:00:00.000Z" data-fmt="date" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="110:67">…</time> </p> </div> </div> <!-- Equipo 2 --> <div class="flex-1 flex flex-col items-center gap-2 text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="117:78"> <img src="https://flagcdn.com/za.svg" alt="Sudáfrica" class="w-14 h-10 object-cover rounded-lg shadow-lg" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="118:16"> <span class="font-bold text-sm leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="124:61">Sudáfrica</span> </div> </div> <!-- Sede --> <div class="mt-5 flex items-center justify-center gap-2 text-[var(--text-secondary)]" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="130:97"> <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="131:118"> <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="132:16"></path> <circle cx="12" cy="11" r="3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="133:16"></circle> </svg> <span class="text-xs font-medium truncate" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="135:56">Ciudad de México</span> </div> </div> <!-- Cuenta regresiva (animada por JS) --> <div class="mt-4 grid grid-cols-4 gap-2" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="141:52"> <div class="flex flex-col items-center glass rounded-2xl py-3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="148:78"> <span id="cd-dias" class="font-['Outfit'] font-black text-2xl text-amber-400" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="149:98">--</span> <span class="text-[9px] text-[var(--text-secondary)] font-semibold uppercase tracking-wider mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="150:117">días</span> </div><div class="flex flex-col items-center glass rounded-2xl py-3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="148:78"> <span id="cd-hrs" class="font-['Outfit'] font-black text-2xl text-amber-400" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="149:98">--</span> <span class="text-[9px] text-[var(--text-secondary)] font-semibold uppercase tracking-wider mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="150:117">hrs</span> </div><div class="flex flex-col items-center glass rounded-2xl py-3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="148:78"> <span id="cd-min" class="font-['Outfit'] font-black text-2xl text-amber-400" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="149:98">--</span> <span class="text-[9px] text-[var(--text-secondary)] font-semibold uppercase tracking-wider mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="150:117">min</span> </div><div class="flex flex-col items-center glass rounded-2xl py-3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="148:78"> <span id="cd-seg" class="font-['Outfit'] font-black text-2xl text-amber-400" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="149:98">--</span> <span class="text-[9px] text-[var(--text-secondary)] font-semibold uppercase tracking-wider mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="150:117">seg</span> </div> </div>
+          <script>(function(){const targetISO = "2026-06-11T19:00:00.000Z";
+
+            (function () {
+              const target = new Date(targetISO);
+              function update() {
+                const diff = target - Date.now();
+                if (diff <= 0) return;
+                const d = Math.floor(diff / 86400000);
+                const h = Math.floor((diff % 86400000) / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+                const el = id => document.getElementById('cd-' + id);
+                if (el('dias')) el('dias').textContent = String(d).padStart(2, '0');
+                if (el('hrs'))  el('hrs').textContent  = String(h).padStart(2, '0');
+                if (el('min'))  el('min').textContent  = String(m).padStart(2, '0');
+                if (el('seg'))  el('seg').textContent  = String(s).padStart(2, '0');
+              }
+              update();
+              setInterval(update, 1000);
+            })();
+          })();</script> </div> </section> <section class="mt-8 max-w-lg mx-auto" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="188:42"> <div class="flex items-center justify-between px-4 mb-4" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="189:62"> <h2 class="font-['Outfit'] font-bold text-lg text-[var(--text-primary)]" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="190:80"> ⏭️ Próximos Partidos </h2> <a href="/calendario" class="text-xs font-semibold text-amber-400 flex items-center gap-1" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="193:98">
+Ver todos
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="195:103"> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="196:12"></path> </svg> </a> </div> <div class="carousel-track" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="202:35"> <div class="carousel-item w-64" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="206:45"> <div class="match-card carousel-card p-4 h-full transition-all hover:border-amber-400/30 border border-transparent shadow" data-match-id="6f215b6d-b9b1-4035-b027-8f1161c43512" style="cursor: pointer;" onclick="window.openMatchDetailDrawer &#38;&#38; window.openMatchDetailDrawer('6f215b6d-b9b1-4035-b027-8f1161c43512')" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="210:108">  <div class="flex items-center justify-between gap-2" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="220:70"> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="221:74"> <img src="https://flagcdn.com/mx.svg" alt="México" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="222:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="225:79">México</span> </div> <div class="flex flex-col items-center px-2 match-score-container" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="228:86"> <div class="text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="246:48"> <p class="font-['Outfit'] font-bold text-base text-amber-400" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="247:87"> <time data-utc="2026-06-11T19:00:00.000Z" data-fmt="time" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="248:64">--:--</time> </p> <p class="text-[9px] text-[var(--text-secondary)] mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="250:83"> <time data-utc="2026-06-11T19:00:00.000Z" data-fmt="date-short" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="251:70">…</time> </p> </div> </div> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="258:74"> <img src="https://flagcdn.com/za.svg" alt="Sudáfrica" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="259:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="262:79">Sudáfrica</span> </div> </div> <div class="mt-3 flex items-center gap-1.5 text-[var(--text-secondary)]" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="266:90"> <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="267:120"> <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="268:22"></path> <circle cx="12" cy="11" r="3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="269:22"></circle> </svg> <span class="text-[10px] truncate" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="271:54">Ciudad de México</span> </div> </div> </div><div class="carousel-item w-64" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="206:45"> <div class="match-card carousel-card p-4 h-full transition-all hover:border-amber-400/30 border border-transparent shadow" data-match-id="59ec320f-e6eb-47c2-8b84-bf076e2ce837" style="cursor: pointer;" onclick="window.openMatchDetailDrawer &#38;&#38; window.openMatchDetailDrawer('59ec320f-e6eb-47c2-8b84-bf076e2ce837')" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="210:108">  <div class="flex items-center justify-between gap-2" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="220:70"> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="221:74"> <img src="https://flagcdn.com/kr.svg" alt="Corea del Sur" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="222:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="225:79">Corea del Sur</span> </div> <div class="flex flex-col items-center px-2 match-score-container" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="228:86"> <div class="text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="246:48"> <p class="font-['Outfit'] font-bold text-base text-amber-400" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="247:87"> <time data-utc="2026-06-12T02:00:00.000Z" data-fmt="time" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="248:64">--:--</time> </p> <p class="text-[9px] text-[var(--text-secondary)] mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="250:83"> <time data-utc="2026-06-12T02:00:00.000Z" data-fmt="date-short" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="251:70">…</time> </p> </div> </div> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="258:74"> <img src="https://flagcdn.com/cz.svg" alt="República Checa" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="259:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="262:79">República Checa</span> </div> </div> <div class="mt-3 flex items-center gap-1.5 text-[var(--text-secondary)]" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="266:90"> <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="267:120"> <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="268:22"></path> <circle cx="12" cy="11" r="3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="269:22"></circle> </svg> <span class="text-[10px] truncate" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="271:54">Guadalajara</span> </div> </div> </div><div class="carousel-item w-64" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="206:45"> <div class="match-card carousel-card p-4 h-full transition-all hover:border-amber-400/30 border border-transparent shadow" data-match-id="8e758c2e-c853-4ff1-bd5f-f86ee882be2f" style="cursor: pointer;" onclick="window.openMatchDetailDrawer &#38;&#38; window.openMatchDetailDrawer('8e758c2e-c853-4ff1-bd5f-f86ee882be2f')" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="210:108">  <div class="flex items-center justify-between gap-2" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="220:70"> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="221:74"> <img src="https://flagcdn.com/ca.svg" alt="Canadá" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="222:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="225:79">Canadá</span> </div> <div class="flex flex-col items-center px-2 match-score-container" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="228:86"> <div class="text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="246:48"> <p class="font-['Outfit'] font-bold text-base text-amber-400" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="247:87"> <time data-utc="2026-06-12T19:00:00.000Z" data-fmt="time" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="248:64">--:--</time> </p> <p class="text-[9px] text-[var(--text-secondary)] mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="250:83"> <time data-utc="2026-06-12T19:00:00.000Z" data-fmt="date-short" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="251:70">…</time> </p> </div> </div> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="258:74"> <img src="https://flagcdn.com/ba.svg" alt="Bosnia y Herzegovina" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="259:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="262:79">Bosnia y Herzegovina</span> </div> </div> <div class="mt-3 flex items-center gap-1.5 text-[var(--text-secondary)]" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="266:90"> <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="267:120"> <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="268:22"></path> <circle cx="12" cy="11" r="3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="269:22"></circle> </svg> <span class="text-[10px] truncate" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="271:54">Toronto</span> </div> </div> </div><div class="carousel-item w-64" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="206:45"> <div class="match-card carousel-card p-4 h-full transition-all hover:border-amber-400/30 border border-transparent shadow" data-match-id="8b3a63a0-1d52-4773-a0fa-ee46f218dcff" style="cursor: pointer;" onclick="window.openMatchDetailDrawer &#38;&#38; window.openMatchDetailDrawer('8b3a63a0-1d52-4773-a0fa-ee46f218dcff')" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="210:108">  <div class="flex items-center justify-between gap-2" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="220:70"> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="221:74"> <img src="https://flagcdn.com/us.svg" alt="EE. UU." class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="222:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="225:79">EE. UU.</span> </div> <div class="flex flex-col items-center px-2 match-score-container" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="228:86"> <div class="text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="246:48"> <p class="font-['Outfit'] font-bold text-base text-amber-400" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="247:87"> <time data-utc="2026-06-13T01:00:00.000Z" data-fmt="time" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="248:64">--:--</time> </p> <p class="text-[9px] text-[var(--text-secondary)] mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="250:83"> <time data-utc="2026-06-13T01:00:00.000Z" data-fmt="date-short" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="251:70">…</time> </p> </div> </div> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="258:74"> <img src="https://flagcdn.com/py.svg" alt="Paraguay" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="259:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="262:79">Paraguay</span> </div> </div> <div class="mt-3 flex items-center gap-1.5 text-[var(--text-secondary)]" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="266:90"> <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="267:120"> <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="268:22"></path> <circle cx="12" cy="11" r="3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="269:22"></circle> </svg> <span class="text-[10px] truncate" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="271:54">Los Angeles</span> </div> </div> </div><div class="carousel-item w-64" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="206:45"> <div class="match-card carousel-card p-4 h-full transition-all hover:border-amber-400/30 border border-transparent shadow" data-match-id="3c0ba027-2f27-4e6a-97d8-4d338d8afa7c" style="cursor: pointer;" onclick="window.openMatchDetailDrawer &#38;&#38; window.openMatchDetailDrawer('3c0ba027-2f27-4e6a-97d8-4d338d8afa7c')" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="210:108">  <div class="flex items-center justify-between gap-2" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="220:70"> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="221:74"> <img src="https://flagcdn.com/qa.svg" alt="Catar" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="222:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="225:79">Catar</span> </div> <div class="flex flex-col items-center px-2 match-score-container" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="228:86"> <div class="text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="246:48"> <p class="font-['Outfit'] font-bold text-base text-amber-400" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="247:87"> <time data-utc="2026-06-13T19:00:00.000Z" data-fmt="time" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="248:64">--:--</time> </p> <p class="text-[9px] text-[var(--text-secondary)] mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="250:83"> <time data-utc="2026-06-13T19:00:00.000Z" data-fmt="date-short" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="251:70">…</time> </p> </div> </div> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="258:74"> <img src="https://flagcdn.com/ch.svg" alt="Suiza" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="259:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="262:79">Suiza</span> </div> </div> <div class="mt-3 flex items-center gap-1.5 text-[var(--text-secondary)]" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="266:90"> <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="267:120"> <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="268:22"></path> <circle cx="12" cy="11" r="3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="269:22"></circle> </svg> <span class="text-[10px] truncate" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="271:54">Área de la Bahía de San Francisco</span> </div> </div> </div><div class="carousel-item w-64" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="206:45"> <div class="match-card carousel-card p-4 h-full transition-all hover:border-amber-400/30 border border-transparent shadow" data-match-id="d20c370d-0110-418f-9b29-380f399f055d" style="cursor: pointer;" onclick="window.openMatchDetailDrawer &#38;&#38; window.openMatchDetailDrawer('d20c370d-0110-418f-9b29-380f399f055d')" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="210:108">  <div class="flex items-center justify-between gap-2" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="220:70"> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="221:74"> <img src="https://flagcdn.com/br.svg" alt="Brasil" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="222:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="225:79">Brasil</span> </div> <div class="flex flex-col items-center px-2 match-score-container" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="228:86"> <div class="text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="246:48"> <p class="font-['Outfit'] font-bold text-base text-amber-400" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="247:87"> <time data-utc="2026-06-13T22:00:00.000Z" data-fmt="time" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="248:64">--:--</time> </p> <p class="text-[9px] text-[var(--text-secondary)] mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="250:83"> <time data-utc="2026-06-13T22:00:00.000Z" data-fmt="date-short" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="251:70">…</time> </p> </div> </div> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="258:74"> <img src="https://flagcdn.com/ma.svg" alt="Marruecos" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="259:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="262:79">Marruecos</span> </div> </div> <div class="mt-3 flex items-center gap-1.5 text-[var(--text-secondary)]" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="266:90"> <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="267:120"> <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="268:22"></path> <circle cx="12" cy="11" r="3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="269:22"></circle> </svg> <span class="text-[10px] truncate" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="271:54">Nueva York/Nueva Jersey</span> </div> </div> </div><div class="carousel-item w-64" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="206:45"> <div class="match-card carousel-card p-4 h-full transition-all hover:border-amber-400/30 border border-transparent shadow" data-match-id="7ef5ed49-7e6c-44bc-adb2-9ade59128173" style="cursor: pointer;" onclick="window.openMatchDetailDrawer &#38;&#38; window.openMatchDetailDrawer('7ef5ed49-7e6c-44bc-adb2-9ade59128173')" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="210:108">  <div class="flex items-center justify-between gap-2" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="220:70"> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="221:74"> <img src="https://flagcdn.com/ht.svg" alt="Haití" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="222:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="225:79">Haití</span> </div> <div class="flex flex-col items-center px-2 match-score-container" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="228:86"> <div class="text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="246:48"> <p class="font-['Outfit'] font-bold text-base text-amber-400" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="247:87"> <time data-utc="2026-06-14T01:00:00.000Z" data-fmt="time" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="248:64">--:--</time> </p> <p class="text-[9px] text-[var(--text-secondary)] mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="250:83"> <time data-utc="2026-06-14T01:00:00.000Z" data-fmt="date-short" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="251:70">…</time> </p> </div> </div> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="258:74"> <img src="https://flagcdn.com/gb-sct.svg" alt="Escocia" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="259:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="262:79">Escocia</span> </div> </div> <div class="mt-3 flex items-center gap-1.5 text-[var(--text-secondary)]" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="266:90"> <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="267:120"> <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="268:22"></path> <circle cx="12" cy="11" r="3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="269:22"></circle> </svg> <span class="text-[10px] truncate" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="271:54">Boston</span> </div> </div> </div><div class="carousel-item w-64" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="206:45"> <div class="match-card carousel-card p-4 h-full transition-all hover:border-amber-400/30 border border-transparent shadow" data-match-id="ea1f0598-4ee8-4b5b-92cb-752b81fe4a01" style="cursor: pointer;" onclick="window.openMatchDetailDrawer &#38;&#38; window.openMatchDetailDrawer('ea1f0598-4ee8-4b5b-92cb-752b81fe4a01')" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="210:108">  <div class="flex items-center justify-between gap-2" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="220:70"> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="221:74"> <img src="https://flagcdn.com/au.svg" alt="Australia" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="222:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="225:79">Australia</span> </div> <div class="flex flex-col items-center px-2 match-score-container" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="228:86"> <div class="text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="246:48"> <p class="font-['Outfit'] font-bold text-base text-amber-400" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="247:87"> <time data-utc="2026-06-14T04:00:00.000Z" data-fmt="time" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="248:64">--:--</time> </p> <p class="text-[9px] text-[var(--text-secondary)] mt-0.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="250:83"> <time data-utc="2026-06-14T04:00:00.000Z" data-fmt="date-short" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="251:70">…</time> </p> </div> </div> <div class="flex-1 flex flex-col items-center gap-1.5" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="258:74"> <img src="https://flagcdn.com/tr.svg" alt="Turquía" class="w-10 h-7 object-cover rounded shadow" onerror="this.style.display='none'" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="259:22"> <span class="text-xs font-bold text-center leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="262:79">Turquía</span> </div> </div> <div class="mt-3 flex items-center gap-1.5 text-[var(--text-secondary)]" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="266:90"> <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="267:120"> <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="268:22"></path> <circle cx="12" cy="11" r="3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="269:22"></circle> </svg> <span class="text-[10px] truncate" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="271:54">Vancouver</span> </div> </div> </div> </div> </section>  <section class="mt-8 px-4 max-w-lg mx-auto" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="286:47"> <div class="grid grid-cols-3 gap-3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="287:41"> <div class="glass rounded-2xl p-4 text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="288:54"> <p class="font-['Outfit'] font-black text-2xl gradient-text" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="289:70">104</p> <p class="text-[10px] text-[var(--text-secondary)] mt-1 font-semibold" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="290:80">PARTIDOS</p> </div> <div class="glass rounded-2xl p-4 text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="292:54"> <p class="font-['Outfit'] font-black text-2xl gradient-text" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="293:70">48</p> <p class="text-[10px] text-[var(--text-secondary)] mt-1 font-semibold" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="294:80">EQUIPOS</p> </div> <div class="glass rounded-2xl p-4 text-center" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="296:54"> <p class="font-['Outfit'] font-black text-2xl gradient-text" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="297:70">16</p> <p class="text-[10px] text-[var(--text-secondary)] mt-1 font-semibold" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="298:80">SEDES</p> </div> </div> </section>  <section class="mt-6 px-4 pb-4 max-w-lg mx-auto" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="304:52"> <h2 class="font-['Outfit'] font-bold text-lg mb-4" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="305:56">🌎 Países Sede</h2> <div class="grid grid-cols-3 gap-3" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="306:41"> <div class="glass rounded-2xl p-3 text-center hover:border-amber-400/30 transition-colors border border-transparent" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="312:126"> <span class="text-3xl" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="313:34">🇲🇽</span> <p class="text-xs font-bold mt-2 leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="314:59">México</p> <p class="text-[10px] text-[var(--text-secondary)] mt-1" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="315:68">3 sedes</p> </div><div class="glass rounded-2xl p-3 text-center hover:border-amber-400/30 transition-colors border border-transparent" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="312:126"> <span class="text-3xl" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="313:34">🇺🇸</span> <p class="text-xs font-bold mt-2 leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="314:59">Estados Unidos</p> <p class="text-[10px] text-[var(--text-secondary)] mt-1" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="315:68">11 sedes</p> </div><div class="glass rounded-2xl p-3 text-center hover:border-amber-400/30 transition-colors border border-transparent" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="312:126"> <span class="text-3xl" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="313:34">🇨🇦</span> <p class="text-xs font-bold mt-2 leading-tight" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="314:59">Canadá</p> <p class="text-[10px] text-[var(--text-secondary)] mt-1" data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/pages/index.astro" data-astro-source-loc="315:68">2 sedes</p> </div> </div> </section>  </main> <!-- ── Match Details Live Drawer ── --> <!-- ── Backdrop del Drawer ── --><div id="match-drawer-backdrop" class="fixed inset-0 z-[8500] bg-black/70 backdrop-blur-sm" style="display:none; opacity:0; transition: opacity 0.3s;" aria-hidden="true" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="7:2"></div> <!-- ── Panel del Drawer (Slide-Up) ── --> <div id="match-drawer-panel" class="fixed bottom-0 left-0 right-0 z-[8501] max-w-lg mx-auto rounded-t-[2.5rem] flex flex-col transition-transform duration-350 ease-out" style="--bg-primary: #0a0e1a; --bg-secondary: #111827; --text-primary: #f9fafb; --text-secondary: #9ca3af; --border-subtle: rgba(255, 255, 255, 0.08); background: var(--bg-primary); color: var(--text-primary); border-top: 1px solid var(--border-subtle); transform: translateY(100%); max-height: 85vh; min-height: 50vh;" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="15:328"> <!-- Tirador superior para indicar que se puede deslizar o cerrar --> <div class="w-full flex justify-center py-3 shrink-0" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="18:57"> <div class="w-12 h-1.5 rounded-full bg-gray-600/40" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="19:6"></div> </div> <!-- Botón cerrar (esquina derecha) --> <button id="match-drawer-close" class="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center transition-colors bg-white/5 border border-white/10 hover:bg-white/10 text-[var(--text-secondary)]" aria-label="Cerrar detalles" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="25:40"> <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="26:99"> <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="27:8"></path> </svg> </button> <!-- ── Contenedor de Carga (Spinner) ── --> <div id="drawer-loading" class="flex-1 flex flex-col items-center justify-center py-12 gap-3" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="32:97"> <svg class="w-10 h-10 animate-spin" style="color: #5314ff;" fill="none" viewBox="0 0 24 24" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="33:140"> <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="34:8"></circle> <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="35:8"></path> </svg> <p class="text-xs text-[var(--text-secondary)] font-medium" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="37:65">Cargando detalles del partido...</p> </div> <!-- ── Contenido Principal (Oculto al inicio) ── --> <div id="drawer-content" class="flex-1 flex flex-col overflow-hidden hidden" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="41:80"> <!-- ── CABECERA: Marcador y Estado ── --> <div class="px-6 pt-2 pb-5 border-b border-[var(--border-subtle)] shrink-0" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="44:81"> <!-- Indicador de Tiempo / Estado --> <div class="flex items-center justify-center gap-2 mb-4" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="47:64"> <span id="live-dot-indicator" class="live-dot hidden" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="48:10"></span> <span id="match-status-badge" class="text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider bg-white/5 border border-white/10 text-[var(--text-primary)]" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="49:177">
+PROGRAMADO
+</span> </div> <!-- Scoreboard --> <div class="flex items-center justify-between gap-4" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="55:60"> <!-- Local --> <div class="flex-1 flex flex-col items-center gap-2 text-center min-w-0" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="58:82"> <img id="team1-flag" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="w-14 h-9 object-cover rounded shadow-lg border border-white/10" alt="" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="59:12"> <span id="team1-name" class="font-black text-sm truncate w-full" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="60:76">Local</span> </div> <!-- Marcador Central --> <div class="flex flex-col items-center justify-center min-w-[7rem]" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="64:77"> <span id="scoreboard-text" class="font-['Outfit'] font-black text-4xl gradient-text select-none" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="65:108">
+0 - 0
+</span> <span id="penalties-score-text" class="text-xs font-black uppercase tracking-wider text-amber-500 mt-1 hidden" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="68:122">
+(0 - 0 Pen)
+</span> <span id="match-minute-counter" class="text-xs font-bold text-amber-500 mt-1.5 hidden animate-pulse" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="71:112">
+1'
+</span> </div> <!-- Visitante --> <div class="flex-1 flex flex-col items-center gap-2 text-center min-w-0" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="77:82"> <img id="team2-flag" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="w-14 h-9 object-cover rounded shadow-lg border border-white/10" alt="" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="78:12"> <span id="team2-name" class="font-black text-sm truncate w-full" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="79:76">Visitante</span> </div> </div> <!-- Sede del partido --> <div class="flex flex-col items-center justify-center gap-1.5 text-[var(--text-secondary)] mt-4 text-xs font-medium" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="85:124"> <div class="flex items-center justify-center gap-1.5" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="86:63"> <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="87:116"> <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="88:14"></path> <circle cx="12" cy="11" r="3" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="89:14"></circle> </svg> <span id="match-venue-name" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="91:39">Estadio</span> </div> <div class="flex items-center justify-center gap-1.5 opacity-80" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="93:74"> <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="94:116"> <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="95:14"></rect> <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="96:14"></line> <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="97:14"></line> <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="98:14"></line> </svg> <span id="match-date-time" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="100:38">Fecha del partido</span> </div> </div> </div> <!-- ── LÍNEA DE TIEMPO (Timeline Scrollable) ── --> <div class="flex-1 overflow-y-auto px-6 py-6 custom-scrollbar relative" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="107:77"> <h3 class="font-['Outfit'] font-bold text-sm text-[var(--text-primary)] mb-5 flex items-center gap-2" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="108:109"> <span data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="109:15">⏱️ Transcurrir del Partido</span> <div id="reconnecting-badge" class="hidden text-[10px] bg-amber-500/15 text-amber-400 px-2 py-0.5 rounded border border-amber-500/30 animate-pulse font-normal" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="110:169">Reconectando...</div> </h3> <!-- Contenedor del Timeline --> <div class="relative pl-7 border-l-2 border-white/5 space-y-6" id="timeline-container" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="114:94"> <!-- Eventos inyectados dinámicamente por JS --> </div> <!-- Empty state / Sin eventos --> <div id="timeline-empty-state" class="flex flex-col items-center justify-center py-8 text-center hidden" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="119:112"> <span class="text-3xl mb-2" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="120:37">⚽</span> <p class="text-xs text-[var(--text-secondary)] font-medium" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="121:69">Aún no se han registrado eventos en este partido.</p> </div> </div> </div> <!-- Safe Area Bottom --> <div class="h-safe-bottom shrink-0" style="height: max(1.5rem, env(safe-area-inset-bottom, 1.5rem));" data-astro-cid-lj52qwkr data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/components/MatchDetailDrawer.astro" data-astro-source-loc="128:4"></div> </div>  <!-- ── Script cliente: Gestión de drawer y Supabase Realtime ── --> <script type="module" src="/src/components/MatchDetailDrawer.astro?astro&type=script&index=0&lang.ts"></script> <!-- ── Script: Detección de partido en vivo ── --> <script>(function(){const kickoffISOs = ["2026-06-11T19:00:00.000Z","2026-06-12T02:00:00.000Z","2026-06-12T19:00:00.000Z","2026-06-13T01:00:00.000Z","2026-06-13T19:00:00.000Z","2026-06-13T22:00:00.000Z","2026-06-14T01:00:00.000Z","2026-06-14T04:00:00.000Z","2026-06-14T17:00:00.000Z","2026-06-14T20:00:00.000Z","2026-06-14T23:00:00.000Z","2026-06-15T02:00:00.000Z","2026-06-15T16:00:00.000Z","2026-06-15T19:00:00.000Z","2026-06-15T22:00:00.000Z","2026-06-16T01:00:00.000Z","2026-06-16T19:00:00.000Z","2026-06-16T22:00:00.000Z","2026-06-17T01:00:00.000Z","2026-06-17T04:00:00.000Z","2026-06-17T17:00:00.000Z","2026-06-17T20:00:00.000Z","2026-06-17T23:00:00.000Z","2026-06-18T02:00:00.000Z","2026-06-18T16:00:00.000Z","2026-06-18T19:00:00.000Z","2026-06-18T22:00:00.000Z","2026-06-19T01:00:00.000Z","2026-06-19T19:00:00.000Z","2026-06-19T22:00:00.000Z","2026-06-20T01:00:00.000Z","2026-06-20T04:00:00.000Z","2026-06-20T17:00:00.000Z","2026-06-20T20:00:00.000Z","2026-06-21T00:00:00.000Z","2026-06-21T04:00:00.000Z","2026-06-21T16:00:00.000Z","2026-06-21T19:00:00.000Z","2026-06-21T22:00:00.000Z","2026-06-22T01:00:00.000Z","2026-06-22T17:00:00.000Z","2026-06-22T21:00:00.000Z","2026-06-23T00:00:00.000Z","2026-06-23T03:00:00.000Z","2026-06-23T17:00:00.000Z","2026-06-23T20:00:00.000Z","2026-06-23T23:00:00.000Z","2026-06-24T02:00:00.000Z","2026-06-24T19:00:00.000Z","2026-06-24T19:00:00.000Z","2026-06-24T22:00:00.000Z","2026-06-24T22:00:00.000Z","2026-06-25T01:00:00.000Z","2026-06-25T01:00:00.000Z","2026-06-25T20:00:00.000Z","2026-06-25T20:00:00.000Z","2026-06-25T23:00:00.000Z","2026-06-25T23:00:00.000Z","2026-06-26T02:00:00.000Z","2026-06-26T02:00:00.000Z","2026-06-26T19:00:00.000Z","2026-06-26T19:00:00.000Z","2026-06-27T00:00:00.000Z","2026-06-27T00:00:00.000Z","2026-06-27T03:00:00.000Z","2026-06-27T03:00:00.000Z","2026-06-27T21:00:00.000Z","2026-06-27T21:00:00.000Z","2026-06-27T23:30:00.000Z","2026-06-27T23:30:00.000Z","2026-06-28T02:00:00.000Z","2026-06-28T02:00:00.000Z","2026-06-28T19:00:00.000Z","2026-06-29T17:00:00.000Z","2026-06-29T20:30:00.000Z","2026-06-30T01:00:00.000Z","2026-06-30T17:00:00.000Z","2026-06-30T21:00:00.000Z","2026-07-01T01:00:00.000Z","2026-07-01T16:00:00.000Z","2026-07-01T20:00:00.000Z","2026-07-02T00:00:00.000Z","2026-07-02T19:00:00.000Z","2026-07-02T23:00:00.000Z","2026-07-03T03:00:00.000Z","2026-07-03T18:00:00.000Z","2026-07-03T22:00:00.000Z","2026-07-04T01:30:00.000Z","2026-07-04T17:00:00.000Z","2026-07-04T21:00:00.000Z","2026-07-05T20:00:00.000Z","2026-07-06T00:00:00.000Z","2026-07-06T19:00:00.000Z","2026-07-07T00:00:00.000Z","2026-07-07T16:00:00.000Z","2026-07-07T20:00:00.000Z","2026-07-09T20:00:00.000Z","2026-07-10T19:00:00.000Z","2026-07-11T21:00:00.000Z","2026-07-12T01:00:00.000Z","2026-07-14T19:00:00.000Z","2026-07-15T19:00:00.000Z","2026-07-18T21:00:00.000Z","2026-07-19T19:00:00.000Z"];
+
+      (function () {
+        var MATCH_DURATION_MS = 110 * 60 * 1000; // 110 minutos
+
+        function checkLive() {
+          var now = Date.now();
+          var isLive = kickoffISOs.some(function (iso) {
+            var kick = new Date(iso).getTime();
+            return now >= kick && now <= kick + MATCH_DURATION_MS;
+          });
+          var badge = document.getElementById('live-badge');
+          if (!badge) return;
+          if (isLive) {
+            badge.classList.remove('hidden');
+          } else {
+            badge.classList.add('hidden');
+          }
+        }
+
+        checkLive();
+        setInterval(checkLive, 60000); // re-evalúa cada minuto
+      })();
+    })();</script> <!-- ── Script: Hora local del usuario ── --> <!--
+      Todos los elementos con data-utc="<ISO>" se convierten al timezone del navegador.
+      data-fmt puede ser: "time" | "date" | "datetime" (default: "time")
+    --> <script>
+      (function () {
+        function formatLocal(isoStr, fmt) {
+          try {
+            const d = new Date(isoStr);
+            if (isNaN(d)) return null;
+            if (fmt === 'date-full') {
+              const str = d.toLocaleDateString('es', {
+                weekday: 'long', day: 'numeric', month: 'long'
+              });
+              return str.charAt(0).toUpperCase() + str.slice(1);
+            }
+            if (fmt === 'date') {
+              return d.toLocaleDateString('es', {
+                weekday: 'short', day: 'numeric', month: 'short'
+              });
+            }
+            if (fmt === 'date-short') {
+              return d.toLocaleDateString('es', {
+                day: 'numeric', month: 'short'
+              });
+            }
+            if (fmt === 'datetime') {
+              return d.toLocaleDateString('es', {
+                weekday: 'short', day: 'numeric', month: 'short'
+              }) + ' · ' + d.toLocaleTimeString('es', {
+                hour: 'numeric', minute: '2-digit', hour12: true
+              });
+            }
+            // default: "time"
+            return d.toLocaleTimeString('es', {
+              hour: 'numeric', minute: '2-digit', hour12: true
+            });
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function applyLocalTimes() {
+          var counts = {};
+          var elements = Array.from(document.querySelectorAll('[data-utc]'));
+          
+          // First pass: Calculate local strings and counts for date-full elements
+          elements.forEach(function (el) {
+            var iso = el.getAttribute('data-utc');
+            var fmt = el.getAttribute('data-fmt') || 'time';
+            var text = formatLocal(iso, fmt);
+            el.__localText = text; // Cache it
+            if (fmt === 'date-full' && text) {
+              counts[text] = (counts[text] || 0) + 1;
+            }
+          });
+
+          var lastDateText = null;
+
+          // Second pass: Apply logic
+          elements.forEach(function (el) {
+            var fmt = el.getAttribute('data-fmt') || 'time';
+            var text = el.__localText;
+            if (text) {
+              el.textContent = text;
+              if (fmt === 'date-full') {
+                var headerDiv = el.closest('.date-header-container');
+                if (text === lastDateText) {
+                  if (headerDiv) headerDiv.style.display = 'none';
+                } else {
+                  if (headerDiv) {
+                    headerDiv.style.display = 'flex';
+                    var countSpan = headerDiv.querySelector('.match-count');
+                    if (countSpan) {
+                      countSpan.textContent = counts[text] + (counts[text] === 1 ? ' partido' : ' partidos');
+                    }
+                  }
+                  lastDateText = text;
+                }
+              }
+            }
+          });
+        }
+
+        // Ejecutar inmediatamente si el DOM ya cargó, si no esperar
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', applyLocalTimes);
+        } else {
+          applyLocalTimes();
+        }
+      })();
+    </script> <!-- ── Script: Drag-to-scroll en carruseles (desktop) ── --> <script>
+      (function () {
+        function initCarousel(el) {
+          var isDown  = false;
+          var startX  = 0;
+          var scrollL = 0;
+          var moved   = false;
+
+          el.style.cursor = 'grab';
+
+          el.addEventListener('mousedown', function (e) {
+            isDown  = true;
+            moved   = false;
+            startX  = e.pageX - el.offsetLeft;
+            scrollL = el.scrollLeft;
+            el.style.cursor = 'grabbing';
+            el.style.userSelect = 'none';
+          });
+
+          el.addEventListener('mouseleave', function () {
+            isDown = false;
+            el.style.cursor = 'grab';
+          });
+
+          el.addEventListener('mouseup', function () {
+            isDown = false;
+            el.style.cursor = 'grab';
+            el.style.userSelect = '';
+          });
+
+          el.addEventListener('mousemove', function (e) {
+            if (!isDown) return;
+            e.preventDefault();
+            var x    = e.pageX - el.offsetLeft;
+            var walk = (x - startX) * 1.2;
+            if (Math.abs(walk) > 4) moved = true;
+            el.scrollLeft = scrollL - walk;
+          });
+
+          // Evitar que un drag dispare clicks en los hijos
+          el.addEventListener('click', function (e) {
+            if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+          }, true);
+        }
+
+        function setup() {
+          document.querySelectorAll('.carousel-track').forEach(initCarousel);
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', setup);
+        } else {
+          setup();
+        }
+      })();
+    </script> <!-- ── Bottom Navigation ── --> <nav class="app-nav fixed bottom-0 left-0 right-0 z-50 bottom-nav" id="bottom-nav" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="715:88"> <div class="flex items-center justify-around h-16 max-w-lg mx-auto px-2" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="716:80"> <a href="/" id="nav-home" class="app-nav-item flex flex-col items-center gap-0.5 px-4 py-2 rounded-xl transition-all duration-200 nav-active" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="719:158"> <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="720:112"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="721:14"></path> </svg> <span class="nav-label text-[10px] font-semibold" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="723:61">Inicio</span> </a> <a href="/grupos" id="nav-grupos" class="app-nav-item flex flex-col items-center gap-0.5 px-4 py-2 rounded-xl transition-all duration-200 " data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="727:160"> <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="728:112"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18M10 3v18M14 3v18" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="729:14"></path> </svg> <span class="nav-label text-[10px] font-semibold" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="731:61">Grupos</span> </a> <a href="/estadios" id="nav-estadios" class="app-nav-item flex flex-col items-center gap-0.5 px-4 py-2 rounded-xl transition-all duration-200 " data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="735:162"> <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="736:112"> <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="737:14"></path> <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="738:14"></path> </svg> <span class="nav-label text-[10px] font-semibold" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="740:61">Estadios</span> </a> <a href="/calendario" id="nav-calendario" class="app-nav-item flex flex-col items-center gap-0.5 px-4 py-2 rounded-xl transition-all duration-200 " data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="744:164"> <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="745:112"> <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="746:14"></rect> <line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="747:14"></line> <line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="748:14"></line> <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="749:14"></line> </svg> <span class="nav-label text-[10px] font-semibold" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="751:61">Calendario</span> </a> <a href="/quiniela" id="nav-quiniela" class="app-nav-item flex flex-col items-center gap-0.5 px-4 py-2 rounded-xl transition-all duration-200 " data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="756:164"> <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="757:114"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="758:16"></path> </svg> <span class="nav-label text-[10px] font-semibold" data-astro-cid-sckkx6r4 data-astro-source-file="/Users/pauloconde/Development/mundial-template/src/layouts/Layout.astro" data-astro-source-loc="760:63">Quiniela</span> </a> </div> </nav> <!-- ── Script: Drawer + PWA Install ── --> <script>
+      (function () {
+        var panel    = document.getElementById('drawer-panel');
+        var backdrop = document.getElementById('drawer-backdrop');
+        var btnOpen  = document.getElementById('drawer-open');
+        var btnClose = document.getElementById('drawer-close');
+        var deferredPrompt = null;
+
+        function openDrawer() {
+          backdrop.style.display = 'block';
+          requestAnimationFrame(function () {
+            backdrop.style.opacity = '1';
+            panel.style.transform  = 'translateX(0)';
+          });
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+          backdrop.style.opacity = '0';
+          panel.style.transform  = 'translateX(100%)';
+          setTimeout(function () {
+            backdrop.style.display = 'none';
+            document.body.style.overflow = '';
+          }, 350);
+        }
+
+        btnOpen.addEventListener('click', openDrawer);
+        btnClose.addEventListener('click', closeDrawer);
+        backdrop.addEventListener('click', closeDrawer);
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') closeDrawer();
+        });
+
+        // ── PWA Install: Android ──
+        var section = document.getElementById('install-android');
+        var headerBtn = document.getElementById('header-install-btn');
+        
+        // Mostrar SOLO si el navegador permite la instalación automática
+        if (window.deferredPrompt) {
+          if (section) section.style.display = 'block';
+          if (headerBtn) headerBtn.style.display = 'flex';
+        }
+
+        function handleInstallClick() {
+          if (!window.deferredPrompt) return;
+          window.deferredPrompt.prompt();
+          window.deferredPrompt.userChoice.then(function () {
+            window.deferredPrompt = null;
+            if (section) section.style.display = 'none';
+            if (headerBtn) headerBtn.style.display = 'none';
+          });
+        }
+
+        var installBtn = document.getElementById('install-btn');
+        if (installBtn) installBtn.addEventListener('click', handleInstallClick);
+        if (headerBtn) headerBtn.addEventListener('click', handleInstallClick);
+
+        // ── PWA Install: iOS (Safari) ──
+        var isIOS    = /iphone|ipad|ipod/i.test(navigator.userAgent);
+        var isSafari = /safari/i.test(navigator.userAgent) && !/chrome/i.test(navigator.userAgent);
+        var isStandalone = ('standalone' in window.navigator) && window.navigator.standalone;
+        
+        var iosModalBackdrop = document.getElementById('ios-modal-backdrop');
+        var iosModalPanel = document.getElementById('ios-modal-panel');
+        var iosModalClose = document.getElementById('ios-modal-close');
+
+        function openIosModal() {
+          if (!iosModalBackdrop) return;
+          iosModalBackdrop.style.display = 'flex';
+          requestAnimationFrame(function () {
+            iosModalBackdrop.style.opacity = '1';
+            iosModalPanel.style.transform = 'scale(1)';
+          });
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeIosModal() {
+          if (!iosModalBackdrop) return;
+          iosModalBackdrop.style.opacity = '0';
+          iosModalPanel.style.transform = 'scale(0.95)';
+          setTimeout(function () {
+            iosModalBackdrop.style.display = 'none';
+            document.body.style.overflow = '';
+          }, 300);
+        }
+
+        if (iosModalClose) iosModalClose.addEventListener('click', closeIosModal);
+        if (iosModalBackdrop) {
+          iosModalBackdrop.addEventListener('click', function(e) {
+            if (e.target === iosModalBackdrop) closeIosModal();
+          });
+        }
+
+        if (isIOS && isSafari && !isStandalone) {
+          var iosSection = document.getElementById('install-ios');
+          if (iosSection) iosSection.style.display = 'block';
+          
+          if (headerBtn) {
+            headerBtn.style.display = 'flex';
+            headerBtn.removeEventListener('click', handleInstallClick);
+            headerBtn.addEventListener('click', openIosModal);
+          }
+        }
+      })();
+    </script> <!-- ── Script cliente: Actualización global de tarjetas en tiempo real (Supabase) ── --> <script type="module" src="/src/layouts/Layout.astro?astro&type=script&index=0&lang.ts"></script> </body> </html>

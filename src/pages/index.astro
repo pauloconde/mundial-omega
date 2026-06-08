@@ -65,7 +65,10 @@ const nextMatchUTC = nextMatch ? getMatchUTC(nextMatch) : null;
         </div>
 
         <!-- Tarjeta del partido -->
-        <div class="glass rounded-3xl p-6 slide-up">
+        <div class="match-card hero-card glass rounded-3xl p-6 slide-up transition-all hover:border-amber-400/30 border border-transparent shadow-lg"
+             data-match-id={nextMatch.id}
+             style="cursor: pointer;"
+             onclick={`window.openMatchDetailDrawer && window.openMatchDetailDrawer('${nextMatch.id}')`}>
           <div class="flex items-center justify-between gap-4">
 
             <!-- Equipo 1 -->
@@ -80,11 +83,23 @@ const nextMatchUTC = nextMatch ? getMatchUTC(nextMatch) : null;
             </div>
 
             <!-- Centro: marcador o hora -->
-            <div class="flex flex-col items-center gap-1 px-4">
-              {hasScore(nextMatch) ? (
-                <span class="font-['Outfit'] font-black text-3xl gradient-text">
-                  {getScoreString(nextMatch)}
-                </span>
+            <div class="flex flex-col items-center gap-1 px-4 match-score-container">
+              {nextMatch.estado === 'en_curso' || nextMatch.estado === 'finalizado' ? (
+                <>
+                  <span class="font-['Outfit'] font-black text-3xl gradient-text">
+                    {nextMatch.score?.ft ? `${nextMatch.score.ft[0]} - ${nextMatch.score.ft[1]}` : ''}
+                  </span>
+                  {nextMatch.penales_team1 !== null && nextMatch.penales_team2 !== null && (
+                    <span class="text-xs font-black text-amber-500 uppercase tracking-widest mt-0.5">
+                      ({nextMatch.penales_team1} - {nextMatch.penales_team2} Pen)
+                    </span>
+                  )}
+                  {nextMatch.estado === 'en_curso' && (
+                    <span class="text-xs font-bold text-amber-500 animate-pulse mt-1">
+                      {(nextMatch.minuto_actual ?? 0) > 120 ? 'Penales' : `${nextMatch.minuto_actual}'`}
+                    </span>
+                  )}
+                </>
               ) : (
                 <div class="text-center">
                   <!-- Hora local: el script del layout la convierte -->
@@ -124,9 +139,14 @@ const nextMatchUTC = nextMatch ? getMatchUTC(nextMatch) : null;
         <!-- Cuenta regresiva (animada por JS) -->
         {nextMatchUTC && !hasScore(nextMatch) && (
           <div class="mt-4 grid grid-cols-4 gap-2">
-            {['días', 'hrs', 'min', 'seg'].map(label => (
+            {[
+              { id: 'dias', label: 'días' },
+              { id: 'hrs', label: 'hrs' },
+              { id: 'min', label: 'min' },
+              { id: 'seg', label: 'seg' }
+            ].map(({ id, label }) => (
               <div class="flex flex-col items-center glass rounded-2xl py-3">
-                <span id={`cd-${label}`} class="font-['Outfit'] font-black text-2xl text-amber-400">--</span>
+                <span id={`cd-${id}`} class="font-['Outfit'] font-black text-2xl text-amber-400">--</span>
                 <span class="text-[9px] text-[var(--text-secondary)] font-semibold uppercase tracking-wider mt-0.5">{label}</span>
               </div>
             ))}
@@ -142,7 +162,7 @@ const nextMatchUTC = nextMatch ? getMatchUTC(nextMatch) : null;
                 const m = Math.floor((diff % 3600000) / 60000);
                 const s = Math.floor((diff % 60000) / 1000);
                 const el = id => document.getElementById('cd-' + id);
-                if (el('días')) el('días').textContent = String(d).padStart(2, '0');
+                if (el('dias')) el('dias').textContent = String(d).padStart(2, '0');
                 if (el('hrs'))  el('hrs').textContent  = String(h).padStart(2, '0');
                 if (el('min'))  el('min').textContent  = String(m).padStart(2, '0');
                 if (el('seg'))  el('seg').textContent  = String(s).padStart(2, '0');
@@ -184,7 +204,10 @@ const nextMatchUTC = nextMatch ? getMatchUTC(nextMatch) : null;
           const utc = getMatchUTC(match);
           return (
             <div class="carousel-item w-64">
-              <div class="match-card p-4 h-full">
+              <div class="match-card carousel-card p-4 h-full transition-all hover:border-amber-400/30 border border-transparent shadow"
+                   data-match-id={match.id}
+                   style="cursor: pointer;"
+                   onclick={`window.openMatchDetailDrawer && window.openMatchDetailDrawer('${match.id}')`}>
                 {match.group && (
                   <div class="mb-3">
                     <span class="text-[10px] font-bold px-2 py-0.5 rounded-full"
@@ -202,9 +225,23 @@ const nextMatchUTC = nextMatch ? getMatchUTC(nextMatch) : null;
                     <span class="text-xs font-bold text-center leading-tight">{translateTeam(match.team1)}</span>
                   </div>
 
-                  <div class="flex flex-col items-center px-2">
-                    {hasScore(match) ? (
-                      <span class="font-['Outfit'] font-black text-xl gradient-text">{getScoreString(match)}</span>
+                  <div class="flex flex-col items-center px-2 match-score-container">
+                    {match.estado === 'en_curso' || match.estado === 'finalizado' ? (
+                      <>
+                        <span class="font-['Outfit'] font-black text-xl gradient-text">
+                          {match.score?.ft ? `${match.score.ft[0]} - ${match.score.ft[1]}` : ''}
+                        </span>
+                        {match.penales_team1 !== null && match.penales_team2 !== null && (
+                          <span class="text-[9px] font-black text-amber-500 uppercase tracking-widest mt-0.5 whitespace-nowrap">
+                            ({match.penales_team1} - {match.penales_team2} Pen)
+                          </span>
+                        )}
+                        {match.estado === 'en_curso' && (
+                          <span class="text-[10px] font-bold text-amber-500 animate-pulse mt-0.5">
+                            {(match.minuto_actual ?? 0) > 120 ? 'Penales' : `${match.minuto_actual}'`}
+                          </span>
+                        )}
+                      </>
                     ) : (
                       <div class="text-center">
                         <p class="font-['Outfit'] font-bold text-base text-amber-400">
@@ -216,6 +253,7 @@ const nextMatchUTC = nextMatch ? getMatchUTC(nextMatch) : null;
                       </div>
                     )}
                   </div>
+
 
                   <div class="flex-1 flex flex-col items-center gap-1.5">
                     <img src={getFlagUrl(match.team2)} alt={translateTeam(match.team2)}

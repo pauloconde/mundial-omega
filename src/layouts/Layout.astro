@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { fetchWorldCupData, getMatchUTC } from '../lib/worldcup';
 import sponsorInfo from '../data/sponsor.json';
 import InstallIOSGuide from '../components/InstallIOSGuide.astro';
+import MatchDetailDrawer from '../components/MatchDetailDrawer.astro';
 // @ts-ignore
 import { pwaInfo } from 'virtual:pwa-info';
 
@@ -530,6 +531,9 @@ const kickoffISOs = data.matches.map(m => getMatchUTC(m));
       <slot />
     </main>
 
+    <!-- ── Match Details Live Drawer ── -->
+    <MatchDetailDrawer />
+
     <!-- ── Script: Detección de partido en vivo ── -->
     <script define:vars={{ kickoffISOs }}>
       (function () {
@@ -639,6 +643,8 @@ const kickoffISOs = data.matches.map(m => getMatchUTC(m));
             }
           });
         }
+
+        window.applyLocalTimes = applyLocalTimes;
 
         // Ejecutar inmediatamente si el DOM ya cargó, si no esperar
         if (document.readyState === 'loading') {
@@ -865,6 +871,240 @@ const kickoffISOs = data.matches.map(m => getMatchUTC(m));
           }
         }
       })();
+    </script>
+
+    <!-- ── Script cliente: Actualización global de tarjetas en tiempo real (Supabase) ── -->
+    <script>
+      import { supabase } from '../lib/supabase';
+      import { translateTeam, getFlagUrl } from '../lib/worldcup';
+
+      function updateCard(card: HTMLElement, match: any) {
+        const isHero = card.classList.contains('hero-card');
+        const isCarousel = card.classList.contains('carousel-card');
+        
+        const statusContainer = card.querySelector('.match-status-container');
+        const scoreContainer = card.querySelector('.match-score-container');
+
+        // 1. Actualizar Nombres de Equipos y Banderas
+        const t1Span = card.querySelector('.team1-name-span');
+        const t2Span = card.querySelector('.team2-name-span');
+        
+        const imgs = card.querySelectorAll('img');
+        let t1Img: HTMLImageElement | null = null;
+        let t2Img: HTMLImageElement | null = null;
+        
+        if (imgs.length >= 2) {
+          t1Img = imgs[0] as HTMLImageElement;
+          t2Img = imgs[1] as HTMLImageElement;
+        }
+
+        const t1Name = translateTeam(match.team1_id);
+        const t2Name = translateTeam(match.team2_id);
+
+        if (t1Span) t1Span.textContent = t1Name;
+        if (t2Span) t2Span.textContent = t2Name;
+
+        if (t1Img) {
+          t1Img.src = getFlagUrl(match.team1_id);
+          t1Img.alt = t1Name;
+          if (t1Img.src.startsWith('data:')) {
+            t1Img.style.display = 'none';
+          } else {
+            t1Img.style.display = '';
+          }
+        }
+        if (t2Img) {
+          t2Img.src = getFlagUrl(match.team2_id);
+          t2Img.alt = t2Name;
+          if (t2Img.src.startsWith('data:')) {
+            t2Img.style.display = 'none';
+          } else {
+            t2Img.style.display = '';
+          }
+        }
+
+        // 2. Actualizar Scoreboard
+        if (scoreContainer) {
+          if (match.estado === 'programado') {
+            scoreContainer.innerHTML = `<span class="text-xs text-gray-600 font-bold">vs</span>`;
+          } else {
+            let scoreHtml = `<span class="font-['Outfit'] font-black text-xl ${isHero ? 'text-3xl' : ''} gradient-text">${match.goles_team1} - ${match.goles_team2}</span>`;
+            if (match.penales_team1 !== null && match.penales_team2 !== null) {
+              scoreHtml += `
+                <span class="block ${isHero ? 'text-xs' : 'text-[9px]'} font-black text-amber-500 uppercase tracking-widest mt-0.5 whitespace-nowrap">
+                  (${match.penales_team1} - ${match.penales_team2} Pen)
+                </span>
+              `;
+            }
+            
+            if (!statusContainer || isHero || isCarousel) {
+              if (match.estado === 'en_curso') {
+                const min = match.minuto_actual || 0;
+                const minText = min > 120 ? 'Penales' : `${min}'`;
+                scoreHtml += `
+                  <span class="text-[10px] font-bold text-amber-500 animate-pulse mt-0.5">
+                    ${minText}
+                  </span>
+                `;
+              }
+            }
+            scoreContainer.innerHTML = scoreHtml;
+          }
+        }
+
+        // 3. Actualizar Estado / Cronómetro
+        if (statusContainer) {
+          const groupText = statusContainer.querySelector('.match-group-text');
+          const numText = statusContainer.querySelector('.match-num-text');
+
+          let statusHtml = '';
+          if (match.estado === 'en_curso') {
+            const min = match.minuto_actual || 0;
+            if (min > 120) {
+              statusHtml = `
+                <span class="text-[8px] font-bold px-1.5 py-0.5 rounded-full inline-block animate-pulse"
+                      style="background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3);">
+                  PEN
+                </span>
+              `;
+            } else {
+              statusHtml = `
+                <span class="text-xs font-bold text-amber-500 animate-pulse">
+                  ${min}'
+                </span>
+              `;
+            }
+          } else if (match.estado === 'finalizado') {
+            statusHtml = `
+              <div class="flex flex-col items-center gap-1">
+                <span class="text-[8px] font-bold px-1.5 py-0.5 rounded-full inline-block"
+                      style="background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3);">
+                  TC
+                </span>
+                ${match.penales_team1 !== null && match.penales_team2 !== null ? `
+                  <span class="text-[8px] font-bold px-1.5 py-0.5 rounded-full inline-block animate-pulse"
+                        style="background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3);">
+                    PEN
+                  </span>
+                ` : ''}
+              </div>
+            `;
+          } else {
+            // Programado: generar el elemento de hora local a partir de la fecha de inicio del partido
+            if (match.fecha_inicio_utc) {
+              statusHtml = `
+                <p class="font-['Outfit'] font-bold text-sm text-[var(--text-primary)]">
+                  <time data-utc="${match.fecha_inicio_utc}" data-fmt="time">--:--</time>
+                </p>
+              `;
+            } else {
+              const timeEl = statusContainer.querySelector('time');
+              if (timeEl) {
+                statusHtml = timeEl.outerHTML;
+              } else {
+                statusHtml = `<span class="text-xs font-bold text-[var(--text-secondary)]">--</span>`;
+              }
+            }
+          }
+
+          statusContainer.innerHTML = '';
+          const wrapper = document.createElement('div');
+          wrapper.innerHTML = statusHtml;
+          statusContainer.appendChild(wrapper.firstElementChild || wrapper);
+
+          if (groupText) statusContainer.appendChild(groupText);
+          if (numText) statusContainer.appendChild(numText);
+        }
+
+        // 4. Resaltar Ganador
+        if (t1Span && t2Span) {
+          if (match.estado === 'en_curso' || match.estado === 'finalizado') {
+            const g1 = match.goles_team1;
+            const g2 = match.goles_team2;
+            const p1 = match.penales_team1;
+            const p2 = match.penales_team2;
+
+            const t1Wins = g1 > g2 || (g1 === g2 && p1 !== null && p2 !== null && p1 > p2);
+            const t2Wins = g2 > g1 || (g1 === g2 && p1 !== null && p2 !== null && p2 > p1);
+
+            if (t1Wins) {
+              t1Span.classList.add('text-[var(--text-primary)]');
+              t1Span.classList.remove('text-[var(--text-secondary)]');
+              t2Span.classList.add('text-[var(--text-secondary)]');
+              t2Span.classList.remove('text-[var(--text-primary)]');
+            } else if (t2Wins) {
+              t2Span.classList.add('text-[var(--text-primary)]');
+              t2Span.classList.remove('text-[var(--text-secondary)]');
+              t1Span.classList.add('text-[var(--text-secondary)]');
+              t1Span.classList.remove('text-[var(--text-primary)]');
+            } else {
+              t1Span.classList.add('text-[var(--text-secondary)]');
+              t1Span.classList.remove('text-[var(--text-primary)]');
+              t2Span.classList.add('text-[var(--text-secondary)]');
+              t2Span.classList.remove('text-[var(--text-primary)]');
+            }
+          } else {
+            t1Span.classList.add('text-[var(--text-secondary)]');
+            t1Span.classList.remove('text-[var(--text-primary)]');
+            t2Span.classList.add('text-[var(--text-secondary)]');
+            t2Span.classList.remove('text-[var(--text-primary)]');
+          }
+        }
+      }
+
+      // Suscripción Realtime a cambios de partidos
+      supabase
+        .channel('global-match-cards-tracker')
+        .on('postgres_changes', {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'partidos'
+        }, (payload: any) => {
+          const match = payload.new;
+          console.log('Global match update received:', match);
+
+          const cards = document.querySelectorAll(`[data-match-id="${match.id}"]`);
+          cards.forEach(card => {
+            updateCard(card as HTMLElement, match);
+          });
+
+          // Formatear las horas locales de los elementos recién creados/actualizados
+          if ((window as any).applyLocalTimes) {
+            (window as any).applyLocalTimes();
+          }
+        })
+        .subscribe();
+
+      // Sincronización inicial al cargar para evitar datos estáticos obsoletos (SSG)
+      async function syncMatchCardsWithDatabase() {
+        try {
+          const { data: dbMatches, error } = await supabase
+            .from('partidos')
+            .select('*');
+          
+          if (error) throw error;
+          
+          dbMatches.forEach((match: any) => {
+            const cards = document.querySelectorAll(`[data-match-id="${match.id}"]`);
+            cards.forEach(card => {
+              updateCard(card as HTMLElement, match);
+            });
+          });
+
+          // Formatear las horas locales
+          if ((window as any).applyLocalTimes) {
+            (window as any).applyLocalTimes();
+          }
+        } catch (err) {
+          console.error('[Layout] Error syncing match cards with database:', err);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', syncMatchCardsWithDatabase);
+      } else {
+        syncMatchCardsWithDatabase();
+      }
     </script>
 
   </body>
