@@ -1211,6 +1211,71 @@ const kickoffISOs = data.matches.map(m => getMatchUTC(m));
       }
     </script>
 
+    <!-- ── Toast flotante premium para actualizaciones de la PWA ── -->
+    <div
+      id="pwa-update-toast"
+      class="fixed bottom-20 left-4 right-4 z-[9999] max-w-sm mx-auto bg-black/85 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-2xl flex flex-col gap-3 translate-y-32 opacity-0 pointer-events-none transition-all duration-500 ease-out"
+    >
+      <div class="flex items-start gap-3">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border"
+             style="background: rgba(83, 20, 255, 0.1); border-color: rgba(83, 20, 255, 0.2); color: var(--brand-nav-icon-active, #5314ff);">
+          <svg class="w-5 h-5 animate-[spin_4s_linear_infinite]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-bold text-white font-['Outfit']">¡Nueva versión disponible!</p>
+          <p class="text-xs text-gray-400 leading-tight mt-0.5">Hay nuevas funciones y datos del torneo listos para ti.</p>
+        </div>
+      </div>
+      <div class="flex gap-2.5 justify-end">
+        <button id="pwa-update-dismiss" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-400 hover:text-white transition-colors cursor-pointer">
+          Más tarde
+        </button>
+        <button id="pwa-update-reload" class="px-4 py-1.5 rounded-lg text-xs font-bold text-white transition-transform active:scale-95 cursor-pointer shadow-lg shadow-purple-500/20"
+                style="background: var(--brand-nav-icon-active, #5314ff);">
+          Actualizar
+        </button>
+      </div>
+    </div>
+
+    <script is:inline>
+      (function () {
+        if ('serviceWorker' in navigator) {
+          // Guardamos si la página ya estaba controlada al cargar
+          const hasController = !!navigator.serviceWorker.controller;
+
+          navigator.serviceWorker.addEventListener('controllerchange', function () {
+            if (hasController) {
+              // Un nuevo service worker ha tomado el control
+              const toast = document.getElementById('pwa-update-toast');
+              const dismissBtn = document.getElementById('pwa-update-dismiss');
+              const reloadBtn = document.getElementById('pwa-update-reload');
+
+              if (toast) {
+                // Mostrar el toast con una transición suave
+                toast.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+                toast.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+
+                if (dismissBtn) {
+                  dismissBtn.addEventListener('click', function () {
+                    toast.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+                    toast.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+                  });
+                }
+
+                if (reloadBtn) {
+                  reloadBtn.addEventListener('click', function () {
+                    window.location.reload();
+                  });
+                }
+              }
+            }
+          });
+        }
+      })();
+    </script>
+
   </body>
 </html>
 
